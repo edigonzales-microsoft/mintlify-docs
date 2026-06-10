@@ -27,12 +27,12 @@
   --xbox-green: #008746;
   --xbox-green-active: #008746;
   --xbox-green-fg: #ffffff;
-  --xbox-grey: #484E58;
-  --xbox-red: #E51D23;
-  --xbox-blue: #007DB5;
+  --xbox-grey: #484e58;
+  --xbox-red: #e51d23;
+  --xbox-blue: #007db5;
 
   /* System */
-  --xbox-radius: 0px;
+  --xbox-radius: 4px;
   --xbox-topbar-button-size: 2.125rem;
 }
 
@@ -52,9 +52,9 @@
   --xbox-green: #008746;
   --xbox-green-active: #008746;
   --xbox-green-fg: #ffffff;
-  --xbox-grey: #484E58;
-  --xbox-red: #E51D23;
-  --xbox-blue: #007DB5;
+  --xbox-grey: #484e58;
+  --xbox-red: #e51d23;
+  --xbox-blue: #007db5;
 }
 
 /* ---------------------------------------------------------------------
@@ -68,7 +68,7 @@ body {
 }
 
 .callout {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 #almond-background-color {
@@ -95,7 +95,7 @@ body {
 :root {
   --xbox-page-gutter: 2rem;
   --xbox-sidebar-width: 16rem;
-  --xbox-content-width: 42rem;
+  --xbox-content-width: 50rem;
   --xbox-toc-width: 15rem;
 }
 
@@ -120,8 +120,12 @@ body {
   padding-right: var(--xbox-page-gutter);
 }
 
+.navbar-link {
+  font-weight: 500;
+}
+
 #content-container {
-  border-radius: 0px;
+  border-radius: 4px;
   border: none;
 }
 
@@ -160,27 +164,36 @@ body {
 }
 
 .card {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
-/* Assistant side panel — remove the theme's inset spacing and rounded sheet corners. */
+/* Assistant side panel — remove the theme's inset spacing and normalize sheet corners. */
 div.sticky.shrink-0:has(> #chat-assistant-sheet) {
   padding: 0 !important;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 #chat-assistant-sheet {
-  border-radius: 0px !important;
+  border-radius: 4px !important;
 }
 
 /* The visible assistant input frame is the rounded wrapper, not the transparent textarea. */
 .chat-assistant-floating-input .rounded-2xl:has(#chat-assistant-textarea),
 #chat-assistant-sheet .rounded-2xl:has(#chat-assistant-textarea),
 #chat-assistant-textarea {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
-#chat-assistant-sheet .rounded-2xl:has(#chat-assistant-textarea) > div:last-child {
+#feedback-thumbs-up,
+#feedback-thumbs-down,
+a[href*="/edit/main/"],
+a[href*="/issues/new"] {
+  border-radius: 4px !important;
+}
+
+#chat-assistant-sheet
+  .rounded-2xl:has(#chat-assistant-textarea)
+  > div:last-child {
   padding-bottom: 0.5rem;
 }
 
@@ -291,7 +304,7 @@ div.sticky.shrink-0:has(> #chat-assistant-sheet) {
   text-transform: uppercase;
   color: var(--xbox-text-muted);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: normal;
 }
 
@@ -362,7 +375,7 @@ div.sticky.shrink-0:has(> #chat-assistant-sheet) {
 
 .nav-tabs-item {
   color: var(--xbox-text-muted);
-  font-weight: 500;
+  font-weight: 700;
   transition: color 0.15s ease;
 }
 
@@ -521,7 +534,7 @@ div.sticky.shrink-0:has(> #chat-assistant-sheet) {
   .dark .almond-nav-bottom-section button[aria-label="Toggle dark mode"],
   .dark #navbar .xbox-theme-toggle-button {
     background-color: var(--xbox-bg) !important;
-    border-color: #27272A !important;
+    border-color: #27272a !important;
     color: #9f9fa9 !important;
   }
 }
@@ -552,26 +565,34 @@ div.sticky.shrink-0:has(> #chat-assistant-sheet) {
    Sidebar navigation
    --------------------------------------------------------------------- */
 
-/* Sidebar background — solid darker Xbox grey on every tab, both themes.
-   Original brand grey is #484E58; this is a darkened variant for better
-   contrast against the page content. */
-#sidebar-content,
+/* Sidebar background — opaque in both themes, with theme-specific colors. */
+#sidebar-content {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
 .dark #sidebar-content {
-  background-color: #1E2127 !important;
+  background-color: #1e2127 !important;
   opacity: 1 !important;
 }
 
 /* Ensure the sidebar layer/wrapper is opaque (defeat any theme transparency). */
-#sidebar,
-.dark #sidebar {
-  background-color: #1E2127 !important;
+#sidebar {
+  background-color: #ffffff !important;
   opacity: 1 !important;
 }
 
-/* On dark mode the page background sits behind the sidebar fixed positioning,
-   so make sure the rail edges read against the grey rather than the page bg. */
+.dark #sidebar {
+  background-color: #1e2127 !important;
+  opacity: 1 !important;
+}
+
+/* Rail edges need enough contrast against each theme's sidebar surface. */
 #sidebar-content::before,
-#sidebar-content::after,
+#sidebar-content::after {
+  border-left-color: var(--xbox-border);
+}
+
 .dark #sidebar-content::before,
 .dark #sidebar-content::after {
   border-left-color: rgba(255, 255, 255, 0.12);
@@ -579,29 +600,52 @@ div.sticky.shrink-0:has(> #chat-assistant-sheet) {
 
 sidebar-title,
 sidebar-group-header {
+  color: var(--xbox-text-main);
+  font-weight: 700;
+}
+
+.dark sidebar-title,
+.dark sidebar-group-header {
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 #sidebar-content li a {
-  color: #d4d4d8;
+  color: var(--xbox-text-subtle);
   border-radius: var(--xbox-radius);
 }
 
-#sidebar-content li a:hover,
+#sidebar-content li a:hover {
+  color: var(--xbox-text-main);
+  background-color: transparent !important;
+}
+
+.dark #sidebar-content li a {
+  color: #d4d4d8;
+}
+
 .dark #sidebar-content li a:hover {
   color: #ffffff;
   background-color: transparent !important;
 }
 
-/* Active page — darker brand green for stronger contrast on the grey */
+/* Active page — use theme-specific greens for contrast against each surface. */
 #sidebar-content li[data-active] > a,
 #sidebar-content li[data-active] a {
-  color: #3FB377;
-  font-weight: 500;
+  color: var(--xbox-green-active);
+  font-weight: 700;
   background-color: transparent;
   border-left: 0;
-  border-radius: 0;
+  border-radius: 4px;
+}
+
+.dark #sidebar-content li[data-active] > a,
+.dark #sidebar-content li[data-active] a {
+  color: #3fb377;
+  font-weight: 700;
+  background-color: transparent;
+  border-left: 0;
+  border-radius: 4px;
 }
 
 #sidebar-content li:not([data-active]):hover::before,
@@ -616,12 +660,20 @@ sidebar-group-header {
 }
 
 #sidebar-content li:not([data-active]):hover::before {
+  background-color: var(--xbox-border);
+}
+
+.dark #sidebar-content li:not([data-active]):hover::before {
   background-color: rgba(255, 255, 255, 0.35);
 }
 
 #sidebar-content li[data-active]::before {
   width: 2px;
-  background-color: #3FB377;
+  background-color: var(--xbox-green-active);
+}
+
+.dark #sidebar-content li[data-active]::before {
+  background-color: #3fb377;
 }
 
 /* ---------------------------------------------------------------------
@@ -636,7 +688,7 @@ sidebar-group-header {
 
 .dark #search-bar-entry {
   background-color: #000;
-  border-color: #27272A;
+  border-color: #27272a;
 }
 
 #assistant-entry {
@@ -646,7 +698,7 @@ sidebar-group-header {
 }
 
 .dark #assistant-entry {
-  border-color: #27272A;
+  border-color: #27272a;
 }
 
 /* ---------------------------------------------------------------------
@@ -654,7 +706,7 @@ sidebar-group-header {
    --------------------------------------------------------------------- */
 #page-title {
   color: var(--xbox-text-main);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.7px;
 }
 
@@ -687,7 +739,7 @@ card .font-semibold,
 card h2,
 card h3 {
   color: var(--xbox-text-main);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 card p {
@@ -780,8 +832,7 @@ toc-item[data-active-deepest],
   color: var(--xbox-green-active) !important;
 }
 
-#table-of-contents-content .toc-item[data-active-deepest][data-depth="0"]
-  > a {
+#table-of-contents-content .toc-item[data-active-deepest][data-depth="0"] > a {
   border-left-width: 2px;
   border-left-color: var(--xbox-green-active) !important;
 }
@@ -923,10 +974,10 @@ mdx-content a:not(card a) {
   padding: 16px;
 }
 
-.xbox-quick-body h3 {
+.xbox-quick-title {
   margin: 0;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700 !important;
   letter-spacing: -0.2px;
   color: var(--xbox-text-main);
 }
@@ -935,13 +986,14 @@ mdx-content a:not(card a) {
   margin: 0;
   font-size: 14px;
   line-height: 20px;
+  font-weight: 400;
   color: var(--xbox-text-subtle);
 }
 
 .xbox-quick-link {
   margin-top: auto;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--xbox-green-active);
 }
 
@@ -984,7 +1036,7 @@ mdx-content a:not(card a) {
   align-items: center;
   padding: 8px 16px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
   border-radius: var(--xbox-radius);
   transition:
