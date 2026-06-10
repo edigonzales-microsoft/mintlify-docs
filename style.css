@@ -930,21 +930,21 @@ mdx-content a:not(card a) {
   background-repeat: no-repeat;
 }
 
-/* Quick Access thumbnails — Xbox controller artwork */
+/* Quick Access thumbnails — Xbox hardware lineup artwork */
 .xbox-thumb-1 {
-  background-image: url("/images/f4a157fea56a539d15829292d6085de4a488869c.png");
+  background-image: url("/images/thumb1-ally-handheld.png");
 }
 
 .xbox-thumb-2 {
-  background-image: url("/images/e71580110a12d4c9bd4e22b52c7e88910bbd0e6c.png");
+  background-image: url("/images/thumb2-controller.png");
 }
 
 .xbox-thumb-3 {
-  background-image: url("/images/63098df10ce12967da3aab598d9b594c3f64abe2.png");
+  background-image: url("/images/thumb3-series-consoles.png");
 }
 
 .xbox-thumb-4 {
-  background-image: url("/images/02d728eff6c92e2ab04c47fafb1a51b18cf9cbf7.png");
+  background-image: url("/images/xbox-pc-app.png");
 }
 
 /* "Start building" call to action */
