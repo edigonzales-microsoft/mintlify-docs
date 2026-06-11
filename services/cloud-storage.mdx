@@ -14,6 +14,7 @@ Understanding which service to use for which data type will save you from buildi
 Connected Storage saves game state per user and automatically roams it across every device where the player signs in. A player who saves their progress on Xbox Series X can pick up exactly where they left off on a Windows PC or another console — without manual cloud upload steps.
 
 **Key characteristics:**
+
 - **Per-user** — each signed-in Xbox account has its own save containers
 - **Roaming** — data is synced to the cloud and pulled down when the player signs in elsewhere
 - **Offline-capable** — saves work when the device is offline; sync happens when connectivity is restored
@@ -21,17 +22,18 @@ Connected Storage saves game state per user and automatically roams it across ev
 - **Available on Xbox console and Windows PC** — use the same API on both platforms
 
 Use Connected Storage for:
+
 - Game save files (level progress, inventory, unlocked content)
 - Player settings that should follow them across devices
 - Any game state the player would be upset to lose
 
 ### Connected Storage vs. local game saves
 
-| | Connected Storage | Local PLS (Xbox console) |
-|---|---|---|
+|  | Connected Storage | Local PLS (Xbox console) |
+| --- | --- | --- |
 | Roams across devices | ✅ | ❌ |
 | Available offline | ✅ (cached locally) | ✅ |
-| Fault-tolerant | ✅ (ACID semantics) | Encrypted + integrity-checked |
+| Fault-tolerant | ✅ (ACID semantics) | Encrypted \+ integrity-checked |
 | Deleted on uninstall | ❌ (stays in cloud) | ✅ |
 | Console-specific | ❌ | ✅ |
 | Best for | Game saves, player state | Replays, large local recordings |
@@ -118,12 +120,14 @@ XGameSaveCloseUpdate(updateHandle);
 Title Storage is a cloud blob store for data that you want to share globally across players or make available to your title on any platform. Unlike Connected Storage — which is per-user game state — Title Storage is designed for assets and data that either belong to the title as a whole or are intentionally shared.
 
 **Key characteristics:**
+
 - **Available on all platforms** — Xbox console, Windows PC, iOS, Android (via REST)
 - **Global or per-user** — store per-title global data or per-user data with configurable visibility
 - **Multiple data types** — binary blobs, JSON, and binary config (read-only in the game package)
 - **Access control** — configure per-blob read/write permissions (title-only write, public read, etc.)
 
 Use Title Storage for:
+
 - User statistics intended for server-side leaderboards
 - User rankings and shared competitive data
 - Unlockable artwork and in-game assets available to all players
@@ -137,7 +141,7 @@ Use Title Storage for:
 ### Title Storage data types
 
 | Data type | Use case |
-|---|---|
+| --- | --- |
 | `Binary` | Raw binary blobs: save data, serialized structs, level files |
 | `Json` | JSON-encoded data: stats, rankings, user preferences |
 | `Config` | Read-only binary config embedded in your game package (version-controlled by your title) |
@@ -214,7 +218,7 @@ HRESULT hr = XblTitleStorageDownloadBlobAsync(
 ## Choosing between Connected Storage and Title Storage
 
 | Question | Connected Storage | Title Storage |
-|---|---|---|
+| --- | --- | --- |
 | Is this per-user game state? | ✅ Yes | ❌ |
 | Does it need to roam across devices? | ✅ Yes | ❌ (but accessible from any device) |
 | Is this shared across all players globally? | ❌ | ✅ Yes |

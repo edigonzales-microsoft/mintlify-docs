@@ -22,11 +22,13 @@ There are two supported processing models for Stats and Achievements. You choose
     In the event-based model, your title fires telemetry events from game code. These events are queued and uploaded to Xbox services, where server-side aggregation rules you define in Partner Center process them into stat values.
 
     **Advantages:**
+
     - A single event can update multiple Xbox services features simultaneously (stats, Rich Presence, multiplayer).
     - Aggregation logic lives on the server — you do not maintain custom accumulator code in the client.
     - Deep integration with other Xbox services: Featured Stats, Real-Time Activity (RTA), and shell surfaces.
 
     **Tradeoffs:**
+
     - Configuration in Partner Center is more complex (you must define events, stats, and aggregation rules).
     - Unlock logic for event-based achievements is defined server-side, which can be harder to troubleshoot.
 
@@ -38,12 +40,14 @@ There are two supported processing models for Stats and Achievements. You choose
     In the title-managed model, your game code directly controls when data is sent to Xbox services and what action the server takes. For achievements, your code calls an unlock API directly when the player earns it.
 
     **Advantages:**
+
     - Simpler game code: one API call unlocks an achievement.
     - Easier to debug — unlock happens when and only when your code says so.
     - No server-side unlock rules to configure or maintain.
     - Cross-platform friendly: the direct-call pattern works cleanly in multi-platform codebases.
 
     **Tradeoffs:**
+
     - Your code is responsible for determining when conditions are met.
     - No server-side aggregation for stats; you must compute and upload final values yourself.
 
@@ -56,7 +60,7 @@ There are two supported processing models for Stats and Achievements. You choose
 You are **not** required to use the same model for both Stats and Achievements. The most common and recommended pattern is:
 
 | System | Recommended model | Reason |
-|---|---|---|
+| --- | --- | --- |
 | Stats & Leaderboards | Event-based | Server aggregation, deep shell integration, Featured Stats |
 | Achievements | Title-managed | Simpler code, easier debugging, cross-platform portability |
 
@@ -71,6 +75,7 @@ Featured Stats are a curated subset that appear prominently in your Game Hub on 
 ## Achievements
 
 Achievements are one of Xbox's most recognizable and beloved features. Each achievement has:
+
 - A name and description
 - A locked/unlocked icon (concept art reward)
 - A Gamerscore value
@@ -79,7 +84,7 @@ Achievements are one of Xbox's most recognizable and beloved features. Each achi
 Players can compare achievements with friends, share unlocks to their activity feed, and track progress toward full completion. Achievements are displayed in your Game Hub and on each player's Xbox profile.
 
 <Note>
-  **Xbox Creators Program titles cannot use Achievements.** Achievements and Gamerscore require participation in a managed developer program such as ID\@Xbox. If you want to add achievements to a Creators Program title, apply to [ID\@Xbox](https://www.xbox.com/Developers/id).
+  **Xbox Creators Program titles cannot use Achievements.** Achievements and Gamerscore require participation in a managed developer program such as ID@Xbox. If you want to add achievements to a Creators Program title, apply to [ID@Xbox](https://www.xbox.com/Developers/id).
 </Note>
 
 ## Configuring Player Data in Partner Center
@@ -105,13 +110,13 @@ Players can compare achievements with friends, share unlocks to their activity f
 ## Xbox Creators Program differences
 
 | Feature | Creators Program | ID@Xbox |
-|---|---|---|
+| --- | --- | --- |
 | Title-Managed Stats | ✅ Available | ✅ Available |
 | Event-Based Stats | ❌ Not available | ✅ Available |
 | Achievements & Gamerscore | ❌ Not available | ✅ Available |
 | Leaderboards | ✅ Available | ✅ Available |
 
-If you are in the Creators Program and want richer engagement features, consider applying to [ID\@Xbox](https://www.xbox.com/Developers/id).
+If you are in the Creators Program and want richer engagement features, consider applying to [ID@Xbox](https://www.xbox.com/Developers/id).
 
 ## See also
 

@@ -20,6 +20,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 ```
 
 **Changes in configVersion 1 vs 0:**
+
 - `MSAAppId` and `TitleId` must both be present if either is specified.
 - Both are required when `NoCodePCRoot` is specified or `AdvancedUserModel` is set to `false`.
 - The following elements are **deprecated**: `ModFolder`, `EnableWritesToPackageRoot`, `DisableFilesystemWriteVirtualization`, `DisableRegistryWriteVirtualization`.
@@ -29,7 +30,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 ## Key element reference
 
 | Element | Required | Parent | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `Game` | Required | — | Root element. Accepts `configVersion` attribute. |
 | `Identity` | Required | `Game` | Package identity: `Name`, `Publisher` (CN= format), and `Version`. |
 | `ShellVisuals` | Required (packaged) | `Game` | Logo images and display name used in the shell. |
@@ -66,7 +67,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   ```
 
   | Attribute | Description |
-  |---|---|
+  | --- | --- |
   | `Name` | Package name in `PublisherId.GameName` format, from Partner Center → Product Management → Product Identity |
   | `Publisher` | Publisher certificate subject (CN= format) |
   | `Version` | Four-part version number (`major.minor.build.revision`). Subsequent console generations must increment major version. |
@@ -109,7 +110,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   ```
 
   | Attribute | Description |
-  |---|---|
+  | --- | --- |
   | `Name` | Path to the executable, relative to the package root |
   | `TargetDeviceFamily` | `XboxOne`, `Scarlett`, or `PC` |
   | `Id` | Application ID used in the AUMID. Must be unique per executable. |
@@ -146,7 +147,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   ```
 
   | Element | Range | Description |
-  |---|---|---|
+  | --- | --- | --- |
   | `SizeMB` | 10 – 100000 | Minimum guaranteed size in MB |
   | `GrowableToMB` | ≥ 10 | Maximum size the storage can grow to on-demand. Must be ≥ `SizeMB`. |
 
@@ -165,7 +166,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   ```
 
   | Element | Allowed values | Console |
-  |---|---|---|
+  | --- | --- | --- |
   | `XboxOneXTitleMemory` | `Standard`, `Advanced` | Xbox One X |
   | `XboxLockhartTitleMemory` | `Standard`, `Advanced` | Xbox Series S |
   | `XboxAnacondaTitleMemory` | `Standard`, `Advanced` | Xbox Series X |
@@ -185,7 +186,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   ```
 
   | Element | Description |
-  |---|---|
+  | --- | --- |
   | `GameDVRSystemComponent` | `true` to enable the Game DVR system component |
   | `BlockBroadcast` | `1` to prevent broadcasting the title |
   | `BlockGameDVR` | `1` to prevent Game DVR recordings |
@@ -233,7 +234,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 The following elements were deprecated in the March 2022 GDK and must not be used in `configVersion="1"` files:
 
 | Element | Replacement |
-|---|---|
+| --- | --- |
 | `ModFolder` | Not replaced; mod support is handled outside the config |
 | `DisableFilesystemWriteVirtualization` | Removed; not required for GDK titles |
 | `DisableRegistryWriteVirtualization` | Removed; not required for GDK titles |
@@ -241,9 +242,9 @@ The following elements were deprecated in the March 2022 GDK and must not be use
 
 ---
 
-## Sample MicrosoftGame.config (Xbox Series X\|S)
+## Sample MicrosoftGame.config (Xbox Series X|S)
 
-The following example shows a complete `MicrosoftGame.config` for an Xbox Series X\|S title. Comments note differences for an Xbox One target.
+The following example shows a complete `MicrosoftGame.config` for an Xbox Series X|S title. Comments note differences for an Xbox One target.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

@@ -15,6 +15,7 @@ The GDK async model is built around two primitives:
   <Card title="Task" icon="list-check" href="/reference/xgameruntime">
     A single unit of asynchronous work composed of two phases: a **work callback** that performs the operation on a background thread, and a **completion callback** that delivers the result. The GDK always implements the work callback internally for its own async APIs; you only provide the completion callback.
   </Card>
+
   <Card title="Task Queue (XTaskQueue)" icon="layer-group" href="/reference/xgameruntime">
     A container with two internal ports — a **work port** and a **completion port** — that hold callbacks for later execution. Each port is configured independently at creation time to control how callbacks are dispatched (thread pool, serialized thread pool, manual, or immediate).
   </Card>
@@ -91,7 +92,7 @@ XGameSaveGetRemainingQuotaAsync(providerHandle, asyncBlock);
 You can poll an in-flight operation at any time using the helper functions below:
 
 | Function | Purpose |
-|---|---|
+| --- | --- |
 | `XAsyncGetStatus(asyncBlock, wait)` | Returns `E_PENDING` while running, `S_OK` on success, or an error code on failure. Pass `wait = true` to block until completion. |
 | `XAsyncGetResultSize(asyncBlock, &size)` | Returns the buffer size needed to retrieve the result payload. |
 | `XAsyncCancel(asyncBlock)` | Requests cancellation. Cancellation is best-effort; the operation may not stop immediately. The completion callback is still invoked with `E_ABORT`. |

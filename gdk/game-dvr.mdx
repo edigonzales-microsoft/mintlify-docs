@@ -9,9 +9,10 @@ Xbox Game DVR is the system-level video capture and broadcasting service built i
 
 ## What Game DVR captures
 
-The system continuously records a rolling buffer of your title's rendered output (video + audio). When the player presses the controller capture button or you call a clip-save API, the system writes the buffered frames to the player's capture storage. Separately, the broadcasting pipeline can stream that same rendered output to a streaming service in real time.
+The system continuously records a rolling buffer of your title's rendered output (video \+ audio). When the player presses the controller capture button or you call a clip-save API, the system writes the buffered frames to the player's capture storage. Separately, the broadcasting pipeline can stream that same rendered output to a streaming service in real time.
 
 Game DVR captures:
+
 - **Video** — the rendered frame buffer, encoded as H.264 (AVC) or H.265 (HEVC) depending on the player's settings and console generation.
 - **Audio** — the title's audio output, **excluding** any stream marked as `AudioCategory_GameChat` (see [Privacy considerations](#privacy-considerations)).
 - **Screenshots** — still frames captured on demand or by the player.
@@ -43,7 +44,7 @@ You can configure default capture behavior in your `MicrosoftGame.config` manife
 The `XAppCapture` namespace provides the following capabilities:
 
 | API | Purpose |
-|---|---|
+| --- | --- |
 | `XAppBroadcastGetStatus` | Query whether a broadcast can start; returns detailed status flags |
 | `XAppBroadcastShowUI` | Show the system broadcasting UI so the player can start a broadcast |
 | `XAppBroadcastIsAppBroadcasting` | Check whether the current title is actively being broadcast |
@@ -61,7 +62,7 @@ The `XAppCapture` namespace provides the following capabilities:
 
     ```cpp
     #include <XAppCapture.h>
-
+    
     XAppBroadcastStatus status = {};
     HRESULT hr = XAppBroadcastGetStatus(&status);
     if (SUCCEEDED(hr) && status.canStartBroadcast)
@@ -84,7 +85,7 @@ The `XAppCapture` namespace provides the following capabilities:
     ```cpp
     XTaskQueueHandle queue = /* your task queue */;
     XAppBroadcastMonitorHandle monitorHandle = nullptr;
-
+    
     hr = XAppBroadcastRegisterIsAppBroadcasting(
         queue,
         nullptr,               // context
@@ -152,6 +153,7 @@ If your title runs in HDR, the diagnostic screenshot API can return an SDR scree
 To exclude voice chat from all capture pipelines, assign the `AudioCategory_GameChat` audio category to every render stream that carries player microphone output. The system then ignores those streams during recording and broadcasting automatically. See [Audio systems for Xbox console development](/gdk/audio) for implementation details.
 
 Additionally, be aware that:
+
 - The `BlockGameDVR` and `BlockBroadcast` config flags are defaults, not hard locks — players can override them.
 - All rendered video output (excluding game chat audio) is fair game for capture from the player's perspective.
 - Screenshots are stored in a partition separate from your game partition; use the provided stream APIs (`XAppCaptureOpenScreenshotStream`) to read them from your title if needed.

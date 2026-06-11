@@ -7,7 +7,7 @@ icon: "users"
 
 The Social Manager API efficiently manages and caches the local user's friends and social graph. Rather than making individual service calls to query presence and profile data for each friend, Social Manager maintains an in-memory snapshot of the social graph and delivers incremental updates through a polling model. Call `XblSocialManagerDoWork` once per game frame to receive a list of change events, then update your UI accordingly.
 
-**Header:** `social_manager_c.h`  
+**Header:** `social_manager_c.h`\
 **Library:** `Microsoft.Xbox.Services.14x.GDK.C.lib`
 
 ---
@@ -44,7 +44,7 @@ HRESULT XblSocialManagerAddLocalUser(
   Controls how much extra data is fetched for each friend. Higher detail levels increase bandwidth usage.
 
   | Value | Description |
-  |---|---|
+  | --- | --- |
   | `NoExtraDetail` | Only basic presence (online/offline) |
   | `TitleHistory` | Includes recent titles played |
   | `PreferredColor` | Includes the user's preferred Xbox color |
@@ -105,7 +105,7 @@ HRESULT XblSocialManagerCreateSocialUserGroupFromFilters(
   Filters friends by presence state:
 
   | Value | Meaning |
-  |---|---|
+  | --- | --- |
   | `AllOnline` | Any friends currently online |
   | `AllOnlineInGame` | Friends online and in any game |
   | `TitleOnline` | Friends online in **this** title |
@@ -117,7 +117,7 @@ HRESULT XblSocialManagerCreateSocialUserGroupFromFilters(
   Filters by relationship type:
 
   | Value | Meaning |
-  |---|---|
+  | --- | --- |
   | `Friends` | All friends |
   | `Favorite` | Only friends marked as favorites |
 </ParamField>
@@ -157,7 +157,7 @@ HRESULT XblSocialManagerDestroySocialUserGroup(
 After each `XblSocialManagerDoWork` call, iterate the returned events by their `eventType` field:
 
 | `XblSocialManagerEventType` | When it fires |
-|---|---|
+| --- | --- |
 | `LocalUserAdded` | Initial graph for `XblSocialManagerAddLocalUser` is ready |
 | `LocalUserRemoved` | User was removed via `XblSocialManagerRemoveLocalUser` |
 | `UsersAddedToSocialGraph` | New friends appeared in the graph |

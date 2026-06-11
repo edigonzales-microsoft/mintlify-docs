@@ -17,12 +17,15 @@ Connected Storage is the GDK's per-user game save system. It is designed to be f
   <Card title="Provider" icon="server" href="/reference/xgamesave">
     An `XGameSaveProviderHandle` represents an open connection to a user's Connected Storage space. You initialize one per user at game start by calling `XGameSaveInitializeProvider`.
   </Card>
+
   <Card title="Container" icon="folder" href="/reference/xgamesave">
     An `XGameSaveContainerHandle` is a named logical grouping of blobs (save data chunks) within a provider. Think of a container as a save slot. You create or open one with `XGameSaveCreateContainer`.
   </Card>
+
   <Card title="Blob" icon="file" href="/reference/xgamesave">
     A blob is an individual binary data chunk within a container. You read and write blobs by name. A single container can hold multiple blobs (e.g., one for world state, one for player stats).
   </Card>
+
   <Card title="Update" icon="pencil" href="/reference/xgamesave">
     You stage blob changes with `XGameSaveSubmitBlobWrite` and commit them atomically with `XGameSaveSubmitUpdate`. Either all changes in an update succeed, or none of them do.
   </Card>
@@ -145,7 +148,7 @@ if (SUCCEEDED(hr))
 When a player signs in or your game initializes a provider, Connected Storage may need to sync data from the cloud. You should handle `XGameSaveContainerSyncResult` to understand the outcome:
 
 | Sync result | Meaning |
-|---|---|
+| --- | --- |
 | `Succeeded` | Data is up to date. |
 | `Abort` | Sync was cancelled. Proceed with local data. |
 | `ConflictError` | A conflict was detected between local and cloud data. Prompt the player to choose which version to keep. |
