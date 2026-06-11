@@ -9,9 +9,9 @@ To develop GDK titles, install:
 
 1. **Windows SDK**
 2. **Visual Studio**
-3. **Microsoft GDK** (and GXDK for Xbox)
+3. **Microsoft GDK** (and GXDK for XBOX)
 
-This applies to PC, Xbox, or both targets.
+This applies to PC, XBOX, or both targets.
 
 <Tip>
   Create a system restore point before installing.
@@ -25,7 +25,7 @@ GDK titles are Win32-based, so the [Windows SDK](https://developer.microsoft.com
 - Core OS services: networking, file I/O, memory, window management, message pump.
 - The `WINAPI_FAMILY_GAMES` partition.
 - `xgameplatform.lib` — the umbrella library for `WINAPI_FAMILY_GAMES` entry points.
-- The unified [GameInput](#) API for gamepad, keyboard, mouse, touch.
+- The unified [GameInput](/gdk/input) API for gamepad, keyboard, mouse, touch.
 - The Process Lifetime Management (PLM) API.
 
 **Minimum required: Windows SDK version 22000\+** (Windows 11 SDK). Install via the [download page](https://developer.microsoft.com/windows/downloads/windows-sdk/) or as an optional component in the Visual Studio Installer.
@@ -64,22 +64,22 @@ Components that run on the device where the game executes:
 
 Gaming-centric cloud services exposed through platform-agnostic REST APIs and source-code wrappers:
 
-- Xbox Service API (XSAPI)
-- Xbox Authentication Library (XAL)
+- XBOX Service API (XSAPI)
+- XBOX Authentication Library (XAL)
 - Multiplayer networking
 - PlayFab
 - Microsoft Store \+ in-app purchases
 
 ### Gaming device extensions
 
-Device-specific feature APIs for Xbox hardware:
+Device-specific feature APIs for XBOX hardware:
 
 - DirectX 12.x
 - Audio.x
 - PIX.x
 - `XMemAlloc` and other console-specific memory APIs
 
-## PC vs. Xbox tools
+## PC vs. XBOX tools
 
 **PC games:**
 
@@ -87,14 +87,14 @@ Device-specific feature APIs for Xbox hardware:
 - Use PIX for Windows plus your usual third-party utilities.
 - Optionally configure VS Remote Tools to repro on a lab PC with a specific GPU driver.
 
-**Xbox games:**
+**XBOX games:**
 
-- Iterate, test, debug remotely on Xbox Series X|S or Xbox One family dev kits.
-- Use PIX for Xbox.
-- Use the `xb*` command-line tools, Xbox Manager, Dev Home, and Xbox Device Portal (XDP).
+- Iterate, test, debug remotely on XBOX Series X|S or XBOX One family dev kits.
+- Use PIX for XBOX.
+- Use the `xb*` command-line tools, XBOX Manager, Dev Home, and XBOX Device Portal (XDP).
 
 ## Next steps
 
-- [Configure your development network access](#)
+- Configure your development network access
 - [Develop a new title with the GDK](/gdk/developing-new-titles)
 - [Download & install the GDK](/gdk/download-install)

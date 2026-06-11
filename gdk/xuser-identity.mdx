@@ -12,7 +12,7 @@ The GDK manages users via **`XUser`** objects, each represented by an `XUserHand
 | Identifier | API | Scope |
 | --- | --- | --- |
 | **Local ID** | `XUserGetLocalId` | Lifetime of the game session — do **not** use across sessions |
-| **XUID** (Xbox services ID) | `XUserGetId` | For Xbox services calls and TCUI |
+| **XUID** (XBOX services ID) | `XUserGetId` | For XBOX services calls and TCUI |
 
 ## User states
 
@@ -45,7 +45,7 @@ Fails with `E_GAMEUSER_NO_DEFAULT_USER` if no one is signed in — fall through 
 XUserAddAsync(XUserAddOptions::AddDefaultUserAllowingUI, asyncBlock);
 ```
 
-On success, the user is fully signed in to Xbox services.
+On success, the user is fully signed in to XBOX services.
 
 ## Managing handles
 

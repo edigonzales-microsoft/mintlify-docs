@@ -5,10 +5,10 @@ description: "Learn about WASAPI, XAudio2, and Dolby Atmos spatial audio for Xbo
 icon: "volume-high"
 ---
 
-Xbox consoles provide a rich, multi-tier audio pipeline that covers everything from low-latency raw PCM output to full object-based spatial audio with Dolby Atmos. As a GDK developer, you choose the abstraction level that fits your title's needs: you can work close to the metal with WASAPI, build a flexible graph with XAudio2, or opt into the high-level spatial audio platform to deliver immersive 3D soundscapes automatically adapted to whatever audio hardware the player is using.
+XBOX consoles provide a rich, multi-tier audio pipeline that covers everything from low-latency raw PCM output to full object-based spatial audio with Dolby Atmos. As a GDK developer, you choose the abstraction level that fits your title's needs: you can work close to the metal with WASAPI, build a flexible graph with XAudio2, or opt into the high-level spatial audio platform to deliver immersive 3D soundscapes automatically adapted to whatever audio hardware the player is using.
 
 <Note>
-  Detailed audio documentation — including hardware-specific initialization sequences, codec support tables, and advanced spatial audio configuration — is gated behind an NDA Xbox developer program. Sign in to Microsoft Learn with your authorized Partner Center account to access the full [Overview of Audio](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/audio/overviews/audio) topic. If you do not yet have access, visit [xbox.com/Developers](https://www.xbox.com/Developers).
+  Detailed audio documentation — including hardware-specific initialization sequences, codec support tables, and advanced spatial audio configuration — is gated behind an NDA XBOX developer program. Sign in to Microsoft Learn with your authorized Partner Center account to access the full [Overview of Audio](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/audio/overviews/audio) topic. If you do not yet have access, visit [xbox.com/Developers](https://www.xbox.com/Developers).
 </Note>
 
 ## Available audio systems
@@ -44,7 +44,7 @@ Xbox consoles provide a rich, multi-tier audio pipeline that covers everything f
 
     - Games with complex audio graphs: music, ambient layers, dialogue, SFX
     - Titles that need 3D positional audio via **X3DAudio** (distance attenuation, Doppler, cone filtering)
-    - Custom DSP effects via the **XAPO** (Xbox Audio Processing Object) interface
+    - Custom DSP effects via the **XAPO** (XBOX Audio Processing Object) interface
     - Cross-platform titles that also target Windows PC (XAudio2 ships in the Windows SDK)
 
     XAudio2 can feed its output into the platform spatial audio pipeline if you initialize a `FXMASTERINGLIMITER` on the mastering voice.
@@ -54,24 +54,24 @@ Xbox consoles provide a rich, multi-tier audio pipeline that covers everything f
 
     - Premium audio experiences targeting Dolby Atmos receivers or headphones
     - Titles where the platform should manage HRTF and room modelling automatically
-    - Games shipping on both Xbox One and Xbox Series X|S that want consistent spatial audio behavior
+    - Games shipping on both XBOX One and XBOX Series X|S that want consistent spatial audio behavior
 
     The spatial audio platform uses **ISpatialAudioClient** (derived from WASAPI) and accepts audio objects with position metadata that the OS renders to whatever output format the hardware supports.
   </Tab>
 </Tabs>
 
-## XAPU and XDSP (Xbox console)
+## XAPU and XDSP (XBOX console)
 
-Xbox Series X|S and Xbox One include dedicated audio offload silicon. The GDK exposes it through two C APIs:
+XBOX Series X|S and XBOX One include dedicated audio offload silicon. The GDK exposes it through two C APIs:
 
 - **XAPU** — fixed-function audio processing units. The most common use is single-stream **Opus decoding** offloaded from the CPU. XAPU is ideal for streaming music or heavy voice-line playback.
 - **XDSP** — programmable DSP primitives: convolution, FFT/IFFT, enveloping, and impulse-response reduction. Use XDSP to run reverb, custom filters, and HRTF-style processing without burning CPU time.
 
-Both APIs are Xbox-console-only. On PC, fall back to XAudio2 effects or your own engine DSP.
+Both APIs are XBOX-console-only. On PC, fall back to XAudio2 effects or your own engine DSP.
 
-## Spatial audio on Xbox
+## Spatial audio on XBOX
 
-Xbox Series X|S supports hardware-accelerated Dolby Atmos decoding. When you submit audio objects through the spatial audio pipeline, the OS renderer applies head-related transfer function (HRTF) processing or passes the object metadata to a Dolby Atmos–capable receiver directly over HDMI.
+XBOX Series X|S supports hardware-accelerated Dolby Atmos decoding. When you submit audio objects through the spatial audio pipeline, the OS renderer applies head-related transfer function (HRTF) processing or passes the object metadata to a Dolby Atmos–capable receiver directly over HDMI.
 
 The player configures their preferred spatial audio format in **Settings → Volume & audio output**. Your title does not need to detect the connected hardware manually; the platform abstracts the output device. You only need to supply object-based audio streams with accurate 3D positions.
 

@@ -5,7 +5,7 @@ icon: "grid"
 description: "Render fewer shading samples in regions of low visual importance, with per-draw, per-primitive, and per-pixel VRS modes."
 ---
 
-**Variable Rate Shading (VRS)** lets you reduce shading rate (the number of shader invocations per pixel) in regions where the visual difference is imperceptible. The Xbox Series X|S hardware supports the same VRS surface as PC D3D12 with native rate combiners and image-based VRS.
+**Variable Rate Shading (VRS)** lets you reduce shading rate (the number of shader invocations per pixel) in regions where the visual difference is imperceptible. The XBOX Series X|S hardware supports the same VRS surface as PC D3D12 with native rate combiners and image-based VRS.
 
 ## Why VRS
 
@@ -20,7 +20,7 @@ Typical wins: 10–20% frame-time reduction with no visible quality loss when ap
 | Tier 1 | Per-draw VRS — set rate on `IASetPipelineState`. Cheap, coarse. |
 | Tier 2 | Per-primitive VRS via SV\_ShadingRate \+ image-based VRS via a screen-space texture. Fine-grained. |
 
-Xbox Series X|S supports Tier 2.
+XBOX Series X|S supports Tier 2.
 
 ## API surface
 

@@ -5,7 +5,7 @@ description: "Integrate Xbox Game DVR and broadcasting using XAppCapture APIs, c
 icon: "video"
 ---
 
-Xbox Game DVR is the system-level video capture and broadcasting service built into every Xbox console. It automatically records the last few minutes of gameplay in the background, lets players save clips manually with the controller, and integrates with streaming services to broadcast live gameplay. As a developer, the GDK's `XAppCapture` API family gives you programmatic control over this pipeline — you can mark significant moments, block recording when content is sensitive, attach searchable metadata, and trigger clip saves at key moments in your game.
+XBOX Game DVR is the system-level video capture and broadcasting service built into every XBOX console. It automatically records the last few minutes of gameplay in the background, lets players save clips manually with the controller, and integrates with streaming services to broadcast live gameplay. As a developer, the GDK's `XAppCapture` API family gives you programmatic control over this pipeline — you can mark significant moments, block recording when content is sensitive, attach searchable metadata, and trigger clip saves at key moments in your game.
 
 ## What Game DVR captures
 
@@ -36,7 +36,7 @@ You can configure default capture behavior in your `MicrosoftGame.config` manife
 ```
 
 <Note>
-  `BlockGameDVR` and `BlockBroadcast` set the **default** behavior. The player can override these restrictions in the Xbox system settings. You cannot fully prevent a determined user from capturing content, so design your title with the assumption that all rendered output may be recorded.
+  `BlockGameDVR` and `BlockBroadcast` set the **default** behavior. The player can override these restrictions in the XBOX system settings. You cannot fully prevent a determined user from capturing content, so design your title with the assumption that all rendered output may be recorded.
 </Note>
 
 ## XAppCapture APIs
@@ -150,7 +150,7 @@ If your title runs in HDR, the diagnostic screenshot API can return an SDR scree
   **You must never include player voice chat in Game DVR clips or broadcasts.** Voice chat is user-generated content that may contain personally identifiable information or sensitive data.
 </Warning>
 
-To exclude voice chat from all capture pipelines, assign the `AudioCategory_GameChat` audio category to every render stream that carries player microphone output. The system then ignores those streams during recording and broadcasting automatically. See [Audio systems for Xbox console development](/gdk/audio) for implementation details.
+To exclude voice chat from all capture pipelines, assign the `AudioCategory_GameChat` audio category to every render stream that carries player microphone output. The system then ignores those streams during recording and broadcasting automatically. See [Audio systems for XBOX console development](/gdk/audio) for implementation details.
 
 Additionally, be aware that:
 
@@ -161,5 +161,5 @@ Additionally, be aware that:
 ## See also
 
 - [XAppCapture API reference](https://learn.microsoft.com/en-us/gaming/gdk/docs/reference/system/xappcapture/xappcapture_members)
-- [Audio systems for Xbox console development](/gdk/audio) — setting `AudioCategory_GameChat`
-- [Social features](/services/social) — activity feeds and clip sharing with Xbox services
+- [Audio systems for XBOX console development](/gdk/audio) — setting `AudioCategory_GameChat`
+- [Social features](/services/social) — activity feeds and clip sharing with XBOX services

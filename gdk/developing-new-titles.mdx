@@ -5,11 +5,11 @@ description: "Create a new GDK project using Visual Studio templates for PC, Xbo
 icon: "code"
 ---
 
-GDK titles can target PCs, Xbox consoles, or both (with a shared codebase). You pick the target and how much device-specific extension you use.
+GDK titles can target PCs, XBOX consoles, or both (with a shared codebase). You pick the target and how much device-specific extension you use.
 
 ## Project templates
 
-Installing the GXDK adds nine GDK project templates to Visual Studio: five for PC, four for Xbox.
+Installing the GXDK adds nine GDK project templates to Visual Studio: five for PC, four for XBOX.
 
 | Target | Template | Description |
 | --- | --- | --- |
@@ -18,16 +18,16 @@ Installing the GXDK adds nine GDK project templates to Visual Studio: five for P
 |  | Direct3D 12 Desktop Game Makefile | PC game built from a makefile via command prompt. |
 |  | Desktop Static Library | Static lib targeting `Gaming.Desktop.x64`. |
 |  | Desktop DLL | DLL targeting `Gaming.Desktop.x64`. |
-| **Console** | Direct3D 12 Xbox Game | Standalone Xbox game executable. |
-|  | Direct3D 12 Xbox Game Makefile | Xbox game built from a makefile. |
-|  | Xbox Static Library | Static lib targeting the Xbox platforms. |
-|  | Xbox DLL | DLL targeting the Xbox platforms. |
+| **Console** | Direct3D 12 XBOX Game | Standalone XBOX game executable. |
+|  | Direct3D 12 XBOX Game Makefile | XBOX game built from a makefile. |
+|  | XBOX Static Library | Static lib targeting the XBOX platforms. |
+|  | XBOX DLL | DLL targeting the XBOX platforms. |
 
 ## Create a project
 
 1. Open Visual Studio.
 2. **File** → **New** → **Project**.
-3. In **All Languages**, choose **C\+\+**. In **All Platforms**, choose **Xbox** or **Windows**. In **All Project Types**, choose **Games**. (You can also search by template name.)
+3. In **All Languages**, choose **C\+\+**. In **All Platforms**, choose **XBOX** or **Windows**. In **All Project Types**, choose **Games**. (You can also search by template name.)
 4. Pick a template and click **OK**.
 
 ## Choosing a template
@@ -43,25 +43,25 @@ Installing the GXDK adds nine GDK project templates to Visual Studio: five for P
 - Builds against the stock x64 platform or the custom `Gaming.Desktop.x64` platform.
 - Creates a `MicrosoftGameConfig.mgc` with placeholders for your Partner Center identity.
 
-### Xbox only
+### XBOX only
 
-**Direct3D 12 Xbox Game** is the starting point.
+**Direct3D 12 XBOX Game** is the starting point.
 
 - Uses `WINAPI_FAMILY_GAMES` and links against `XGamePlatform.lib`.
-- Includes D3D12 headers ready for Xbox D3D12.x extensions.
+- Includes D3D12 headers ready for XBOX D3D12.x extensions.
 - Includes `XGameRuntime.h` and links `XGameRuntime.lib`.
 - XSAPI extension lib available by default.
-- Uses the `Gaming.Xbox.XboxOne.x64` MSBuild platform with remote-debug expectations.
+- Uses the `Gaming.XBOX.XboxOne.x64` MSBuild platform with remote-debug expectations.
 - Creates a `MicrosoftGameConfig.mgc` with placeholders.
 
-### PC \+ Xbox (shared codebase)
+### PC \+ XBOX (shared codebase)
 
-Start with one template (e.g., **Direct3D 12 Desktop Game**) and **add a second build configuration** targeting `Gaming.Xbox.XboxOne.x64` (or vice versa).
+Start with one template (e.g., **Direct3D 12 Desktop Game**) and **add a second build configuration** targeting `Gaming.XBOX.XboxOne.x64` (or vice versa).
 
 You'll need to tailor source with `#define`/`#ifdef` or partition platform-specific code into separate DLLs:
 
 - The PC configuration uses stock D3D12.
-- The Xbox configuration uses D3D12.x.
+- The XBOX configuration uses D3D12.x.
 
 Switching the active configuration changes the debugger, libs linked, and other tooling settings automatically.
 

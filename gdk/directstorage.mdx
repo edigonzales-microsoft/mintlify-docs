@@ -5,10 +5,10 @@ description: "Use DirectStorage on Xbox Series X|S for low-overhead NVMe streami
 icon: "bolt"
 ---
 
-DirectStorage is the GDK API that lets your title pull bytes from the NVMe SSD straight into GPU resources — bypassing the legacy file I/O stack, the CPU-side decompression step, and the staging copy through main memory. On Xbox Series X|S it is the recommended path for any asset streaming workload, and it is required to hit the platform's marketed load-time targets.
+DirectStorage is the GDK API that lets your title pull bytes from the NVMe SSD straight into GPU resources — bypassing the legacy file I/O stack, the CPU-side decompression step, and the staging copy through main memory. On XBOX Series X|S it is the recommended path for any asset streaming workload, and it is required to hit the platform's marketed load-time targets.
 
 <Note>
-  DirectStorage is available **only on Xbox Series X|S**. Xbox One titles continue to use the standard Win32 file APIs (`CreateFile2`, `ReadFile`, etc.). Cross-gen titles should abstract their I/O layer so the Series build can switch to DirectStorage transparently.
+  DirectStorage is available **only on XBOX Series X|S**. XBOX One titles continue to use the standard Win32 file APIs (`CreateFile2`, `ReadFile`, etc.). Cross-gen titles should abstract their I/O layer so the Series build can switch to DirectStorage transparently.
 </Note>
 
 ## Why DirectStorage

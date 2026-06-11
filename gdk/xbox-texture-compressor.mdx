@@ -5,12 +5,12 @@ icon: "file-zipper"
 description: "XBTC — the offline texture-compression and packaging pipeline for Xbox titles. Archive format, batch configuration, and GPU-decompression integration."
 ---
 
-**XBTC** is the offline texture pipeline that compresses, layouts, and packages textures for Xbox Series X|S titles. It targets the on-disk format that DirectStorage and Sampler Feedback consume natively, and integrates with the BCPack / Zlib GPU-decompression path.
+**XBTC** is the offline texture pipeline that compresses, layouts, and packages textures for XBOX Series X|S titles. It targets the on-disk format that DirectStorage and Sampler Feedback consume natively, and integrates with the BCPack / Zlib GPU-decompression path.
 
 ## What XBTC does
 
 1. Takes source textures (DDS, PNG, EXR, RAW) and per-asset configuration.
-2. Compresses to the right BC format (BC1–7) with the right block layout for the Xbox Series X|S sampler.
+2. Compresses to the right BC format (BC1–7) with the right block layout for the XBOX Series X|S sampler.
 3. Packages into an **XBTC archive** — a tiled, BCPack-compressed format optimized for streaming.
 4. Optionally writes shader / sampler mapping metadata.
 
@@ -26,7 +26,7 @@ Key flags:
 
 - `-c <config.json>` — JSON batch configuration (see below).
 - `-o <output.xbtc>` — output archive path.
-- `-platform Scarlett` — target hardware (Xbox Series X|S).
+- `-platform Scarlett` — target hardware (XBOX Series X|S).
 - `-jobs N` — parallel compression.
 - `-verbose` — detailed logging.
 

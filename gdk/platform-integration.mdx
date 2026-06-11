@@ -14,7 +14,7 @@ A **protocol activation** is when the shell launches your title via a URI such a
 Use cases:
 
 - Deep-link from a friend's invite into a specific match or lobby.
-- Resume from an external launcher (Xbox app, store, vendor shell on handhelds).
+- Resume from an external launcher (XBOX app, store, vendor shell on handhelds).
 - Hand off from a chat or social app.
 
 ## File type activation
@@ -25,11 +25,11 @@ Keep file handlers idempotent — the OS may activate an already-running instanc
 
 ## Media Foundation transform decoding
 
-For video cutscenes, in-game streaming, and FMV, use **Media Foundation** transforms to decode H.264, H.265/HEVC, and VP9 on both Xbox and Windows. The hardware decoder path is automatic on capable Xbox consoles; PC falls back to whatever the GPU driver supports.
+For video cutscenes, in-game streaming, and FMV, use **Media Foundation** transforms to decode H.264, H.265/HEVC, and VP9 on both XBOX and Windows. The hardware decoder path is automatic on capable XBOX consoles; PC falls back to whatever the GPU driver supports.
 
 Prefer Media Foundation over hand-rolled decoders:
 
-- It uses the dedicated video decode block on Xbox, freeing the GPU and CPU.
+- It uses the dedicated video decode block on XBOX, freeing the GPU and CPU.
 - It integrates with the audio mixer for synchronized A/V.
 - It is certification-friendly — Microsoft already validated the codecs and DRM paths.
 
@@ -43,9 +43,9 @@ Guidelines:
 - Treat `char*` as UTF-8 throughout the title; reserve `wchar_t*` for the small number of APIs that still require UTF-16.
 - Be deliberate about converting at the API boundary; do not convert speculatively in hot paths.
 
-## Windows messages on Xbox
+## Windows messages on XBOX
 
-Xbox titles run under a windowed message loop in the same way PC titles do. The system delivers PLM (suspend, resume, constrain), display (resolution change, HDR mode), and input (controller, IME) events through `WindowProc`. Pump messages every frame and do not block in the handler.
+XBOX titles run under a windowed message loop in the same way PC titles do. The system delivers PLM (suspend, resume, constrain), display (resolution change, HDR mode), and input (controller, IME) events through `WindowProc`. Pump messages every frame and do not block in the handler.
 
 If you use the GameInput callback model and the task queue dispatcher, you can keep your `WindowProc` tiny — most input and async completions flow through the queue, not the message loop.
 

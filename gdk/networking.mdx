@@ -5,20 +5,20 @@ description: "Learn GDK networking requirements, approved socket APIs, Xbox netw
 icon: "wifi"
 ---
 
-Networking on Xbox console is not a free-for-all: the GDK restricts which socket APIs you may use, mandates specific security behaviors, and requires your title to integrate with Xbox network security to pass certification. Understanding these requirements early in your networking design will save you significant rework before submission.
+Networking on XBOX console is not a free-for-all: the GDK restricts which socket APIs you may use, mandates specific security behaviors, and requires your title to integrate with XBOX network security to pass certification. Understanding these requirements early in your networking design will save you significant rework before submission.
 
 <Warning>
-  Using unapproved networking APIs or bypassing Xbox network security requirements will cause your title to **fail certification**. Review the requirements in this page and the linked GDK networking documentation before writing any network code.
+  Using unapproved networking APIs or bypassing XBOX network security requirements will cause your title to **fail certification**. Review the requirements in this page and the linked GDK networking documentation before writing any network code.
 </Warning>
 
 ## GDK networking requirements
 
 The GDK permits titles to use the following socket APIs:
 
-- **WinSock 2** (`winsock2.h`) — the standard Berkeley-style socket API on Windows and Xbox.
-- **GDK-specific networking extensions** — additional APIs that expose Xbox network security features.
+- **WinSock 2** (`winsock2.h`) — the standard Berkeley-style socket API on Windows and XBOX.
+- **GDK-specific networking extensions** — additional APIs that expose XBOX network security features.
 
-You must **not** use raw IP sockets to bypass the Xbox security layer, and you must not use deprecated XDK APIs in GDK titles.
+You must **not** use raw IP sockets to bypass the XBOX security layer, and you must not use deprecated XDK APIs in GDK titles.
 
 <Note>
   Detailed networking documentation, including the full list of approved APIs, socket option requirements, and advanced QoS configuration, is in the NDA-gated [GDK Networking section](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/networking/gc-networking-toc). Sign in with your authorized Partner Center account to access it.
@@ -51,15 +51,15 @@ WSACleanup();
   Always call `WSAStartup` with version 2.2. GDK titles require WinSock 2.2 and must call `WSACleanup` before exiting to avoid resource leaks.
 </Tip>
 
-## Xbox network security requirements
+## XBOX network security requirements
 
-All network traffic sent between players in an Xbox title must pass through the **Xbox network security layer**. This layer provides:
+All network traffic sent between players in an XBOX title must pass through the **XBOX network security layer**. This layer provides:
 
 - **Encryption** — all peer traffic is encrypted in transit.
-- **Authentication** — the Xbox identity of each endpoint is verified using the player's signed-in Xbox account.
+- **Authentication** — the XBOX identity of each endpoint is verified using the player's signed-in XBOX account.
 - **Anti-cheat** — the security layer prevents spoofed sender addresses and man-in-the-middle attacks.
 
-You integrate with Xbox network security by using the **secure sockets** APIs provided in the GDK. These APIs wrap your underlying WinSock sockets with the Xbox security layer transparently. You should not implement your own encryption layer on top of Xbox secure sockets, as this can interfere with the security model and is not required.
+You integrate with XBOX network security by using the **secure sockets** APIs provided in the GDK. These APIs wrap your underlying WinSock sockets with the XBOX security layer transparently. You should not implement your own encryption layer on top of XBOX secure sockets, as this can interfere with the security model and is not required.
 
 Titles that pass raw, unencrypted game traffic directly between players — bypassing secure sockets — will fail certification with a network security XR violation.
 
@@ -70,9 +70,9 @@ For most titles that need peer-to-peer networking, Microsoft recommends **Azure 
 - **Relay networking** — traffic routes through Azure relay servers so players never need to expose their IP addresses.
 - **NAT traversal** — Party negotiates connections through NATs automatically.
 - **Voice and text chat** — integrated chat channel with automatic accessibility features (speech-to-text, text-to-speech).
-- **Cross-platform play** — the same Party library works on Xbox, Windows PC, PlayStation, Nintendo Switch, iOS, and Android.
+- **Cross-platform play** — the same Party library works on XBOX, Windows PC, PlayStation, Nintendo Switch, iOS, and Android.
 
-Party satisfies Xbox network security requirements on Xbox and Windows PC when used correctly. It replaces the deprecated **Xbox Integrated Multiplayer (XIM)** service, which does not work in GDK titles.
+Party satisfies XBOX network security requirements on XBOX and Windows PC when used correctly. It replaces the deprecated **XBOX Integrated Multiplayer (XIM)** service, which does not work in GDK titles.
 
 ```cpp
 // Minimal PlayFab Party initialization sketch
@@ -88,7 +88,7 @@ PARTY_HANDLE handle = nullptr;
 PartyError err = manager.Initialize(titleId);
 if (PARTY_FAILED(err)) { /* handle error */ }
 
-// Create a local user from the signed-in Xbox user's entity token
+// Create a local user from the signed-in XBOX user's entity token
 // (obtain entityToken from PlayFab authentication flow)
 PartyLocalUser* localUser = nullptr;
 err = manager.CreateLocalUser(
@@ -99,16 +99,16 @@ err = manager.CreateLocalUser(
 ```
 
 <Note>
-  Integrating PlayFab Party requires a PlayFab account and a title configuration in the PlayFab Game Manager. See the [Party overview](https://learn.microsoft.com/en-us/gaming/playfab/features/multiplayer/networking/) and the [Xbox and PC multiplayer design guidance](https://learn.microsoft.com/en-us/gaming/gdk/docs/services/multiplayer/overviews/multiplayer-design-guidance-xbox-pc-gdk) for the full integration path.
+  Integrating PlayFab Party requires a PlayFab account and a title configuration in the PlayFab Game Manager. See the [Party overview](https://learn.microsoft.com/en-us/gaming/playfab/features/multiplayer/networking/) and the [XBOX and PC multiplayer design guidance](https://learn.microsoft.com/en-us/gaming/gdk/docs/services/multiplayer/overviews/multiplayer-design-guidance-xbox-pc-gdk) for the full integration path.
 </Note>
 
 ## Networking and multiplayer session management
 
-Network connectivity alone is not enough for a compliant Xbox multiplayer experience. You also need to integrate with Xbox services for:
+Network connectivity alone is not enough for a compliant XBOX multiplayer experience. You also need to integrate with XBOX services for:
 
 - **Session lifecycle** — use Multiplayer Session Directory (MPSD) or Multiplayer Manager (MPM) to manage player sessions.
-- **Invites and joins** — players must be able to invite friends and join from the Xbox shell using the standard invite flow.
-- **Multiplayer Activity (MPA)** — required for titles using custom matchmaking to surface join-in-progress to the Xbox shell.
+- **Invites and joins** — players must be able to invite friends and join from the XBOX shell using the standard invite flow.
+- **Multiplayer Activity (MPA)** — required for titles using custom matchmaking to surface join-in-progress to the XBOX shell.
 
 See the [Multiplayer](/services/multiplayer) page for a full breakdown of these requirements.
 
@@ -119,7 +119,7 @@ See the [Multiplayer](/services/multiplayer) page for a full breakdown of these 
 | `WSAStartup` / `WSACleanup` | Initialize and tear down the WinSock runtime |
 | `socket` / `bind` / `connect` | Standard WinSock socket lifecycle |
 | `send` / `recv` / `sendto` / `recvfrom` | Standard data transfer |
-| GDK secure socket APIs | Wrap sockets with Xbox network security (see NDA docs) |
+| GDK secure socket APIs | Wrap sockets with XBOX network security (see NDA docs) |
 | `PartyManager::Initialize` | Initialize PlayFab Party |
 | `PartyManager::CreateLocalUser` | Register a signed-in player with Party |
 | `PartyNetwork::ConnectToNetwork` | Join or create a Party network |
@@ -130,17 +130,17 @@ Tag latency-sensitive outbound traffic (gameplay updates, voice) with DSCP/QoS m
 
 ## Reserved ports and firewall exceptions
 
-A range of Xbox-system ports is reserved for platform services (Live, Party, system telemetry) and cannot be bound by titles. Ship a list of game-specific UDP/TCP ports in your packaging metadata so the console firewall can open them automatically — do not assume players will configure their home routers.
+A range of XBOX-system ports is reserved for platform services (Live, Party, system telemetry) and cannot be bound by titles. Ship a list of game-specific UDP/TCP ports in your packaging metadata so the console firewall can open them automatically — do not assume players will configure their home routers.
 
 ## HTTP stacks: xCurl and WinHTTP
 
 - **xCurl** — libcurl-compatible HTTP client recommended for GDK titles. Cross-platform, supports HTTP/2, easy to plug into existing engines that already speak libcurl.
-- **WinHTTP** — Windows-native HTTP client, also available on Xbox. Pick WinHTTP when you already depend on it for tooling/services parity.
+- **WinHTTP** — Windows-native HTTP client, also available on XBOX. Pick WinHTTP when you already depend on it for tooling/services parity.
 - Custom HTTP stacks are allowed but must be debuggable through the standard platform network capture tooling.
 
 ## XDK migration
 
-Titles porting from Xbox One ERA (XDK) replace XDK-era socket and HTTP APIs with WinSock \+ xCurl/WinHTTP. The migration guide maps every XDK web-request and game-mesh API to its GDK equivalent.
+Titles porting from XBOX One ERA (XDK) replace XDK-era socket and HTTP APIs with WinSock \+ xCurl/WinHTTP. The migration guide maps every XDK web-request and game-mesh API to its GDK equivalent.
 
 ## See also
 

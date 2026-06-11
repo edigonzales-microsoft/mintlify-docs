@@ -44,16 +44,16 @@ The GDK requires at least **30 GB of free disk space** for a full installation, 
 
 The GDK is available from two sources depending on your developer program status:
 
-**Public GDK (no program membership required):** The [public Microsoft GDK on GitHub](https://aka.ms/gdk) contains the common tools, libraries, headers, and documentation needed to build Xbox Game Pass for PC titles on Windows 10/11, and to target Xbox consoles using the publicly available APIs.
+**Public GDK (no program membership required):** The [public Microsoft GDK on GitHub](https://aka.ms/gdk) contains the common tools, libraries, headers, and documentation needed to build XBOX Game Pass for PC titles on Windows 10/11, and to target XBOX consoles using the publicly available APIs.
 
-**Secure GDK download (program membership required):** Partners enrolled in a Microsoft managed Xbox developer program can download the full GDK — including NDA console extensions, offline documentation, the Submission Validator, and NDA samples — from [aka.ms/gdkdl](https://aka.ms/gdkdl).
+**Secure GDK download (program membership required):** Partners enrolled in a Microsoft managed XBOX developer program can download the full GDK — including NDA console extensions, offline documentation, the Submission Validator, and NDA samples — from [aka.ms/gdkdl](https://aka.ms/gdkdl).
 
 <Steps>
   <Step title="Open the download portal">
     Navigate to [aka.ms/gdkdl](https://aka.ms/gdkdl). Sign in with the Microsoft Entra ID account associated with your organization's Partner Center account. If you're using the public GDK, clone the repository from [aka.ms/gdk](https://aka.ms/gdk) instead.
   </Step>
   <Step title="Select the GDK release">
-    On the secure download portal, locate the **GDK 2604** release (or the latest available). Download the GDK installer package (`.exe`). If you're targeting Xbox consoles, also download the **GDK with Xbox Extensions (GDKx)** package.
+    On the secure download portal, locate the **GDK 2604** release (or the latest available). Download the GDK installer package (`.exe`). If you're targeting XBOX consoles, also download the **GDK with XBOX Extensions (GDKx)** package.
   </Step>
   <Step title="Save the installer">
     Save the installer to a local drive with at least 30 GB of available space. Avoid network shares or paths with spaces or special characters to prevent installer issues.
@@ -92,10 +92,10 @@ If you don't already have Visual Studio 2019 or 2022 installed, install it befor
     | Component | Platform | MSBuild Platform Toolset |
     | --- | --- | --- |
     | Gaming Runtime (PC) | Windows 10/11 PC | `Gaming.Desktop.x64` |
-    | Xbox One Extensions | Xbox One console | `Gaming.Xbox.XboxOne.x64` |
-    | Xbox Series X\|S Extensions | Xbox Series X\|S console | `Gaming.Xbox.Scarlett.x64` |
+    | XBOX One Extensions | XBOX One console | `Gaming.XBOX.XboxOne.x64` |
+    | XBOX Series X\|S Extensions | XBOX Series X\|S console | `Gaming.XBOX.Scarlett.x64` |
 
-    If you're targeting PC only, selecting Gaming Runtime is sufficient. For console development, select the corresponding Xbox extension(s) as well.
+    If you're targeting PC only, selecting Gaming Runtime is sufficient. For console development, select the corresponding XBOX extension(s) as well.
   </Step>
   <Step title="Complete the installation">
     Click **Install** and wait for the installer to finish. The GDK installs into `C:\Program Files (x86)\Microsoft GDK\` by default. The Visual Studio extensions (VSIX) are registered automatically for all installed supported versions of Visual Studio.
@@ -116,7 +116,7 @@ After the GDK is installed, confirm that the platform toolsets and project templ
     Launch Visual Studio. From the start screen, click **Create a new project**, or go to **File → New → Project** from the menu bar.
   </Step>
   <Step title="Filter by GDK templates">
-    In the **New Project** dialog, set the language filter to **C\+\+**, the platform filter to **Xbox** or **Windows**, and the project type to **Games**. You should see the GDK project templates listed below.
+    In the **New Project** dialog, set the language filter to **C\+\+**, the platform filter to **XBOX** or **Windows**, and the project type to **Games**. You should see the GDK project templates listed below.
   </Step>
   <Step title="Select a template">
     Choose the template that matches your target platform:
@@ -125,13 +125,13 @@ After the GDK is installed, confirm that the platform toolsets and project templ
     | --- | --- | --- |
     | Direct3D 12 Desktop Game | PC | Standalone PC game using `Gaming.Desktop.x64` and the full Win32 API surface |
     | Direct3D 12 Desktop Game (Classic) | PC | PC game using the stock x64 MSBuild platform (no custom toolset) |
-    | Direct3D 12 Xbox Game | Xbox console | Xbox console game using `Gaming.Xbox.Scarlett.x64` or `Gaming.Xbox.XboxOne.x64` |
+    | Direct3D 12 XBOX Game | XBOX console | XBOX console game using `Gaming.XBOX.Scarlett.x64` or `Gaming.XBOX.XboxOne.x64` |
     | Desktop Static Library | PC | Static library for inclusion in a `Gaming.Desktop.x64` project |
     | Desktop DLL | PC | Dynamic-link library for inclusion in a `Gaming.Desktop.x64` project |
-    | Xbox Static Library | Xbox | Static library for inclusion in a GDK Xbox console project |
-    | Xbox DLL | Xbox | DLL for inclusion in a GDK Xbox console project |
+    | XBOX Static Library | XBOX | Static library for inclusion in a GDK XBOX console project |
+    | XBOX DLL | XBOX | DLL for inclusion in a GDK XBOX console project |
 
-    For your first project, **Direct3D 12 Desktop Game** (PC) or **Direct3D 12 Xbox Game** (console) is the recommended starting point.
+    For your first project, **Direct3D 12 Desktop Game** (PC) or **Direct3D 12 XBOX Game** (console) is the recommended starting point.
   </Step>
   <Step title="Name and create your project">
     Enter a project name and location, then click **Create**. Visual Studio scaffolds a new project including a `MicrosoftGame.config` file with placeholder identity values, a basic Direct3D 12 device and swapchain, and a simple game update-and-render loop — ready for you to build and run immediately.
@@ -150,14 +150,14 @@ With the GDK installed and your first project created, you're ready to move on t
 
 <CardGroup cols={2}>
   <Card title="Get Started" icon="rocket" href="/gdk/get-started">
-    Understand the Xbox console vs. PC development paths and choose the right setup for your title.
+    Understand the XBOX console vs. PC development paths and choose the right setup for your title.
   </Card>
 
   <Card title="MicrosoftGame.config" icon="file-code" href="/gdk/game-config">
     Replace the placeholder values in your project's config file with your Partner Center identity details.
   </Card>
 
-  <Card title="Xbox Services" icon="trophy" href="/services/overview">
+  <Card title="XBOX Services" icon="trophy" href="/services/overview">
     Set up a development sandbox and test account to start integrating achievements, saves, and multiplayer.
   </Card>
 

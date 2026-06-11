@@ -5,10 +5,10 @@ description: "Understand the GDK memory model: title vs. system reservation, vir
 icon: "memory"
 ---
 
-Xbox consoles expose a unified-memory architecture (UMA) where CPU and GPU share the same physical RAM. The GDK gives your title a fixed budget per console SKU and reserves the remainder for the operating system, capture pipeline, and system overlay. Staying inside that budget — and avoiding fragmentation — is one of the highest-impact things you can do for stability and certification.
+XBOX consoles expose a unified-memory architecture (UMA) where CPU and GPU share the same physical RAM. The GDK gives your title a fixed budget per console SKU and reserves the remainder for the operating system, capture pipeline, and system overlay. Staying inside that budget — and avoiding fragmentation — is one of the highest-impact things you can do for stability and certification.
 
 <Note>
-  Exact memory budgets per console SKU (Xbox One, Xbox One X, Xbox Series S, Xbox Series X) and per running mode (foreground, constrained, streaming) are documented in the NDA-gated [System memory overview](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/memory/system-memory-overview). Visit [xbox.com/Developers](https://www.xbox.com/Developers) for program access.
+  Exact memory budgets per console SKU (XBOX One, XBOX One X, XBOX Series S, XBOX Series X) and per running mode (foreground, constrained, streaming) are documented in the NDA-gated [System memory overview](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/memory/system-memory-overview). Visit [xbox.com/Developers](https://www.xbox.com/Developers) for program access.
 </Note>
 
 ## Memory layout at a glance
@@ -52,11 +52,11 @@ Most engines wrap `XMemAlloc` behind their own allocator and apply tags based on
 - **Pre-allocate at boot.** Reserve your largest contiguous heaps during title startup. This avoids fragmentation later in the session.
 - **Use streaming pools.** For open-world games, segment textures and meshes into chunks that map to gameplay zones, and stream them in and out of fixed-size pools.
 - **Keep a margin.** Leave at least a few hundred megabytes of headroom. Constrained mode, game streaming clients, and certification require a working buffer.
-- **Profile early.** Use PIX for Xbox memory captures and the [XBWatson](/tools/xbwatson) crash signature service throughout production, not just at cert time.
+- **Profile early.** Use PIX for XBOX memory captures and the [XBWatson](/tools/xbwatson) crash signature service throughout production, not just at cert time.
 
 ## Constrained mode
 
-When the player invokes the Xbox guide or a system dialog, your title may be moved into a constrained execution state with reduced CPU, GPU, and memory. Listen for the platform suspend / constrain notifications and shed non-essential work, particularly audio mix complexity and streaming I/O.
+When the player invokes the XBOX guide or a system dialog, your title may be moved into a constrained execution state with reduced CPU, GPU, and memory. Listen for the platform suspend / constrain notifications and shed non-essential work, particularly audio mix complexity and streaming I/O.
 
 ## Virtual memory allocator
 
@@ -76,7 +76,7 @@ Accessing memory from a different CPU core than the one that produced it incurs 
 
 ## Porting your memory model from XDK
 
-XDK titles that used the Xbox One SDK's allocator can migrate incrementally: keep your custom allocator for hot paths and route everything else through XMem first, then move hot paths over once profiling shows parity. The porting guide in the GDK docs lists the XDK-to-GDK allocator API mappings.
+XDK titles that used the XBOX One SDK's allocator can migrate incrementally: keep your custom allocator for hot paths and route everything else through XMem first, then move hot paths over once profiling shows parity. The porting guide in the GDK docs lists the XDK-to-GDK allocator API mappings.
 
 ## See also
 

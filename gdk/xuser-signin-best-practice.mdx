@@ -27,7 +27,7 @@ void CALLBACK Identity_TrySignInDefaultUserSilently_Callback(XAsyncBlock* asyncB
     HRESULT hr = XUserAddResult(asyncBlock, &newUser);
 
     if (SUCCEEDED(hr)) {
-        // Create Xbox services context.
+        // Create XBOX services context.
     } else {
         // No default user — prompt "Press A / Enter to continue" and retry with UI.
     }

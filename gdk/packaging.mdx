@@ -5,7 +5,7 @@ description: "Learn how to create GDK packages for Xbox and PC using makepkg, In
 icon: "box"
 ---
 
-Packaging is the process of bundling your game's executables, assets, and manifest into a distributable format that Microsoft Store can ingest, validate, and deliver to players. The GDK packaging system is shared across Xbox console and Windows PC targets, giving you Streaming Install, Intelligent Delivery, differential content updates, and support for downloadable content (DLC) — all from a single toolchain.
+Packaging is the process of bundling your game's executables, assets, and manifest into a distributable format that Microsoft Store can ingest, validate, and deliver to players. The GDK packaging system is shared across XBOX console and Windows PC targets, giving you Streaming Install, Intelligent Delivery, differential content updates, and support for downloadable content (DLC) — all from a single toolchain.
 
 ## Key features
 
@@ -15,7 +15,7 @@ Packaging is the process of bundling your game's executables, assets, and manife
   </Card>
 
   <Card title="Intelligent Delivery" icon="tags" href="/reference/xpackage">
-    Tag content chunks as language-specific or hardware-specific (e.g., 4K textures for Xbox One X and Xbox Series consoles) so that players only download what their system actually needs.
+    Tag content chunks as language-specific or hardware-specific (e.g., 4K textures for XBOX One X and XBOX Series consoles) so that players only download what their system actually needs.
   </Card>
 
   <Card title="Differential Updates" icon="arrows-rotate" href="/reference/xpackage">
@@ -37,10 +37,10 @@ Packaging is the process of bundling your game's executables, assets, and manife
     The layout file tells `makepkg` which files belong in the package and how they are organized into chunks. Intelligent Delivery tags (language, device family) are applied here.
   </Step>
   <Step title="Run makepkg to build the package">
-    For **Xbox console** and **PC (MSIXVC)**, use `makepkg.exe`:
+    For **XBOX console** and **PC (MSIXVC)**, use `makepkg.exe`:
 
     ```bash
-    # Xbox console (XVC format)
+    # XBOX console (XVC format)
     makepkg pack /f layout.xml /d .\gamefiles\ /pd .\output\
     
     # PC (MSIXVC format)
@@ -71,7 +71,7 @@ Starting with the April 2026 GDK, a next-generation PC packaging format called *
 | Packaging speed | Up to 7.6× faster |
 | Workflow | Combined pack and upload in a single command |
 
-MSIXVC2 is **PC-only**. Xbox console games continue to use the XVC format. Both formats are supported by the `makepkg2` tool.
+MSIXVC2 is **PC-only**. XBOX console games continue to use the XVC format. Both formats are supported by the `makepkg2` tool.
 
 <Tip>
   If you are starting a new PC game or overhauling your packaging pipeline, MSIXVC2 is the recommended format for its dramatically smaller update deltas and faster turnaround during development.
@@ -109,7 +109,7 @@ Your game can change the chunk installation order at runtime in response to play
 
 Validator output includes a fixed catalog of message codes you can suppress or treat as warnings in your pipeline.
 
-## Xbox Game Package Manager (XGPM)
+## XBOX Game Package Manager (XGPM)
 
 **XGPM** is the developer-PC tool for inspecting, mounting, and managing locally installed packages and their chunks during development. Use it to:
 
@@ -140,4 +140,4 @@ For physical media, the packaging toolchain can produce:
 
 - **Test discs** — burnable images used for compatibility and certification testing on retail hardware
 - **Disc subsets** — small disc layouts that pair with a streaming install for fast first-boot
-- **Cross-generation test discs** — single disc images that install the correct Xbox One or Xbox Series X|S build based on the console it is inserted into
+- **Cross-generation test discs** — single disc images that install the correct XBOX One or XBOX Series X|S build based on the console it is inserted into

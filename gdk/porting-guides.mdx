@@ -18,9 +18,9 @@ For middleware engines, start with the engine-specific PC end-to-end guides:
 - [Custom C/C\+\+ engines](/pc-e2e/engines/custom-engine)
 - [Overview: GDK and game engines](/pc-e2e/gdk-and-engines)
 
-## Xbox One ERA → GDK
+## XBOX One ERA → GDK
 
-For existing Xbox One ERA titles, the porting guide covers:
+For existing XBOX One ERA titles, the porting guide covers:
 
 - WinRT-style API replacements with flat C / simple C\+\+ equivalents.
 - Async pattern migration (from the ERA `IAsyncOperation` model to `XAsyncBlock` / `XTaskQueue`).
@@ -31,11 +31,11 @@ See [**Memory porting**](/gdk/memory) for ERA → GDK memory specifics.
 
 ### EMiLi (ERA Migration Library)
 
-**EMiLi** is a Microsoft-supplied compatibility shim that implements common Xbox One ERA APIs on top of the GDK. Drop it into an existing ERA codebase and large parts of the title will keep compiling and running unchanged while you incrementally rewrite hot paths against the native GDK APIs. EMiLi is a porting accelerator, not a shipping target — plan to remove it before final certification.
+**EMiLi** is a Microsoft-supplied compatibility shim that implements common XBOX One ERA APIs on top of the GDK. Drop it into an existing ERA codebase and large parts of the title will keep compiling and running unchanged while you incrementally rewrite hot paths against the native GDK APIs. EMiLi is a porting accelerator, not a shipping target — plan to remove it before final certification.
 
 ### EMiLi (ERA Migration Library)
 
-**EMiLi** is a Microsoft-supplied compatibility shim that implements common Xbox One ERA APIs on top of the GDK. Drop it into an existing ERA codebase and large parts of the title will keep compiling and running unchanged while you incrementally rewrite hot paths against the native GDK APIs. EMiLi is a porting accelerator, not a shipping target — plan to remove it before final certification.
+**EMiLi** is a Microsoft-supplied compatibility shim that implements common XBOX One ERA APIs on top of the GDK. Drop it into an existing ERA codebase and large parts of the title will keep compiling and running unchanged while you incrementally rewrite hot paths against the native GDK APIs. EMiLi is a porting accelerator, not a shipping target — plan to remove it before final certification.
 
 ## Shaders: FXC → DXC
 
@@ -47,11 +47,11 @@ The DirectX Shader Compiler (DXC) is the modern HLSL compiler. The FXC → DXC p
 
 ## GameInput porting
 
-Migrate from `Windows.Xbox.Input` and **XInput** to the unified [**GameInput**](/gdk/input) API. The porting guide covers device enumeration, reading state, vibration, and PIX integration.
+Migrate from `Windows.XBOX.Input` and **XInput** to the unified [**GameInput**](/gdk/input) API. The porting guide covers device enumeration, reading state, vibration, and PIX integration.
 
 ## Steam → GDK / Microsoft Store
 
-For PC titles that already ship on Steam via Steamworks, this guide maps Steamworks features to Microsoft Store / Xbox services equivalents:
+For PC titles that already ship on Steam via Steamworks, this guide maps Steamworks features to Microsoft Store / XBOX services equivalents:
 
 - Achievements → XSAPI achievements
 - Cloud saves → Connected Storage (`XGameSave`)
