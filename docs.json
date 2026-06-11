@@ -147,24 +147,47 @@
           {
             "group": "Get Started",
             "pages": [
-              "index",
-              "onboarding",
-              "gdk/welcome",
-              "introduction",
-              "gdk/what-is-gdk",
-              "gdk/glossary",
-              "gdk/feature-quality",
-              "gdk/access-resources",
-              "gdk/setup-organization",
-              "gdk/dev-pc-setup",
-              "gdk/sdk-and-tools",
+              {
+                "group": "Welcome & Introduction",
+                "icon": "hand-wave",
+                "pages": [
+                  "index",
+                  "gdk/welcome",
+                  "introduction",
+                  "gdk/what-is-gdk",
+                  "gdk/glossary",
+                  "gdk/feature-quality"
+                ]
+              },
+              {
+                "group": "Onboarding & Access",
+                "icon": "id-card",
+                "pages": [
+                  "onboarding",
+                  "gdk/access-resources",
+                  "gdk/setup-organization",
+                  "gdk/security-requirements",
+                  "gdk/atg-engagement"
+                ]
+              },
+              {
+                "group": "Setup & Install",
+                "icon": "download",
+                "pages": [
+                  "gdk/dev-pc-setup",
+                  "gdk/sdk-and-tools",
+                  "gdk/download-install"
+                ]
+              },
+              {
+                "group": "Build Your First Title",
+                "icon": "play",
+                "pages": []
+              },
               "gdk/get-started",
-              "gdk/download-install",
               "gdk/developing-new-titles",
               "gdk/samples",
-              "gdk/porting-guides",
-              "gdk/security-requirements",
-              "gdk/atg-engagement"
+              "gdk/porting-guides"
             ]
           }
         ]
