@@ -5,7 +5,7 @@ description: "Optimize and certify your GDK title for Windows handheld devices l
 icon: "mobile-screen"
 ---
 
-Windows handhelds — including the **ROG Xbox Ally** family and other Windows-based portable PCs — run the same `Gaming.Desktop.x64` GDK binaries as desktops, but they ship in a thermally and battery-constrained form factor with a touch-first shell. Plan for them as a distinct target.
+Windows handhelds — including the **ROG XBOX Ally** family and other Windows-based portable PCs — run the same `Gaming.Desktop.x64` GDK binaries as desktops, but they ship in a thermally and battery-constrained form factor with a touch-first shell. Plan for them as a distinct target.
 
 ## Handheld Compatibility program
 
@@ -37,7 +37,7 @@ Handhelds run on a battery and dissipate heat through a small chassis. Treat pow
 
 ## Game launchers and the handheld shell
 
-The Xbox app and the handheld's vendor shell (Armoury Crate SE on Ally devices) launch your title and show key art, progress, and Cloud Saves status. To integrate cleanly:
+The XBOX app and the handheld's vendor shell (Armoury Crate SE on Ally devices) launch your title and show key art, progress, and Cloud Saves status. To integrate cleanly:
 
 - Ship correct **store metadata and key art** at all required sizes — the shell uses store-listing assets, not in-game assets.
 - Support **deep-link launch** via your registered protocol or AUMID so the shell can resume into a specific mode (continue, multiplayer lobby, DLC).
@@ -47,7 +47,7 @@ The Xbox app and the handheld's vendor shell (Armoury Crate SE on Ally devices) 
 
 - **Driver and runtime dependencies** — declare any framework packages (DirectX, VC\+\+, .NET) so the store installs them automatically. Do not bundle private copies.
 - **Storage** — handhelds ship with smaller SSDs than desktops; honor Intelligent Delivery tags so optional language, hi-res texture, or campaign-only chunks are user-removable.
-- **Cloud streaming fallback** — handhelds are first-class Xbox Cloud Gaming clients; if a player's local install fails, the shell can offer streaming. Make sure your Cloud Aware code paths are tested on the handheld form factor.
+- **Cloud streaming fallback** — handhelds are first-class XBOX Cloud Gaming clients; if a player's local install fails, the shell can offer streaming. Make sure your Cloud Aware code paths are tested on the handheld form factor.
 
 ## See also
 

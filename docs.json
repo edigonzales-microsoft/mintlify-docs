@@ -134,6 +134,11 @@
       "source": "/tools/pgo",
       "destination": "/tools/profile-guided-optimization",
       "permanent": true
+    },
+    {
+      "source": "/introduction",
+      "destination": "/gdk/welcome",
+      "permanent": true
     }
   ],
   "metadata": {
@@ -152,9 +157,9 @@
                 "icon": "hand-wave",
                 "pages": [
                   "index",
-                  "gdk/welcome",
-                  "introduction",
                   "gdk/what-is-gdk",
+                  "gdk/welcome",
+                  "gdk/get-started",
                   "gdk/glossary",
                   "gdk/feature-quality"
                 ]
@@ -187,8 +192,7 @@
                   "gdk/samples",
                   "gdk/porting-guides"
                 ]
-              },
-              "gdk/get-started"
+              }
             ]
           }
         ]

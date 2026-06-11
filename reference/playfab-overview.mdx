@@ -10,7 +10,7 @@ PlayFab APIs are organized into REST groups, a unified C SDK (Services C API), a
 ## Surface
 
 - **REST APIs** — versioned per service. All requests use HTTPS to `https://<TitleID>.playfabapi.com` (or a regional endpoint).
-- **Services C API** — the unified GDK-ready C library used by Xbox titles.
+- **Services C API** — the unified GDK-ready C library used by XBOX titles.
 - **PlayFab Party** — C/C\+\+ realtime data \+ voice transport.
 - **PlayFab Multiplayer (Lobby \+ Matchmaking)** — C/C\+\+ \+ Unity for matchmaking and lobby management.
 - **Real-time messages** — WebSocket messages for Lobby and Matchmaking events.
@@ -19,7 +19,7 @@ PlayFab APIs are organized into REST groups, a unified C SDK (Services C API), a
 
 All calls require a session token. Acquire one with a login method (`LoginWithXbox`, `LoginWithCustomID`, etc.) and pass it as the `X-Authorization` header.
 
-See [Authenticate players with PlayFab and Xbox services](/playfab/player-sign-in) for the GDK integration story.
+See [Authenticate players with PlayFab and XBOX services](/playfab/player-sign-in) for the GDK integration story.
 
 ## Per-service references
 

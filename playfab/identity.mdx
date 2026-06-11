@@ -5,7 +5,7 @@ icon: "fingerprint"
 description: "PlayFab identity concepts: master accounts, title player accounts, the entity model, linked providers, and migration patterns."
 ---
 
-PlayFab identity has three layers — master player accounts, title player accounts, and the entity model. Understanding how they fit together is critical when integrating with Xbox services, cross-platform play, and account-linking flows.
+PlayFab identity has three layers — master player accounts, title player accounts, and the entity model. Understanding how they fit together is critical when integrating with XBOX services, cross-platform play, and account-linking flows.
 
 ## Account model
 
@@ -17,18 +17,18 @@ Use the entity model for new features. Legacy PlayerData and account APIs still 
 
 ## Linking providers
 
-The canonical Xbox flow:
+The canonical XBOX flow:
 
-1. Player signs in to Xbox via `XUserAddAsync`.
+1. Player signs in to XBOX via `XUserAddAsync`.
 2. Title gets an XBL token via `XUserGetTokenAndSignatureUtf16Async`.
 3. Title calls `LoginWithXbox` on the PlayFab client SDK with the XBL token.
-4. PlayFab creates (or finds) a master account linked to that Xbox identity, and returns a session token \+ entity token.
+4. PlayFab creates (or finds) a master account linked to that XBOX identity, and returns a session token \+ entity token.
 
 For cross-platform play, additional providers can be linked:
 
 - Player on PC signs in with Steam.
 - Title calls `LinkSteamAccount` on the existing PlayFab session.
-- The master account now has both Xbox and Steam links — either platform can sign in to the same PlayFab identity.
+- The master account now has both XBOX and Steam links — either platform can sign in to the same PlayFab identity.
 
 Unlinking is symmetric (`UnlinkXboxAccount`, `UnlinkSteamAccount`).
 
@@ -39,7 +39,7 @@ For pre-account experiences (player tries the game before signing in):
 - `LoginWithCustomID` — your title provides a stable device ID; PlayFab creates an account bound to it.
 - `LoginWithIOSDeviceID`, `LoginWithAndroidDeviceID` — platform-supplied device IDs.
 
-Later, when the player signs in with Xbox, call `LinkXboxAccount` to merge the device-bound account with the Xbox identity. From then on, either sign-in path resolves to the same master account.
+Later, when the player signs in with Xbox, call `LinkXboxAccount` to merge the device-bound account with the XBOX identity. From then on, either sign-in path resolves to the same master account.
 
 ## Account merging
 

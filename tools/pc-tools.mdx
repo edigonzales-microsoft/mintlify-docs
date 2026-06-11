@@ -104,10 +104,10 @@ The GDK provides a focused set of PC-side tools that handle the three most commo
 
 ## PIX for Windows
 
-PIX for Windows is a standalone GPU performance analysis and debugging tool for DirectX 12 titles running on Windows 10 and later. It is separate from the version of PIX that ships inside the GDK (which targets Xbox One Development Kits).
+PIX for Windows is a standalone GPU performance analysis and debugging tool for DirectX 12 titles running on Windows 10 and later. It is separate from the version of PIX that ships inside the GDK (which targets XBOX One Development Kits).
 
 <Note>
-  PIX for Windows supports **DirectX 12 only** and requires **Windows 10 or later**. If your game also targets Xbox consoles, you can install PIX for Windows and PIX for Xbox **side-by-side** on the same development PC — they do not conflict.
+  PIX for Windows supports **DirectX 12 only** and requires **Windows 10 or later**. If your game also targets XBOX consoles, you can install PIX for Windows and PIX for XBOX **side-by-side** on the same development PC — they do not conflict.
 </Note>
 
 Key capabilities include:
@@ -146,11 +146,11 @@ WDP is built into Windows and does not require any GDK-specific installation. En
   remove-appxpackage <PackageFullName from above>
   ```
 
-  Then open the Xbox app and install a game to trigger automatic reinstallation of GRTS from the Microsoft Store.
+  Then open the XBOX app and install a game to trigger automatic reinstallation of GRTS from the Microsoft Store.
 </Accordion>
 
 <Accordion title="Error 0x80070490 — Element not found when using wdapp install">
-  You are attempting to install an `.xvc` file (Xbox console format) with `wdapp install`. The `install` command only works with `.msixvc` (PC format) packages. Rebuild your title targeting `Gaming.Desktop.x64` and repackage with `makepkg.exe`.
+  You are attempting to install an `.xvc` file (XBOX console format) with `wdapp install`. The `install` command only works with `.msixvc` (PC format) packages. Rebuild your title targeting `Gaming.Desktop.x64` and repackage with `makepkg.exe`.
 </Accordion>
 
 <Accordion title="Launch failures when title folder is shared via Windows File Sharing">

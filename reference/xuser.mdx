@@ -5,7 +5,7 @@ description: "Reference for the XUser API: add users, resolve sign-in issues, qu
 icon: "user"
 ---
 
-The **XUser** API is the GDK surface for player identity. Every signed-in player is represented by an `XUserHandle` that you use to call user-scoped APIs across Xbox services, Connected Storage, Store, and Game Chat. This page is a quick reference; the conceptual walkthrough lives in [User Model](/gdk/user-model).
+The **XUser** API is the GDK surface for player identity. Every signed-in player is represented by an `XUserHandle` that you use to call user-scoped APIs across XBOX services, Connected Storage, Store, and Game Chat. This page is a quick reference; the conceptual walkthrough lives in [User Model](/gdk/user-model).
 
 ## Header and library
 
@@ -39,10 +39,10 @@ The **XUser** API is the GDK surface for player identity. Every signed-in player
 
 | Function | Purpose |
 | --- | --- |
-| `XUserGetTokenAndSignatureAsync` | Acquire an XSTS token and request signature for an Xbox services REST call. |
+| `XUserGetTokenAndSignatureAsync` | Acquire an XSTS token and request signature for an XBOX services REST call. |
 | `XUserGetTokenAndSignatureResult` | Complete the token request and read the token / signature buffers. |
 
-The XSAPI C library calls this internally; you typically use it directly only when calling Xbox services REST endpoints from your own code.
+The XSAPI C library calls this internally; you typically use it directly only when calling XBOX services REST endpoints from your own code.
 
 ## Change notifications
 
@@ -76,7 +76,7 @@ XUserAddAsync(XUserAddOptions::AddDefaultUserSilently, async);
 
 ## Modern gamertags
 
-Xbox supports two gamertag formats. Your title's UI must handle both correctly:
+XBOX supports two gamertag formats. Your title's UI must handle both correctly:
 
 - **Classic gamertags** — ASCII-only, up to 15 characters, globally unique. Every existing gamertag prior to 2019.
 - **Modern gamertags** — UTF-8 display name plus a discriminator suffix (`Gamertag#1234`) for uniqueness. Supports non-Latin scripts, allowing players to use their real-language identity.

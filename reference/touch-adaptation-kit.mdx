@@ -5,7 +5,7 @@ icon: "hand-pointer"
 description: "Declarative touch layouts for Xbox Cloud Gaming, mapping touch input to virtual gamepad, keyboard, and mouse events."
 ---
 
-The Touch Adaptation Kit (TAK) lets your title ship a JSON-based touch layout that the Xbox streaming client renders on touch devices. Use it to expose virtual joysticks, buttons, dpads, throttles, and sensors that map to whatever input your game expects.
+The Touch Adaptation Kit (TAK) lets your title ship a JSON-based touch layout that the XBOX streaming client renders on touch devices. Use it to expose virtual joysticks, buttons, dpads, throttles, and sensors that map to whatever input your game expects.
 
 ## Layout structure
 
@@ -79,9 +79,9 @@ Microsoft ships **Content Test Applications (CTAs)** to test your streaming expe
 
 All CTAs support custom stream configuration (resolution, bitrate, codec) and load your packaged title from a dev kit or PC build.
 
-## Xbox streaming server identity (XSTS claims)
+## XBOX streaming server identity (XSTS claims)
 
-When your service receives a request from a streaming session, the user's Xbox services Security Token (XSTS) includes claims that identify the streaming server, not the player's device. Use these claims to differentiate streamed sessions from local play in service-side logic (telemetry, region pinning, anti-abuse). Do not assume the source IP belongs to the player.
+When your service receives a request from a streaming session, the user's XBOX services Security Token (XSTS) includes claims that identify the streaming server, not the player's device. Use these claims to differentiate streamed sessions from local play in service-side logic (telemetry, region pinning, anti-abuse). Do not assume the source IP belongs to the player.
 
 ## See also
 

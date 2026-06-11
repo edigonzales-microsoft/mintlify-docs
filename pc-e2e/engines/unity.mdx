@@ -5,7 +5,7 @@ description: "Integrate the GDK with your Unity project to ship to Windows, Xbox
 icon: "cube"
 ---
 
-The Microsoft GDK packages for Unity — co-developed by Microsoft and Unity — let you target Windows x64, Xbox Series X|S, and Xbox One with the same configuration and code base.
+The Microsoft GDK packages for Unity — co-developed by Microsoft and Unity — let you target Windows x64, XBOX Series X|S, and XBOX One with the same configuration and code base.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ The Microsoft GDK packages for Unity — co-developed by Microsoft and Unity —
 - Windows SDK 22000 or later
 - Windows 10 (1809\+) or Windows 11
 - October 2023 GDK Update 4 or later
-- Valid Unity license if targeting Xbox consoles
+- Valid Unity license if targeting XBOX consoles
 
 <Warning>
   Unity published a security advisory affecting specific Unity Engine versions. Review the [Unity Security Update Advisory](https://aka.ms/unity_security) before shipping.
@@ -26,21 +26,21 @@ The Microsoft GDK packages for Unity — co-developed by Microsoft and Unity —
 | --- | --- | --- |
 | **Microsoft GDK API** | PC \+ Console | Unity Registry (Package Manager) |
 | **Microsoft GDK Tools** | PC \+ Console | Unity Registry |
-| **Microsoft GDK Tools for Xbox** | Console only | Direct download via Unity Xbox Discussions |
-| **GXDK Input System** | Console only | Unity Xbox Discussions |
-| **Game Core Render Pipeline** | Console only | Unity Xbox Discussions |
+| **Microsoft GDK Tools for Xbox** | Console only | Direct download via Unity XBOX Discussions |
+| **GXDK Input System** | Console only | Unity XBOX Discussions |
+| **Game Core Render Pipeline** | Console only | Unity XBOX Discussions |
 
-The **GDK API package** provides C# wrappers for native APIs — access Xbox network services (achievements, cloud saves, leaderboards) directly from C#.
+The **GDK API package** provides C# wrappers for native APIs — access XBOX network services (achievements, cloud saves, leaderboards) directly from C#.
 
 The **GDK Tools package** generates `MicrosoftGame.config`, packages your PC game, and integrates Partner Center association.
 
 Console packages require:
 
-- The GDK from the [Xbox Developer Downloads portal](https://aka.ms/gdkdl).
-- The **Xbox Series X|S and Xbox One Add-ons for Unity Editor** installed on every dev machine.
+- The GDK from the [XBOX Developer Downloads portal](https://aka.ms/gdkdl).
+- The **XBOX Series X|S and XBOX One Add-ons for Unity Editor** installed on every dev machine.
 
 <Note>
-  You must belong to ID@Xbox (or an equivalent Xbox Developer program) and request access to the Unity Xbox Discussions site before you can get the console packages.
+  You must belong to ID@XBOX (or an equivalent XBOX Developer program) and request access to the Unity XBOX Discussions site before you can get the console packages.
 </Note>
 
 ## Install the packages
@@ -54,7 +54,7 @@ Console packages require:
 ### From tarball (console packages)
 
 1. **Package Manager** → **\+** → **Add package from tarball**.
-2. Select the `.tgz` you downloaded from Unity Xbox Discussions.
+2. Select the `.tgz` you downloaded from Unity XBOX Discussions.
 3. Install.
 
 <Tip>
@@ -67,7 +67,7 @@ Console packages require:
   <Step title="Create a GDK Settings Asset">
     After installing the API \+ Tools packages, use the new GDK menu to create a **GDK Settings Asset**. This adds GDK-specific entries to **Project Settings** for configuring your title.
 
-    With the Xbox Tools package \+ add-ons installed, the settings include tabs for each platform.
+    With the XBOX Tools package \+ add-ons installed, the settings include tabs for each platform.
   </Step>
   <Step title="Create a Microsoft Game Config Asset">
     Generate the `MicrosoftGame.config` and supporting files from the new asset menu.
@@ -109,14 +109,14 @@ Included with the GDK download:
 | `UnitySimpleMPSD` | MPSD \+ SmartMatch session and matchmaking |
 | `UnityRumble` | Multiplayer Manager (MPM) \+ PlayFab Party |
 | `UnityRumblePlayFabMultiplayer` | PlayFab Multiplayer session and matchmaking |
-| `UnitySimpleHttpCall` | Xbox networking HTTP send/receive |
+| `UnitySimpleHttpCall` | XBOX networking HTTP send/receive |
 | `UnitySimpleWebSockets` | HTTP Client Web Sockets |
 | `UnitySimplePLM` | PLM event handling |
-| `UnityAssetWorkflow` (Xbox only) | Console-side asset iteration tooling |
+| `UnityAssetWorkflow` (XBOX only) | Console-side asset iteration tooling |
 
 ### Handheld best practices
 
-[Unity HandheldBestPractices](https://aka.ms/hhexpsample_unity) — C# patterns for Windows handhelds (ROG Xbox Ally, etc.). Doesn't use the GDK directly; demonstrates the right Windows APIs to use.
+[Unity HandheldBestPractices](https://aka.ms/hhexpsample_unity) — C# patterns for Windows handhelds (ROG XBOX Ally, etc.). Doesn't use the GDK directly; demonstrates the right Windows APIs to use.
 
 ## Build and package
 
@@ -131,7 +131,7 @@ GDK Settings control shell visuals, localization, and packaging. No special Buil
 - In **Project Settings → Player → Publisher Settings**, set **Package Encryption**:
   - **Development** for sideload / `xbapp install` / `Build and Run`.
   - **Submission** for Partner Center uploads. Submission packages **cannot** be sideloaded.
-- In **Build Profiles**, set target to **Xbox One** or **Xbox Series**, build type to **Development** or **Master**, deploy method to **Package**.
+- In **Build Profiles**, set target to **XBOX One** or **XBOX Series**, build type to **Development** or **Master**, deploy method to **Package**.
 - Output is an `.xvc` under `XVC/`.
 
 ## Test in Play Mode

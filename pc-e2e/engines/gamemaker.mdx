@@ -43,7 +43,7 @@ The repo includes a sample at `source/GDKExtension_gml/GDKExtension.yyp`.
 In GameMaker: **Build → Create Executable**, then **Package as Zip**.
 
 <Warning>
-  **Package as Zip** is required to generate an MSIXVC. **Package as Installer** does not produce an MSIXVC, and the app will not have access to Xbox services.
+  **Package as Zip** is required to generate an MSIXVC. **Package as Installer** does not produce an MSIXVC, and the app will not have access to XBOX services.
 </Warning>
 
 Install with `wdapp`:
@@ -63,10 +63,10 @@ Sample config: `source/GDKExtension_gml/datafiles/MicrosoftGame.config`.
 
 | Partner Center | MicrosoftGame.config |
 | --- | --- |
-| Xbox Title ID | `TitleId` |
+| XBOX Title ID | `TitleId` |
 | Package/Identity/Name | `Identity → Name` |
 | Package/Identity/Publisher | `Identity → Publisher` |
-| Xbox services → Xbox Settings → MSAAppId | `MSAAppId` |
+| XBOX services → XBOX Settings → MSAAppId | `MSAAppId` |
 
 Example:
 
@@ -81,7 +81,7 @@ Example:
     <Executable Name="Achievements2017_desktop.exe" TargetDeviceFamily="PC" Id="Game"/>
   </ExecutableList>
   <ShellVisuals DefaultDisplayName="Achievements2017 Desktop Sample"
-                PublisherDisplayName="Xbox Advanced Technology Group"
+                PublisherDisplayName="XBOX Advanced Technology Group"
                 StoreLogo="Assets\StoreLogo.png"
                 Square150x150Logo="Assets\Logo.png"
                 Square44x44Logo="Assets\SmallLogo.png"
@@ -113,12 +113,12 @@ gdk_quit();
 | --- | --- |
 | **Base** | User / account selection |
 | **Storage** | Per-user load/save (game saves) |
-| **Xbox services** | Stats, leaderboards, achievements, rich presence |
+| **XBOX services** | Stats, leaderboards, achievements, rich presence |
 | **In-App Purchases** | Microsoft Store commerce via GDK |
 
 API reference: `source/GDKExtension_gml/datafiles/GDK_Extension_Documentation.pdf`.
 
-## Test Xbox services
+## Test XBOX services
 
 ### Create a test account
 
@@ -126,10 +126,10 @@ See [Creating test accounts](/services/overview).
 
 ### Switch your sandbox
 
-1. Find your sandbox ID in **Partner Center → Xbox services → Gameplay settings** (e.g., `ABCDEF.0`).
+1. Find your sandbox ID in **Partner Center → XBOX services → Gameplay settings** (e.g., `ABCDEF.0`).
 2. **Start** → **Microsoft GDK Command Prompts**.
 3. Run `XblPCSandbox.exe <your sandbox ID>`.
-4. Sign in to the Xbox App with your test account.
+4. Sign in to the XBOX App with your test account.
 
 ## Publish
 

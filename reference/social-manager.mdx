@@ -37,7 +37,7 @@ HRESULT XblSocialManagerAddLocalUser(
 ```
 
 <ParamField path="user" type="XblUserHandle" required>
-  The Xbox Live user handle for the local player whose social graph should be tracked. Obtain this from the XUser API after the player signs in.
+  The XBOX Live user handle for the local player whose social graph should be tracked. Obtain this from the XUser API after the player signs in.
 </ParamField>
 
 <ParamField path="extraLevelDetail" type="XblSocialManagerExtraDetailLevel" required>
@@ -47,7 +47,7 @@ HRESULT XblSocialManagerAddLocalUser(
   | --- | --- |
   | `NoExtraDetail` | Only basic presence (online/offline) |
   | `TitleHistory` | Includes recent titles played |
-  | `PreferredColor` | Includes the user's preferred Xbox color |
+  | `PreferredColor` | Includes the user's preferred XBOX color |
   | `TitleHistoryAndPreferredColor` | Both of the above |
 </ParamField>
 

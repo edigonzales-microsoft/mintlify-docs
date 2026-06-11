@@ -16,7 +16,7 @@ Crashes, hangs, deadlocks during long play sessions, suspend / resume cycles, or
 **Avoid by:**
 
 - Running soak tests through PLM cycles (suspend, constrain, resume).
-- Testing across Xbox Series X, Series S, and Xbox One SKUs.
+- Testing across XBOX Series X, Series S, and XBOX One SKUs.
 - Catching async failure paths — timeouts, throttle responses, network drops.
 - Using `XErrorSetCallback` to log unrecoverable errors before the OS terminates the title.
 
@@ -40,13 +40,13 @@ Session state diverges across members. Causes:
 
 **Avoid by:** picking one model ([raw MPSD](/reference/xsapi-multiplayer) or [Multiplayer Manager](/reference/xsapi-multiplayer-manager)) and sticking to it; honor ETags.
 
-### 4. XR-045 Xbox User and Account Privileges
+### 4. XR-045 XBOX User and Account Privileges
 
 Title exposes communication, UGC, or multiplayer features without checking the user has the privilege.
 
 **Avoid by:** call `XUserCheckPrivilege` before every feature that maps to a privilege; show platform UI (`XUserResolvePrivilegeWithUiAsync`) when the user lacks it.
 
-### 5. XR-074 Loss of Connectivity to Xbox and Partner Services
+### 5. XR-074 Loss of Connectivity to XBOX and Partner Services
 
 Title crashes, hangs, or shows infinite loading on disconnect.
 
@@ -58,9 +58,9 @@ Chunk selection or language switch doesn't match `MicrosoftGame.config`.
 
 **Avoid by:** test every declared chunk; validate language switching at runtime; use `XPackageEnumerateChunkAvailability` and `XPackageEstimateDownloadSize`.
 
-### 7. XR-130 Xbox Console Families and Generations
+### 7. XR-130 XBOX Console Families and Generations
 
-Title ships only one config and underperforms on Xbox Series S or One.
+Title ships only one config and underperforms on XBOX Series S or One.
 
 **Avoid by:** query `XSystemGetDeviceType` and adapt resolution, asset quality, and feature toggles; test on each SKU.
 
@@ -87,7 +87,7 @@ User context lost on resume; second controller can't join mid-session.
 PC-specific failures concentrate around:
 
 - **XR-007 PC Cross-Network Data Usage** — declare cross-network data flows in the privacy policy.
-- **XR-074 PC variant** — same as console: handle Xbox / partner service connectivity loss.
+- **XR-074 PC variant** — same as console: handle XBOX / partner service connectivity loss.
 - **Sandbox not switched back to RETAIL** before submission — packages tested in a dev sandbox can fail certification.
 - **Packaging issues from `makepkg`** — missing dependencies, wrong content IDs, no `Submission Validator` log.
 
@@ -104,7 +104,7 @@ Before submitting:
 
 ## See also
 
-- [Xbox Requirements](/publishing/xbox-requirements)
+- [XBOX Requirements](/publishing/xbox-requirements)
 - [Failure Mode Analysis](/publishing/xr-fma)
 - [Certification](/publishing/certification)
 - [Pre-release testing](/publishing/pre-release)

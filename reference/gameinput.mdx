@@ -5,7 +5,7 @@ description: "Reference for the GameInput API: enumerate devices, read gamepad a
 icon: "gamepad"
 ---
 
-**GameInput** is the modern input API for the Microsoft GDK. It replaces XInput, DirectInput, and Raw Input with a single surface that handles gamepads, keyboards, mice, racing wheels, arcade sticks, and flight sticks consistently across Xbox consoles and Windows PC.
+**GameInput** is the modern input API for the Microsoft GDK. It replaces XInput, DirectInput, and Raw Input with a single surface that handles gamepads, keyboards, mice, racing wheels, arcade sticks, and flight sticks consistently across XBOX consoles and Windows PC.
 
 ## Header and library
 
@@ -106,12 +106,12 @@ Force-feedback-capable devices (racing wheels, flight sticks) are driven through
 
 ## Virtual keyboard
 
-On Xbox and streaming clients, request the system virtual keyboard to capture text input from gamepad or touch. The virtual keyboard returns text through GameInput's text-input pathway so you do not need a separate code path for physical vs. virtual keyboards.
+On XBOX and streaming clients, request the system virtual keyboard to capture text input from gamepad or touch. The virtual keyboard returns text through GameInput's text-input pathway so you do not need a separate code path for physical vs. virtual keyboards.
 
 ## Porting from XInput or Windows.Xbox.Input
 
 - **XInput → GameInput** — XInput continues to work on PC via the XInput-on-GameInput shim, but new development should target GameInput directly for access to all device classes, sensors, and lower latency. The porting guide maps each XInput call to its GameInput equivalent.
-- **Windows.Xbox.Input (WXI) → GameInput** — Xbox One ERA titles using WXI map to GameInput via a parallel porting guide. Major changes: device enumeration model, reading lifetime, and user-to-device association now go through XUser.
+- **Windows.Xbox.Input (WXI) → GameInput** — XBOX One ERA titles using WXI map to GameInput via a parallel porting guide. Major changes: device enumeration model, reading lifetime, and user-to-device association now go through XUser.
 
 ## Hardware developers
 

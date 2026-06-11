@@ -5,19 +5,19 @@ icon: "music"
 description: "XAudio2 helpers, XMA codec helpers, XAPU/XDSP audio offload, Shape DMA/EqComp/FiltVol/PCM/SRC/XMA contexts, and the ACP HAL."
 ---
 
-The GDK ships a suite of audio APIs that go well beyond stock XAudio2 — from Xbox hardware-accelerated processing (XAPU, XDSP) to direct ACP HAL control. Most titles only use a small subset; the categories below summarize what's available.
+The GDK ships a suite of audio APIs that go well beyond stock XAudio2 — from XBOX hardware-accelerated processing (XAPU, XDSP) to direct ACP HAL control. Most titles only use a small subset; the categories below summarize what's available.
 
 ## XAudio2 helpers (`XAudio2Xbox`)
 
 | Function | Description |
 | --- | --- |
-| `XAudio2CreateWithSharedContexts` | Create an XAudio2 instance that shares processing contexts with other Xbox audio components |
+| `XAudio2CreateWithSharedContexts` | Create an XAudio2 instance that shares processing contexts with other XBOX audio components |
 
 Structure: `FXLOUDNESS_PARAMETERS`.
 
 ## XMA2 helpers (`XMA2Defs`)
 
-XMA2 is the Xbox compressed audio format. The defs library provides bit-level frame and packet helpers:
+XMA2 is the XBOX compressed audio format. The defs library provides bit-level frame and packet helpers:
 
 - Frame queries: `GetXmaFrameBitPosition`, `GetXmaFrameLengthInBits`, `GetLastXmaFrameBitPosition`.
 - Packet queries: `GetXmaPacketFirstFrameOffsetInBits`, `GetXmaPacketFrameCount`, `GetXmaPacketMetadata`, `GetXmaPacketSkipCount`.

@@ -5,7 +5,7 @@ icon: "chart-line"
 description: "Design progression with PlayFab v2 Statistics, entity leaderboards, and reward grants. When to use PlayFab vs. Xbox achievements."
 ---
 
-Player progression is the system that turns play sessions into long-term engagement. PlayFab provides versioned **Statistics**, **Leaderboards**, and a flexible **rewards** model that integrate with Xbox achievements where appropriate.
+Player progression is the system that turns play sessions into long-term engagement. PlayFab provides versioned **Statistics**, **Leaderboards**, and a flexible **rewards** model that integrate with XBOX achievements where appropriate.
 
 ## Statistics v2 model
 
@@ -77,18 +77,18 @@ For scheduled rewards ("weekly leaderboard top 10 get 1000 gold"), use a schedul
 3. Grants gold to each.
 4. Optionally calls `IncrementStatisticVersion` to reset.
 
-## When to use PlayFab vs. Xbox achievements
+## When to use PlayFab vs. XBOX achievements
 
 | Need | Use |
 | --- | --- |
 | Cross-platform progression | PlayFab Stats v2 — unified across platforms |
-| Xbox gamerscore / platform UI surfaces | Xbox achievements via XSAPI |
+| XBOX gamerscore / platform UI surfaces | XBOX achievements via XSAPI |
 | Leaderboards that survive title-version changes | PlayFab Stats v2 |
-| Show-on-profile achievements | Xbox achievements |
+| Show-on-profile achievements | XBOX achievements |
 | Granular event-based progression | PlayFab Stats v2 — more flexible aggregation |
 | Tournament / season resets | PlayFab Stats v2 — native versioning |
 
-Most titles use both: PlayFab for the underlying progression model, Xbox achievements for platform surface area. A CloudScript rule can grant an Xbox achievement when a PlayFab statistic hits a threshold.
+Most titles use both: PlayFab for the underlying progression model, XBOX achievements for platform surface area. A CloudScript rule can grant an XBOX achievement when a PlayFab statistic hits a threshold.
 
 ## Battle passes and seasonal progression
 
@@ -124,4 +124,4 @@ Keep the season's tier table and reward catalog server-authoritative. The title 
 
 - [PlayFab Statistics & Leaderboards (API)](/reference/playfab-statistics)
 - [PlayFab leaderboards & stats (overview)](/playfab/leaderboards-stats)
-- [Xbox achievements](/services/achievements)
+- [XBOX achievements](/services/achievements)

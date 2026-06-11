@@ -14,8 +14,8 @@ When an API call fails, the first thing you need is the meaning of the code. Thi
     `FACILITY_GAMING` HRESULTs from `XGameErr.h` — returned by every `X*` API in the GDK, plus per-code constant definitions.
   </Card>
 
-  <Card title="Xbox Live error codes" icon="cloud" href="/reference/xbl-error-codes">
-    `FACILITY_XBOX` and `FACILITY_HTTP` HRESULTs returned by XSAPI and Xbox services REST.
+  <Card title="XBOX Live error codes" icon="cloud" href="/reference/xbl-error-codes">
+    `FACILITY_XBOX` and `FACILITY_HTTP` HRESULTs returned by XSAPI and XBOX services REST.
   </Card>
 
   <Card title="PlayFab error codes" icon="server" href="/reference/playfab-errors">
@@ -42,7 +42,7 @@ An HRESULT is a 32-bit signed integer with a structured layout:
 | Facility | Hex | Where it comes from |
 | --- | --- | --- |
 | `FACILITY_GAMING` | `0x027` | GDK system APIs (`XGameErr.h`) |
-| `FACILITY_XBOX` | `0x015` | Xbox services / XSAPI |
+| `FACILITY_XBOX` | `0x015` | XBOX services / XSAPI |
 | `FACILITY_HTTP` | `0x019` | HTTP status codes via XSAPI |
 | `FACILITY_WIN32` | `0x007` | Standard Win32 error mapped via `HRESULT_FROM_WIN32` |
 | `FACILITY_WINHTTP` | `0x028` | WinHTTP errors |
@@ -63,7 +63,7 @@ For `FACILITY_HTTP` HRESULTs, `HRESULT_CODE(hr)` gives the HTTP status (e.g., `0
 ## Decision flow
 
 1. **Is the HRESULT in `FACILITY_GAMING`?** → [GDK error codes](/reference/error-codes).
-2. **`FACILITY_XBOX` or `FACILITY_HTTP`?** → [Xbox Live HRESULTs](/reference/xbl-error-codes).
+2. **`FACILITY_XBOX` or `FACILITY_HTTP`?** → [XBOX Live HRESULTs](/reference/xbl-error-codes).
 3. **PlayFab returned a JSON envelope with `errorCode`?** → [PlayFab errors](/reference/playfab-errors).
 4. **Standard Win32 error?** → Microsoft's [`HRESULT` reference](https://learn.microsoft.com/openspecs/windows_protocols/ms-erref/) or run `net helpmsg <code>`.
 

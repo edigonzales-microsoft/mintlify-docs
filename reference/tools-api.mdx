@@ -11,10 +11,10 @@ The GDK ships a set of command-line tools you can call from your build pipeline.
 
 | Tool | Platform | Purpose |
 | --- | --- | --- |
-| `makepkg` | PC \+ Xbox | Build MSIXVC packages from a loose-file layout |
-| `xbapp` | Xbox console | Install, launch, terminate, and enumerate packages on a devkit |
+| `makepkg` | PC \+ XBOX | Build MSIXVC packages from a loose-file layout |
+| `xbapp` | XBOX console | Install, launch, terminate, and enumerate packages on a devkit |
 | `wdapp` | PC | Register and launch PC titles for development; PC equivalent of `xbapp` |
-| `submissionvalidator` | PC \+ Xbox | Run the same cert pre-check Microsoft runs at ingest |
+| `submissionvalidator` | PC \+ XBOX | Run the same cert pre-check Microsoft runs at ingest |
 
 Typical packaging pipeline:
 
@@ -32,9 +32,9 @@ submissionvalidator out\pkg\MyGame_1.0.0.0_neutral_x64.msixvc
 | Tool | Purpose |
 | --- | --- |
 | MicrosoftGame.config editor | GUI for editing the title manifest — ships in the Visual Studio extension |
-| `XblConfig` | Pull / push Xbox services config (achievements, stats, presence) as JSON in source control |
+| `XblConfig` | Pull / push XBOX services config (achievements, stats, presence) as JSON in source control |
 
-Using `XblConfig` lets you treat your Xbox services config as source code rather than clicking through Partner Center.
+Using `XblConfig` lets you treat your XBOX services config as source code rather than clicking through Partner Center.
 
 ## Service diagnostics
 
@@ -42,16 +42,16 @@ Using `XblConfig` lets you treat your Xbox services config as source code rather
 | --- | --- |
 | Trace Analyzer | Visualize XSAPI / libHttpClient traffic from a captured ETL |
 | Multiplayer Session History Viewer | Inspect MPSD session state changes over time |
-| Fiddler with Xbox services certificate | Inspect HTTPS traffic from devkits during dev |
+| Fiddler with XBOX services certificate | Inspect HTTPS traffic from devkits during dev |
 | Player Data Reset | Wipe stats / achievements / presence for a test account in a sandbox |
 
 ## Sandbox and account management
 
 | Tool | Purpose |
 | --- | --- |
-| PC Sandbox Switcher | Move a PC between Xbox services sandboxes |
+| PC Sandbox Switcher | Move a PC between XBOX services sandboxes |
 | Developer Account Tool | Mint and manage test accounts in a sandbox |
-| Xbox Live Account Tool (XAL) | Sign-in flow testing and token inspection |
+| XBOX Live Account Tool (XAL) | Sign-in flow testing and token inspection |
 | Developer Entitlements Tool | Grant test entitlements (DLC, consumables) for QA |
 
 ## Common invocations from CI
@@ -72,6 +72,6 @@ Wire `submissionvalidator` into PR checks to catch cert violations before they r
 ## See also
 
 - [PC Tools](/tools/pc-tools)
-- [Xbox Service Tools](/tools/xbox-service-tools)
+- [XBOX Service Tools](/tools/xbox-service-tools)
 - [Visual Studio integration](/tools/visual-studio)
 - [Tools API reference (Microsoft Learn)](https://learn.microsoft.com/en-us/gaming/gdk/_content/gc/reference/tools/gc-reference-tools-toc) — full per-tool documentation

@@ -5,29 +5,29 @@ description: "Learn how to sign players in to both Xbox services and PlayFab usi
 icon: "right-to-bracket"
 ---
 
-When you build a GDK title that uses PlayFab, every player must be authenticated with **two separate systems**: Xbox services and PlayFab. Xbox services provides the player-facing account that players already know — their gamertag, friends list, and Xbox profile. PlayFab operates behind the scenes to identify the player within your specific title and power features like Party chat, Economy, and leaderboards. Both accounts must be active before your title can use any PlayFab service.
+When you build a GDK title that uses PlayFab, every player must be authenticated with **two separate systems**: XBOX services and PlayFab. XBOX services provides the player-facing account that players already know — their gamertag, friends list, and XBOX profile. PlayFab operates behind the scenes to identify the player within your specific title and power features like Party chat, Economy, and leaderboards. Both accounts must be active before your title can use any PlayFab service.
 
 <Note>
-  Players must be signed in to **both** their Xbox services account and their linked PlayFab account before using PlayFab features such as Party chat. Signing in to only one service is not sufficient.
+  Players must be signed in to **both** their XBOX services account and their linked PlayFab account before using PlayFab features such as Party chat. Signing in to only one service is not sufficient.
 </Note>
 
 ## Understanding the two account systems
 
-Xbox services accounts and PlayFab accounts are distinct from each other:
+XBOX services accounts and PlayFab accounts are distinct from each other:
 
-|  | Xbox Services Account | PlayFab Account |
+|  | XBOX Services Account | PlayFab Account |
 | --- | --- | --- |
 | **Visible to player** | Yes — gamertag, profile, friends | No — internal identifier |
 | **Scope** | Microsoft-wide | Per PlayFab title |
-| **Created by** | Player during Xbox setup | Auto-provisioned by your title |
-| **Identifier** | Xbox User ID (XUID) | PlayFab Entity ID |
+| **Created by** | Player during XBOX setup | Auto-provisioned by your title |
+| **Identifier** | XBOX User ID (XUID) | PlayFab Entity ID |
 
-When a player launches your game for the first time, your title must be prepared to **provision** a new PlayFab account linked to their Xbox services account if one does not already exist.
+When a player launches your game for the first time, your title must be prepared to **provision** a new PlayFab account linked to their XBOX services account if one does not already exist.
 
 By the end of a successful sign-in flow:
 
 - The player has a PlayFab user account within the context of your title.
-- That PlayFab account is linked to the player's Xbox services account.
+- That PlayFab account is linked to the player's XBOX services account.
 - The player is authenticated with both services and ready to use all PlayFab features.
 
 ## Your PlayFab TitleId
@@ -35,7 +35,7 @@ By the end of a successful sign-in flow:
 Before integrating sign-in, you need a PlayFab TitleId. You receive this when you create a title in [PlayFab Game Manager](https://developer.playfab.com). It is a **4–6 hex-digit string** — for example, `A3F2B` — that uniquely identifies your title within PlayFab.
 
 <Warning>
-  Your PlayFab TitleId is **not** the same as your Xbox Title ID. They are assigned by different systems and must both be configured correctly in your project.
+  Your PlayFab TitleId is **not** the same as your XBOX Title ID. They are assigned by different systems and must both be configured correctly in your project.
 </Warning>
 
 ## Choosing a sign-in method
@@ -44,7 +44,7 @@ There are two ways to sign players in to PlayFab from a GDK title:
 
 <Tabs>
   <Tab title="PlayFab Services SDK (Recommended)">
-    The PlayFab Services SDK is the recommended approach for **all titles** that use any PlayFab service. It ships as part of the GDK and includes `PFAuthenticationLoginWithXUserAsync`, a dedicated function for authenticating Xbox players.
+    The PlayFab Services SDK is the recommended approach for **all titles** that use any PlayFab service. It ships as part of the GDK and includes `PFAuthenticationLoginWithXUserAsync`, a dedicated function for authenticating XBOX players.
 
     **Use this method if your title uses:**
 
@@ -52,8 +52,8 @@ There are two ways to sign players in to PlayFab from a GDK title:
     - PlayFab Party alongside other PlayFab services
     - Multiple authentication providers (Xbox, Google Play, Apple ID)
   </Tab>
-  <Tab title="Party Xbox Live Helper Library">
-    The PlayFab Party Xbox Live Helper Library is a narrower option suited only for titles where PlayFab Party is the **only** PlayFab service used **and** Xbox services is the **only** authentication provider.
+  <Tab title="Party XBOX Live Helper Library">
+    The PlayFab Party XBOX Live Helper Library is a narrower option suited only for titles where PlayFab Party is the **only** PlayFab service used **and** XBOX services is the **only** authentication provider.
 
     **Use this method only if:**
 
@@ -68,8 +68,8 @@ There are two ways to sign players in to PlayFab from a GDK title:
   <Step title="Install the GDK and add the extension library">
     Download and install the [GDK](https://aka.ms/gdkdl). In your Visual Studio project properties, navigate to **Gaming Desktop → General → Gaming Extension Libraries** and add **PlayFab.Services.C** to your project.
   </Step>
-  <Step title="Sign the player in to their Xbox account">
-    Call `XUserAddAsync` to authenticate the player with Xbox services. This returns an `XUserHandle` that represents the signed-in user.
+  <Step title="Sign the player in to their XBOX account">
+    Call `XUserAddAsync` to authenticate the player with XBOX services. This returns an `XUserHandle` that represents the signed-in user.
 
     ```cpp
     XUserHandle userHandle = nullptr;
@@ -79,7 +79,7 @@ There are two ways to sign players in to PlayFab from a GDK title:
     // Complete async, retrieve userHandle
     ```
   </Step>
-  <Step title="Sign the player in to PlayFab using their Xbox account">
+  <Step title="Sign the player in to PlayFab using their XBOX account">
     Pass the `XUserHandle` to `PFAuthenticationLoginWithXUserAsync`. Set `createAccount` to `TRUE` so that a new PlayFab account is automatically provisioned if the player does not yet have one linked to your title.
 
     ```cpp
@@ -98,20 +98,20 @@ There are two ways to sign players in to PlayFab from a GDK title:
   </Step>
 </Steps>
 
-## Sign-in flow: PlayFab Party Xbox Live Helper Library
+## Sign-in flow: PlayFab Party XBOX Live Helper Library
 
 <Steps>
-  <Step title="Sign the player in to their Xbox account">
+  <Step title="Sign the player in to their XBOX account">
     Call `XUserAddAsync` as described above and hold the resulting `XUserHandle`.
   </Step>
-  <Step title="Retrieve the player's Xbox User ID (XUID)">
+  <Step title="Retrieve the player's XBOX User ID (XUID)">
     When chat is first initiated, call `XUserGetId` to retrieve the player's XUID.
   </Step>
   <Step title="Create a PartyXblLocalChatUser">
     Pass the XUID to `PartyXblManager::CreateLocalChatUser` to create a local chat user object.
   </Step>
   <Step title="Call LoginToPlayFab">
-    Pass the `PartyXblLocalChatUser` to `PartyXblManager::LoginToPlayFab`. On GDK titles, this call automatically fetches the required Xbox services token and signs the player in to PlayFab. If no PlayFab account is linked yet, one is created automatically — without requiring an email or username.
+    Pass the `PartyXblLocalChatUser` to `PartyXblManager::LoginToPlayFab`. On GDK titles, this call automatically fetches the required XBOX services token and signs the player in to PlayFab. If no PlayFab account is linked yet, one is created automatically — without requiring an email or username.
   </Step>
   <Step title="Handle PartyXblLoginToPlayFabCompletedStateChange">
     When the login completes, you receive a `PartyXblLoginToPlayFabCompletedStateChange` containing the player's PlayFab Entity ID and token. Store these for the session.
@@ -120,7 +120,7 @@ There are two ways to sign players in to PlayFab from a GDK title:
 
 ## Cross-platform sign-in
 
-If your title ships on platforms beyond Xbox and Windows PC, use platform-appropriate authentication providers so that players on each platform have the best experience:
+If your title ships on platforms beyond XBOX and Windows PC, use platform-appropriate authentication providers so that players on each platform have the best experience:
 
 - **Android** — offer Google Play Games sign-in
 - **iOS** — offer Apple ID sign-in

@@ -5,13 +5,13 @@ description: "Overview of the Xbox Services API (XSAPI): XSAPI C vs direct REST 
 icon: "book-open"
 ---
 
-Xbox services expose two ways for your game to interact with the Xbox Live back-end: the **Xbox Services API (XSAPI)** client library and the **Xbox services REST endpoints** called directly. For all GDK titles, Microsoft recommends using the XSAPI C-based API. This page explains both approaches, their trade-offs, and the key areas of the XSAPI C surface.
+XBOX services expose two ways for your game to interact with the XBOX Live back-end: the **XBOX Services API (XSAPI)** client library and the **XBOX services REST endpoints** called directly. For all GDK titles, Microsoft recommends using the XSAPI C-based API. This page explains both approaches, their trade-offs, and the key areas of the XSAPI C surface.
 
 ## Two approaches
 
 <Tabs>
   <Tab title="XSAPI C-based API (recommended for GDK)">
-    The XSAPI C API is the recommended approach for all GDK titles targeting Windows PC, Xbox One, or Xbox Series consoles. It was introduced in June 2018 and is the only API set supported for GDK development.
+    The XSAPI C API is the recommended approach for all GDK titles targeting Windows PC, XBOX One, or XBOX Series consoles. It was introduced in June 2018 and is the only API set supported for GDK development.
 
     **Advantages:**
 
@@ -24,16 +24,16 @@ Xbox services expose two ways for your game to interact with the Xbox Live back-
     **Header:** `microsoft.xbox.services.h`\
     **Library:** `Microsoft.Xbox.Services.14x.GDK.C.lib`
   </Tab>
-  <Tab title="Xbox services REST endpoints">
-    Calling the Xbox services REST endpoints directly gives you maximum flexibility at the cost of managing all the HTTP plumbing yourself.
+  <Tab title="XBOX services REST endpoints">
+    Calling the XBOX services REST endpoints directly gives you maximum flexibility at the cost of managing all the HTTP plumbing yourself.
 
     **Advantages:**
 
-    - Call Xbox services from a **web service or back-end server** that cannot link against a native client library.
+    - Call XBOX services from a **web service or back-end server** that cannot link against a native client library.
     - Access **endpoints not yet wrapped by XSAPI** — if you need a feature not exposed in XSAPI, the REST layer is your fallback.
     - Some REST capabilities have no XSAPI equivalent.
 
-    You can mix both approaches in a single game: use XSAPI for social, achievements, and multiplayer, and call REST directly for any endpoint XSAPI does not cover. See the [Xbox services REST API reference](https://learn.microsoft.com/en-us/gaming/gdk/docs/reference/live/rest/atoc-xboxlivews-reference) for the full endpoint catalogue.
+    You can mix both approaches in a single game: use XSAPI for social, achievements, and multiplayer, and call REST directly for any endpoint XSAPI does not cover. See the [XBOX services REST API reference](https://learn.microsoft.com/en-us/gaming/gdk/docs/reference/live/rest/atoc-xboxlivews-reference) for the full endpoint catalogue.
   </Tab>
 </Tabs>
 
@@ -41,7 +41,7 @@ Xbox services expose two ways for your game to interact with the Xbox Live back-
 
 ## libHttpClient
 
-XSAPI uses **libHttpClient** as its underlying HTTP library. libHttpClient is a game-developer-friendly HTTP client that integrates with the GDK async model and supports the same memory and threading controls as the rest of the GDK. If you call Xbox services REST endpoints directly from native code, you can use libHttpClient as well.
+XSAPI uses **libHttpClient** as its underlying HTTP library. libHttpClient is a game-developer-friendly HTTP client that integrates with the GDK async model and supports the same memory and threading controls as the rest of the GDK. If you call XBOX services REST endpoints directly from native code, you can use libHttpClient as well.
 
 See the [libHttpClient reference](https://learn.microsoft.com/en-us/gaming/gdk/docs/reference/live/httpclient/atoc-httpclient) for API details.
 
@@ -55,11 +55,11 @@ See the [libHttpClient reference](https://learn.microsoft.com/en-us/gaming/gdk/d
   </Card>
 
   <Card title="Achievements" icon="trophy" href="/services/achievements">
-    Unlock, query, and display Xbox achievements. Includes both the classic Achievements API and the newer Achievements Manager for simplified graph caching.
+    Unlock, query, and display XBOX achievements. Includes both the classic Achievements API and the newer Achievements Manager for simplified graph caching.
   </Card>
 
   <Card title="Stats & Leaderboards" icon="chart-bar" href="/reference/xsapi-leaderboard">
-    Write title-managed statistics and query leaderboards. Stats drive the Xbox leaderboard service.
+    Write title-managed statistics and query leaderboards. Stats drive the XBOX leaderboard service.
   </Card>
 
   <Card title="Multiplayer" icon="gamepad" href="/services/multiplayer">
@@ -67,7 +67,7 @@ See the [libHttpClient reference](https://learn.microsoft.com/en-us/gaming/gdk/d
   </Card>
 
   <Card title="Presence" icon="circle-dot" href="/services/social">
-    Set and query rich presence strings that display in the Xbox social graph for active players.
+    Set and query rich presence strings that display in the XBOX social graph for active players.
   </Card>
 
   <Card title="Privacy" icon="shield-halved" href="/services/social">
@@ -75,7 +75,7 @@ See the [libHttpClient reference](https://learn.microsoft.com/en-us/gaming/gdk/d
   </Card>
 
   <Card title="Profile" icon="id-card" href="/services/social">
-    Query gamertag, gamerpic, and other profile fields for any Xbox user.
+    Query gamertag, gamerpic, and other profile fields for any XBOX user.
   </Card>
 
   <Card title="Title Storage" icon="database" href="/services/player-data">
@@ -110,7 +110,7 @@ See the [libHttpClient reference](https://learn.microsoft.com/en-us/gaming/gdk/d
     HRESULT hr = XblInitialize(&xblArgs);
     ```
   </Step>
-  <Step title="Create an Xbox Live context for a signed-in user">
+  <Step title="Create an XBOX Live context for a signed-in user">
     Most XSAPI operations require an `XblContextHandle` tied to a signed-in user.
 
     ```cpp

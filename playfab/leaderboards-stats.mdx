@@ -7,19 +7,19 @@ icon: "chart-line"
 
 PlayFab provides a flexible **Statistics v2** service for tracking arbitrary numeric and string-valued player progress, plus a **Leaderboards** service for ranking players by those stats. Together they cover any scoreboard your title needs — global, regional, friend, or cohort.
 
-## When to use PlayFab vs. Xbox stats
+## When to use PlayFab vs. XBOX stats
 
 <CardGroup cols={2}>
-  <Card title="Xbox stats (XSAPI)" icon="xbox">
-    Required for any stat that powers an Xbox achievement, friend leaderboard in the Xbox guide, or appears on the Xbox profile card.
+  <Card title="XBOX stats (XSAPI)" icon="xbox">
+    Required for any stat that powers an XBOX achievement, friend leaderboard in the XBOX guide, or appears on the XBOX profile card.
   </Card>
 
   <Card title="PlayFab statistics" icon="chart-line">
-    Recommended for cross-platform leaderboards, complex multi-column rankings, and any stat that doesn't need to surface inside the Xbox UI.
+    Recommended for cross-platform leaderboards, complex multi-column rankings, and any stat that doesn't need to surface inside the XBOX UI.
   </Card>
 </CardGroup>
 
-Many titles use **both**: Xbox stats for the achievement and friends-list integration, PlayFab stats for the in-game global leaderboards. Write to both from the same gameplay event.
+Many titles use **both**: XBOX stats for the achievement and friends-list integration, PlayFab stats for the in-game global leaderboards. Write to both from the same gameplay event.
 
 ## Defining a statistic
 
@@ -62,7 +62,7 @@ Use `GetLeaderboardAroundPlayer` to fetch the slice centered on the current play
 
 ## Cohort leaderboards
 
-PlayFab supports filtering leaderboards by friend list, segment, or arbitrary entity group. Combine with the [People system](/services/people-system) to power a "friends only" tab that pulls the player's Xbox friends into a PlayFab leaderboard slice.
+PlayFab supports filtering leaderboards by friend list, segment, or arbitrary entity group. Combine with the [People system](/services/people-system) to power a "friends only" tab that pulls the player's XBOX friends into a PlayFab leaderboard slice.
 
 ## Versioned resets
 

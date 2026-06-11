@@ -5,7 +5,7 @@ description: "MicrosoftGame.config schema reference: configVersion rules, Identi
 icon: "file-code"
 ---
 
-`MicrosoftGame.config` is the central configuration file for every GDK title. It defines the game's identity, shell presence (logos and display names), list of executables, Xbox Live service identifiers, storage settings, and platform-specific options. The file is processed by `makepkg.exe` at packaging time and by the Gaming Runtime when a title is registered or launched.
+`MicrosoftGame.config` is the central configuration file for every GDK title. It defines the game's identity, shell presence (logos and display names), list of executables, XBOX Live service identifiers, storage settings, and platform-specific options. The file is processed by `makepkg.exe` at packaging time and by the Gaming Runtime when a title is registered or launched.
 
 The source file you author is a `.mgc` file (MicrosoftGame Config); the GDK build tools compile it to the final `MicrosoftGame.config` placed in your output directory.
 
@@ -37,12 +37,12 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 | `ExecutableList` | Required | `Game` | List of one or more `Executable` entries. |
 | `Executable` | Required | `ExecutableList` | An individual executable: `Name`, `TargetDeviceFamily`, `Id`, `IsDevOnly`. |
 | `StoreId` | Optional | `Game` | Microsoft Store product ID (from Partner Center). |
-| `MSAAppId` | Required (if using Xbox Live) | `Game` | 16-character hex MSA App ID for Xbox Live identity. |
-| `TitleId` | Required with MSAAppId | `Game` | 8-character hex Xbox Live Title ID. |
-| `RequiresXboxLive` | Optional | `Game` | `true` if the title must have Xbox Live connectivity to run. |
+| `MSAAppId` | Required (if using XBOX Live) | `Game` | 16-character hex MSA App ID for XBOX Live identity. |
+| `TitleId` | Required with MSAAppId | `Game` | 8-character hex XBOX Live Title ID. |
+| `RequiresXboxLive` | Optional | `Game` | `true` if the title must have XBOX Live connectivity to run. |
 | `Resources` | Optional | `Game` | Language locale list for localizing `ShellVisuals`. |
 | `PersistentLocalStorage` | Optional (console) | `Game` | Specifies the `SizeMB` and `GrowableToMB` for console persistent local storage. |
-| `VirtualMachine` | Optional (console) | `Game` | Memory and compatibility settings for specific Xbox hardware. |
+| `VirtualMachine` | Optional (console) | `Game` | Memory and compatibility settings for specific XBOX hardware. |
 | `MediaCapture` | Optional (console) | `Game` | Controls Game DVR, broadcast blocking, and screenshot behavior. |
 | `RelatedProducts` | Optional | `Game` | `RelatedProduct` StoreId entries for DLC relationship mapping. |
 | `AllowedProducts` | Optional | `Game` | Base game StoreId entries that this DLC belongs to. |
@@ -74,7 +74,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 
   ### ShellVisuals
 
-  Defines how the title appears in the Xbox or Windows shell: its display name, publisher display name, logo images, description, splash screen, and background colour.
+  Defines how the title appears in the XBOX or Windows shell: its display name, publisher display name, logo images, description, splash screen, and background colour.
 
   ```xml
   <ShellVisuals
@@ -119,7 +119,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
   | `OverrideLogo` | Override the logo from `ShellVisuals` |
 </Accordion>
 
-<Accordion title="Xbox Live identifiers (MSAAppId, TitleId, StoreId)">
+<Accordion title="XBOX Live identifiers (MSAAppId, TitleId, StoreId)">
   ```xml
   <MSAAppId>0000000000000000</MSAAppId>
   <TitleId>FFFFFFFF</TitleId>
@@ -136,7 +136,7 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 </Accordion>
 
 <Accordion title="PersistentLocalStorage (console)">
-  Configures the size of the title's persistent local storage on Xbox consoles. This storage persists across game updates and is separate from cloud saves.
+  Configures the size of the title's persistent local storage on XBOX consoles. This storage persists across game updates and is separate from cloud saves.
 
   ```xml
   <PersistentLocalStorage>
@@ -155,21 +155,21 @@ All titles using the October 2023 GDK or later **must** use `configVersion="1"`.
 </Accordion>
 
 <Accordion title="VirtualMachine (console memory)">
-  Controls per-console-generation memory allocation for Xbox hardware:
+  Controls per-console-generation memory allocation for XBOX hardware:
 
   ```xml
   <VirtualMachine>
-      <XboxLockhartTitleMemory>Standard</XboxLockhartTitleMemory>   <!-- Xbox Series S -->
-      <XboxAnacondaTitleMemory>Standard</XboxAnacondaTitleMemory>   <!-- Xbox Series X -->
-      <!-- <XboxOneXTitleMemory>Standard</XboxOneXTitleMemory>  for Xbox One X -->
+      <XboxLockhartTitleMemory>Standard</XboxLockhartTitleMemory>   <!-- XBOX Series S -->
+      <XboxAnacondaTitleMemory>Standard</XboxAnacondaTitleMemory>   <!-- XBOX Series X -->
+      <!-- <XboxOneXTitleMemory>Standard</XboxOneXTitleMemory>  for XBOX One X -->
   </VirtualMachine>
   ```
 
   | Element | Allowed values | Console |
   | --- | --- | --- |
-  | `XboxOneXTitleMemory` | `Standard`, `Advanced` | Xbox One X |
-  | `XboxLockhartTitleMemory` | `Standard`, `Advanced` | Xbox Series S |
-  | `XboxAnacondaTitleMemory` | `Standard`, `Advanced` | Xbox Series X |
+  | `XboxOneXTitleMemory` | `Standard`, `Advanced` | XBOX One X |
+  | `XboxLockhartTitleMemory` | `Standard`, `Advanced` | XBOX Series S |
+  | `XboxAnacondaTitleMemory` | `Standard`, `Advanced` | XBOX Series X |
   | `SMTEnabled` | `true`, `false` | Enable simultaneous multi-threading |
   | `XboxCompatibility` | `XboxOne`, `Scarlett` | Max compatible console generation |
 </Accordion>
@@ -242,9 +242,9 @@ The following elements were deprecated in the March 2022 GDK and must not be use
 
 ---
 
-## Sample MicrosoftGame.config (Xbox Series X|S)
+## Sample MicrosoftGame.config (XBOX Series X|S)
 
-The following example shows a complete `MicrosoftGame.config` for an Xbox Series X|S title. Comments note differences for an Xbox One target.
+The following example shows a complete `MicrosoftGame.config` for an XBOX Series X|S title. Comments note differences for an XBOX One target.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -278,7 +278,7 @@ The following example shows a complete `MicrosoftGame.config` for an Xbox Series
     </RelatedProducts>
 
     <VirtualMachine>
-        <!-- Use XboxOneXTitleMemory instead if targeting Xbox One -->
+        <!-- Use XboxOneXTitleMemory instead if targeting XBOX One -->
         <XboxLockhartTitleMemory>Standard</XboxLockhartTitleMemory>
         <XboxAnacondaTitleMemory>Standard</XboxAnacondaTitleMemory>
     </VirtualMachine>
@@ -286,7 +286,7 @@ The following example shows a complete `MicrosoftGame.config` for an Xbox Series
     <MSAFullTrust>false</MSAFullTrust>
 
     <ExecutableList>
-        <!-- Use TargetDeviceFamily="XboxOne" if targeting Xbox One -->
+        <!-- Use TargetDeviceFamily="XboxOne" if targeting XBOX One -->
         <Executable
             Name="ExampleGame.exe"
             TargetDeviceFamily="Scarlett"

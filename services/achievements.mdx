@@ -5,12 +5,12 @@ description: "Integrate Xbox achievements with title-managed or event-based mode
 icon: "trophy"
 ---
 
-Achievements are one of the most recognizable and enduring features of the Xbox platform. Players earn Gamerscore by unlocking achievements, compare completion rates with friends, and showcase their gaming history across every title they play. For your game, achievements are a powerful tool for driving engagement: they give players explicit goals to pursue, reward exploration and mastery, and encourage replayability long after the credits roll.
+Achievements are one of the most recognizable and enduring features of the XBOX platform. Players earn Gamerscore by unlocking achievements, compare completion rates with friends, and showcase their gaming history across every title they play. For your game, achievements are a powerful tool for driving engagement: they give players explicit goals to pursue, reward exploration and mastery, and encourage replayability long after the credits roll.
 
 Integrating achievements into a GDK title requires three things: configuring achievement definitions in Partner Center, choosing a processing model (title-managed or event-based), and making the right API calls at the right moments in your game.
 
 <Note>
-  **Achievements require ID@Xbox or a managed developer program.** The Xbox Creators Program does not have access to achievements or Gamerscore. To unlock this feature, apply to [ID@Xbox](https://www.xbox.com/Developers/id).
+  **Achievements require ID@XBOX or a managed developer program.** The XBOX Creators Program does not have access to achievements or Gamerscore. To unlock this feature, apply to [ID@Xbox](https://www.xbox.com/Developers/id).
 </Note>
 
 ## Title-managed vs. event-based achievements
@@ -19,11 +19,11 @@ Microsoft recommends **title-managed Achievements** for all new titles. It uses 
 
 <Tabs>
   <Tab title="Title-Managed (recommended)">
-    Your game code calls an unlock API directly when the player earns an achievement. Xbox services records the unlock and awards the Gamerscore.
+    Your game code calls an unlock API directly when the player earns an achievement. XBOX services records the unlock and awards the Gamerscore.
 
     - ✅ Simple configuration — no server-side unlock rules
     - ✅ Easy to debug — achievement unlocks when your code says so
-    - ✅ Cross-platform friendly — same calling pattern on Xbox and PC
+    - ✅ Cross-platform friendly — same calling pattern on XBOX and PC
     - ✅ Supports progression updates (0–100%) via the same API
     - ✅ Supports offline unlocks — queued and synced when reconnected
     - ❌ Does not support Challenges (a legacy event-based feature)
@@ -44,7 +44,7 @@ Microsoft recommends **title-managed Achievements** for all new titles. It uses 
 
 ## Achievements Manager
 
-For efficiently reading and displaying achievement data, use the **Achievements Manager API**. Rather than making individual service calls every time you need to show achievement lists or progress, Achievements Manager maintains a local cache that is automatically kept in sync with Xbox services. This reduces latency and service call overhead for your UI.
+For efficiently reading and displaying achievement data, use the **Achievements Manager API**. Rather than making individual service calls every time you need to show achievement lists or progress, Achievements Manager maintains a local cache that is automatically kept in sync with XBOX services. This reduces latency and service call overhead for your UI.
 
 Key Achievements Manager functions:
 
@@ -60,12 +60,12 @@ Key Achievements Manager functions:
 
 <Steps>
   <Step title="Create achievement definitions">
-    In Partner Center, go to your title's **Xbox services → Achievements** page. For each achievement, provide:
+    In Partner Center, go to your title's **XBOX services → Achievements** page. For each achievement, provide:
 
     - **ID** — a unique string identifier used in API calls (for example, `"achievement_first_win"`)
     - **Name and locked description** — shown to players before unlock
     - **Unlocked description** — shown after unlock
-    - **Gamerscore value** — must follow Xbox achievement policies (typically 5–100 points per achievement)
+    - **Gamerscore value** — must follow XBOX achievement policies (typically 5–100 points per achievement)
     - **Locked and unlocked artwork** — concept art shown in achievement cards
   </Step>
   <Step title="Set progression (optional)">
@@ -147,19 +147,19 @@ XblAchievementsUpdateAchievementAsync(
 ```
 
 <Tip>
-  Do not spam progress updates on every frame. Batch progress updates to meaningful thresholds (every 10%, on round completion, etc.) to avoid throttling from the Xbox services rate limiter.
+  Do not spam progress updates on every frame. Batch progress updates to meaningful thresholds (every 10%, on round completion, etc.) to avoid throttling from the XBOX services rate limiter.
 </Tip>
 
 ## Offline achievement unlocks
 
-If the player is offline when your code calls `XblAchievementsUpdateAchievementAsync`, XSAPI automatically queues the unlock request locally. When the device reconnects to Xbox services, the queued unlock is synced automatically. The player sees the unlock notification once connectivity is restored.
+If the player is offline when your code calls `XblAchievementsUpdateAchievementAsync`, XSAPI automatically queues the unlock request locally. When the device reconnects to XBOX services, the queued unlock is synced automatically. The player sees the unlock notification once connectivity is restored.
 
 The offline behavior of title-managed Achievements is equivalent to event-based Achievements — no special handling is required in your game code.
 
 ## Frequently asked questions
 
 <Accordion title="Can I add new achievements with DLC after shipping?">
-  Yes. You can add achievements via content updates following Xbox Live policies for Achievements. All DLC achievements must use the same processing model (title-managed or event-based) as the base game's achievements.
+  Yes. You can add achievements via content updates following XBOX Live policies for Achievements. All DLC achievements must use the same processing model (title-managed or event-based) as the base game's achievements.
 </Accordion>
 
 <Accordion title="Can I reset achievement data during development?">

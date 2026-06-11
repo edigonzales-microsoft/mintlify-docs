@@ -5,9 +5,9 @@ icon: "triangle-exclamation"
 description: "What each Xbox Requirement failure means at test time — root causes, common implementation pitfalls, and remediation patterns."
 ---
 
-When an Xbox Requirement (XR) fails during certification, the cert report lists the XR ID and a short reason. **Failure Mode Analysis (FMA)** documentation explains the underlying root causes for each failure-prone XR and how to fix them.
+When an XBOX Requirement (XR) fails during certification, the cert report lists the XR ID and a short reason. **Failure Mode Analysis (FMA)** documentation explains the underlying root causes for each failure-prone XR and how to fix them.
 
-Use this page as the cross-reference. For the canonical XR list see [Xbox Requirements](/publishing/xbox-requirements).
+Use this page as the cross-reference. For the canonical XR list see [XBOX Requirements](/publishing/xbox-requirements).
 
 ## How to read an FMA entry
 
@@ -31,7 +31,7 @@ These XRs see the highest cert-failure rates and have detailed FMA guidance.
 
 - **XR-013 Linking Microsoft Accounts with Publisher Accounts** — account-linking flows must be reversible, consented, and offline-tolerant.
 - **XR-014 Personal Information** — don't display, store, or transmit PII without explicit consent and a privacy policy.
-- **XR-045 Xbox User and Account Privileges** — check privileges via `XUserCheckPrivilege` before exposing communication, UGC, or multiplayer features.
+- **XR-045 XBOX User and Account Privileges** — check privileges via `XUserCheckPrivilege` before exposing communication, UGC, or multiplayer features.
 - **XR-046 Display Name and Gamerpic** — always use the platform-provided gamertag / gamerpic; never substitute your own profanity-filter pass.
 - **XR-047 / XR-048 User Profile Access and Profile Settings Usage** — respect user-controlled profile visibility and settings.
 
@@ -49,8 +49,8 @@ These XRs see the highest cert-failure rates and have detailed FMA guidance.
 
 - **XR-064 Joinable Game Sessions and Online Play** — advertised joinability must succeed; broken or stale activities are a hard fail.
 - **XR-067 Maintaining Multiplayer Session State** — session state must update consistently across all members and survive transient network blips.
-- **XR-070 Xbox Friends List** — friend-presence integration must reflect XSAPI social truth.
-- **XR-074 Loss of Connectivity to Xbox and Partner Services** — graceful offline fallback; no infinite spinners or crash on disconnect.
+- **XR-070 XBOX Friends List** — friend-presence integration must reflect XSAPI social truth.
+- **XR-074 Loss of Connectivity to XBOX and Partner Services** — graceful offline fallback; no infinite spinners or crash on disconnect.
 
 ### Activation and PLM
 
@@ -60,7 +60,7 @@ These XRs see the highest cert-failure rates and have detailed FMA guidance.
 ### Pricing and store presence
 
 - **XR-036 Title Pricing Information** — any in-title display of pricing must read live from XStore APIs, not from baked-in strings.
-- **XR-022 Official Naming Standards** — use the platform-correct product names (Microsoft Store, Xbox Series X|S, etc.).
+- **XR-022 Official Naming Standards** — use the platform-correct product names (Microsoft Store, XBOX Series X|S, etc.).
 
 ### Streaming Install and DLC
 
@@ -71,7 +71,7 @@ These XRs see the highest cert-failure rates and have detailed FMA guidance.
 
 ### Console families
 
-- **XR-130 Xbox Console Families and Generations** — cross-gen titles must adapt graphics, memory, and feature use per console SKU.
+- **XR-130 XBOX Console Families and Generations** — cross-gen titles must adapt graphics, memory, and feature use per console SKU.
 
 ### Game DVR and screenshots
 
@@ -89,10 +89,10 @@ Across many FMA entries, the same patterns appear:
 2. **Async state-change handling** — register for `XUserRegisterForChangeEvent`, controller-association changes, and PLM events; never assume state is stable.
 3. **Honor cached service state** — don't hard-fail on a single bad service response; degrade gracefully.
 4. **Use platform UI for system flows** — sign-in, account linking, store, profile cards all go through TCUI ([XGameUI](/reference/xgameui)).
-5. **Test on all SKUs** — a working build on Xbox Series X often fails on Series S memory or Xbox One performance.
+5. **Test on all SKUs** — a working build on XBOX Series X often fails on Series S memory or XBOX One performance.
 
 ## See also
 
-- [Xbox Requirements catalog](/publishing/xbox-requirements)
+- [XBOX Requirements catalog](/publishing/xbox-requirements)
 - [Top failing tests](/publishing/xr-top-failing)
 - [Certification](/publishing/certification)

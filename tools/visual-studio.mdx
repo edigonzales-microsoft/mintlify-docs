@@ -5,7 +5,7 @@ description: "Set up GDK project templates, custom MSBuild platforms, Xbox Gamin
 icon: "code"
 ---
 
-The GDK installer adds first-class Visual Studio support including C\+\+ project templates, three custom MSBuild platforms, the Xbox Gaming Project Control tool window, and a seamless F5 debug experience that handles game registration and launch automatically. Visual Studio 2019 and Visual Studio 2022 are both supported, with VS 2022 recommended for new projects.
+The GDK installer adds first-class Visual Studio support including C\+\+ project templates, three custom MSBuild platforms, the XBOX Gaming Project Control tool window, and a seamless F5 debug experience that handles game registration and launch automatically. Visual Studio 2019 and Visual Studio 2022 are both supported, with VS 2022 recommended for new projects.
 
 ## Supported platforms and toolsets
 
@@ -14,8 +14,8 @@ The GDK registers the following custom MSBuild platforms inside Visual Studio:
 | Platform | Target |
 | --- | --- |
 | `Gaming.Desktop.x64` | Windows PC (GDK) game development |
-| `Gaming.Xbox.XboxOne.x64` | Xbox One family consoles |
-| `Gaming.Xbox.Scarlett.x64` | Xbox Series X\|S consoles |
+| `Gaming.Xbox.XboxOne.x64` | XBOX One family consoles |
+| `Gaming.Xbox.Scarlett.x64` | XBOX Series X\|S consoles |
 
 Each platform automatically sets the correct preprocessor defines (e.g. `_GAMING_DESKTOP`), include paths, and library paths under the GDK installation directory. You do not need to manually configure these settings when using the provided project templates.
 
@@ -97,11 +97,11 @@ makepkg.exe localize /d "$(OutDir)" /pd "$(OutDir)" /gc "%(Identity)"</Command>
 
 ---
 
-## Xbox Gaming Project Control
+## XBOX Gaming Project Control
 
-The **Xbox Gaming Project Control** tool window provides a guided interface for editing `MicrosoftGame.config` directly inside Visual Studio, including field validation, IntelliSense-style completion for known element values, and quick links to relevant documentation.
+The **XBOX Gaming Project Control** tool window provides a guided interface for editing `MicrosoftGame.config` directly inside Visual Studio, including field validation, IntelliSense-style completion for known element values, and quick links to relevant documentation.
 
-Open it from **View → Other Windows → Xbox Gaming Project Control** (available after installing the GDK Visual Studio extension).
+Open it from **View → Other Windows → XBOX Gaming Project Control** (available after installing the GDK Visual Studio extension).
 
 Key features:
 

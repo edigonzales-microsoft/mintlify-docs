@@ -5,24 +5,24 @@ description: "Explore Xbox multiplayer: MPSD session management, Multiplayer Man
 icon: "users"
 ---
 
-Multiplayer is one of the most powerful tools you have for extending your title's lifetime and building a lasting player community. Xbox services provides a comprehensive multiplayer stack — from low-level session state management and matchmaking to high-level APIs that handle common scenarios out of the box. Whether you are building a competitive ranked shooter, a cooperative RPG, or a casual party game, the right Xbox multiplayer components can help you ship faster and deliver a better experience.
+Multiplayer is one of the most powerful tools you have for extending your title's lifetime and building a lasting player community. XBOX services provides a comprehensive multiplayer stack — from low-level session state management and matchmaking to high-level APIs that handle common scenarios out of the box. Whether you are building a competitive ranked shooter, a cooperative RPG, or a casual party game, the right XBOX multiplayer components can help you ship faster and deliver a better experience.
 
-With over **1 billion multiplayer matches played each month** on Xbox services, the infrastructure is built for performance, reliability, and scale.
+With over **1 billion multiplayer matches played each month** on XBOX services, the infrastructure is built for performance, reliability, and scale.
 
 ## Multiplayer system overview
 
-The Xbox multiplayer stack is composed of several complementary subsystems. You choose which ones to use based on your title's complexity and architecture.
+The XBOX multiplayer stack is composed of several complementary subsystems. You choose which ones to use based on your title's complexity and architecture.
 
 <Tabs>
   <Tab title="MPSD">
-    **Multiplayer Session Directory (MPSD)** is the foundation of the Xbox multiplayer stack. It is a cloud service that stores and coordinates session state — who is in a lobby, what their connection information is, whether a match is in progress, and what the session's join rules are.
+    **Multiplayer Session Directory (MPSD)** is the foundation of the XBOX multiplayer stack. It is a cloud service that stores and coordinates session state — who is in a lobby, what their connection information is, whether a match is in progress, and what the session's join rules are.
 
     **Use MPSD when you:**
 
     - Need full control over session lifecycle and matchmaking logic
     - Are building client/server or dedicated-server titles
     - Have more than 8 players or highly customized session rules
-    - Need deep integration with the Xbox shell (invites, join-in-progress)
+    - Need deep integration with the XBOX shell (invites, join-in-progress)
 
     MPSD sessions are defined by **session templates** you configure in Partner Center. Templates specify player counts, timeout behavior, visibility, and capabilities.
 
@@ -54,7 +54,7 @@ The Xbox multiplayer stack is composed of several complementary subsystems. You 
     - Have a client-host (peer-to-peer with relay) architecture
     - Have **8 or fewer players** per session
     - Want a simpler API surface without writing full MPSD logic
-    - Are new to Xbox multiplayer development
+    - Are new to XBOX multiplayer development
 
     MPM is **not** suitable for dedicated server titles or sessions with more than 8 players.
 
@@ -70,7 +70,7 @@ The Xbox multiplayer stack is composed of several complementary subsystems. You 
     // Add the local user to the lobby
     hr = XblMultiplayerManagerLobbySessionAddLocalUser(localUser);
     
-    // Set a join-in-progress string visible in the Xbox shell
+    // Set a join-in-progress string visible in the XBOX shell
     hr = XblMultiplayerManagerLobbySessionSetLocalMemberProperties(
         localUser,
         "{ \"status\": \"looking_for_group\" }",
@@ -86,7 +86,7 @@ The Xbox multiplayer stack is composed of several complementary subsystems. You 
     ```
   </Tab>
   <Tab title="PlayFab Party">
-    **Azure PlayFab Party** is Microsoft's recommended cross-platform real-time networking and communication solution for client-host titles. It replaces the deprecated Xbox Integrated Multiplayer (XIM), which does **not** work in GDK titles.
+    **Azure PlayFab Party** is Microsoft's recommended cross-platform real-time networking and communication solution for client-host titles. It replaces the deprecated XBOX Integrated Multiplayer (XIM), which does **not** work in GDK titles.
 
     **Use PlayFab Party when you:**
 
@@ -135,7 +135,7 @@ The Xbox multiplayer stack is composed of several complementary subsystems. You 
 
 ## SmartMatch matchmaking
 
-SmartMatch is Xbox services' matchmaking service. It supports three complementary flows you can mix and match:
+SmartMatch is XBOX services' matchmaking service. It supports three complementary flows you can mix and match:
 
 <CardGroup cols={3}>
   <Card title="Quick Match" icon="bolt" href="https://learn.microsoft.com/en-us/gaming/gdk/docs/services/multiplayer/matchmaking/live-matchmaking-overview">
@@ -155,11 +155,11 @@ SmartMatch hoppers are configured in Partner Center. Each hopper defines the ses
 
 ## Multiplayer Activity (MPA)
 
-**Multiplayer Activity (MPA)** is required for any Xbox or Windows PC title that uses custom matchmaking or session management (rather than pure MPM). MPA surfaces the invite/join social experience that the Xbox shell expects:
+**Multiplayer Activity (MPA)** is required for any XBOX or Windows PC title that uses custom matchmaking or session management (rather than pure MPM). MPA surfaces the invite/join social experience that the XBOX shell expects:
 
 - The player's current activity (in lobby, in match, idle) is visible to friends.
 - Friends can send and receive game invites.
-- Players can join a friend's game directly from the Xbox shell without being explicitly invited.
+- Players can join a friend's game directly from the XBOX shell without being explicitly invited.
 
 ```cpp
 #include <xsapi-c/multiplayer_activity_c.h>
@@ -181,17 +181,17 @@ HRESULT hr = XblMultiplayerActivitySetActivityAsync(
 ```
 
 <Warning>
-  Titles that ship on Xbox console or Windows PC **must** implement MPA (or equivalent MPSD-based invite/join flows) to meet Xbox certification requirements. A title that cannot properly receive and handle invites will fail cert.
+  Titles that ship on XBOX console or Windows PC **must** implement MPA (or equivalent MPSD-based invite/join flows) to meet XBOX certification requirements. A title that cannot properly receive and handle invites will fail cert.
 </Warning>
 
 ## Game Chat 2
 
-**Game Chat 2** provides secure, low-latency voice and text chat for Xbox services gamers. It uses Xbox's media services and the Xbox social graph to enforce mute preferences, reputation-based filtering, and communication restrictions.
+**Game Chat 2** provides secure, low-latency voice and text chat for XBOX services gamers. It uses Xbox's media services and the XBOX social graph to enforce mute preferences, reputation-based filtering, and communication restrictions.
 
 Key features:
 
-- Works on Xbox console and Windows PC GDK titles
-- Automatically respects player mute lists and communication preferences set in Xbox settings
+- Works on XBOX console and Windows PC GDK titles
+- Automatically respects player mute lists and communication preferences set in XBOX settings
 - Supports per-channel audio routing (team channel, all-chat channel)
 - Provides text chat as an accessibility alternative
 
@@ -225,7 +225,7 @@ For titles where players pick their own match (community servers, custom games, 
 
 ## Cross-network play (XR-007)
 
-If your title supports **cross-network play** (Xbox players matched with PC, mobile, or other-platform players), it falls under cert requirement **XR-007**. Implement:\\n\\n- A clear in-UI disclosure that the player is about to encounter non-Xbox users.\\n- A per-player toggle to opt out of cross-network matches (some accounts opt out by default).\\n- Parental control respect \\u2014 child accounts may be blocked from cross-network entirely.\\n\\nThe published cross-network examples (MMO and multiplayer match) show how to structure session config and matchmaking hoppers to honor XR-007.\\n\\n## Calling MPSD directly\\n\\nMost titles use **Multiplayer Manager (MPM)** as a high-level wrapper over MPSD. For unusual session shapes \\u2014 persistent guilds, asymmetric large-team modes, server-allocated sessions \\u2014 you can call **MPSD REST** directly with `XblMultiplayer*` APIs. The direct path is more code but unlocks every MPSD feature.\\n\\n## Choosing the right multiplayer components
+If your title supports **cross-network play** (XBOX players matched with PC, mobile, or other-platform players), it falls under cert requirement **XR-007**. Implement:\\n\\n- A clear in-UI disclosure that the player is about to encounter non-XBOX users.\\n- A per-player toggle to opt out of cross-network matches (some accounts opt out by default).\\n- Parental control respect \\u2014 child accounts may be blocked from cross-network entirely.\\n\\nThe published cross-network examples (MMO and multiplayer match) show how to structure session config and matchmaking hoppers to honor XR-007.\\n\\n## Calling MPSD directly\\n\\nMost titles use **Multiplayer Manager (MPM)** as a high-level wrapper over MPSD. For unusual session shapes \\u2014 persistent guilds, asymmetric large-team modes, server-allocated sessions \\u2014 you can call **MPSD REST** directly with `XblMultiplayer*` APIs. The direct path is more code but unlocks every MPSD feature.\\n\\n## Choosing the right multiplayer components
 
 | Scenario | Recommended components |
 | --- | --- |

@@ -5,7 +5,7 @@ description: "Overview of the GDK system API surface: XGameRuntime, XGameSave, X
 icon: "rocket"
 ---
 
-The GDK System API is a flat C API surface that gives your game access to the core platform features shared across Windows PC and Xbox consoles. Every major subsystem has its own header and library file; you include only what your game needs. All functions return `HRESULT` values, and error constants are declared in `XGameErr.h`.
+The GDK System API is a flat C API surface that gives your game access to the core platform features shared across Windows PC and XBOX consoles. Every major subsystem has its own header and library file; you include only what your game needs. All functions return `HRESULT` values, and error constants are declared in `XGameErr.h`.
 
 Before calling any System API, you must initialize the Gaming Runtime by calling `XGameRuntimeInitialize()` at process startup and `XGameRuntimeUninitialize()` just before process exit.
 
@@ -21,7 +21,7 @@ Before calling any System API, you must initialize the Gaming Runtime by calling
   </Card>
 
   <Card title="XGameStreaming" icon="signal-stream" href="/reference/xgamestreaming">
-    Detect Xbox Game Streaming / Remote Play sessions, query client properties, and manage touch control layouts. Header: `XGameStreaming.h`.
+    Detect XBOX Game Streaming / Remote Play sessions, query client properties, and manage touch control layouts. Header: `XGameStreaming.h`.
   </Card>
 
   <Card title="XPackage" icon="box-open" href="/reference/xpackage">

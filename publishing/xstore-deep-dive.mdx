@@ -25,7 +25,7 @@ Before XStore APIs do anything useful, you need:
 
 1. A Partner Center product with a TitleId, StoreId, and MSAAppId.
 2. Your title's `MicrosoftGame.config` updated with those values.
-3. **Xbox services** enabled on the product (for licensing checks).
+3. **XBOX services** enabled on the product (for licensing checks).
 4. Sandbox switched to a dev sandbox where the product is published.
 5. Test accounts with access to that sandbox.
 
@@ -116,11 +116,11 @@ UI: it's a good practice to surface both "buy the bundle" and "buy individual it
 
 ## Product sharing model
 
-Xbox supports several sharing scenarios:
+XBOX supports several sharing scenarios:
 
 - **Home Xbox** — the home console can play digital titles purchased by the owner without sign-in.
 - **Family sharing** — family members of the buyer can access the purchase.
-- **PC Xbox Play Anywhere** — single purchase grants both console and PC entitlement.
+- **PC XBOX Play Anywhere** — single purchase grants both console and PC entitlement.
 
 The XStore licensing layer handles these transparently. Your title doesn't usually need to know which path granted access — just check the license is active.
 

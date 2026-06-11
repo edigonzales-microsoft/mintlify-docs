@@ -5,13 +5,13 @@ description: "Reference for the Windows Device Portal REST API on Xbox devkits a
 icon: "server"
 ---
 
-The **Windows Device Portal (WDP)** is the HTTPS service that runs on every Xbox devkit and Windows dev PC. Beyond the web UI, WDP exposes a REST API that you can call from CI scripts, test harnesses, or your own dev-ops tooling.
+The **Windows Device Portal (WDP)** is the HTTPS service that runs on every XBOX devkit and Windows dev PC. Beyond the web UI, WDP exposes a REST API that you can call from CI scripts, test harnesses, or your own dev-ops tooling.
 
 Use WDP REST to automate everything you would otherwise do by hand in the portal: install packages, switch sandbox, capture screenshots, watch processes, pull crash dumps, and toggle dev-only settings.
 
 ## Endpoint
 
-WDP listens on HTTPS port 11443 on Xbox devkits and on Windows. Authentication is HTTP Basic with the devkit's WDP credentials (configured during devkit setup).
+WDP listens on HTTPS port 11443 on XBOX devkits and on Windows. Authentication is HTTP Basic with the devkit's WDP credentials (configured during devkit setup).
 
 ```text
 https://<console-ip>:11443/api/...
