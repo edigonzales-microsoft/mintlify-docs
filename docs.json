@@ -183,12 +183,12 @@
                 "group": "Build Your First Title",
                 "icon": "play",
                 "pages": [
-                  "gdk/get-started"
+                  "gdk/developing-new-titles",
+                  "gdk/samples",
+                  "gdk/porting-guides"
                 ]
               },
-              "gdk/developing-new-titles",
-              "gdk/samples",
-              "gdk/porting-guides"
+              "gdk/get-started"
             ]
           }
         ]
@@ -199,27 +199,57 @@
           {
             "group": "Core Features",
             "pages": [
-              "gdk/game-config",
-              "gdk/microsoftgameconfig-editor",
-              "gdk/microsoftgameconfig-localization",
-              "gdk/user-model",
-              "gdk/xuser-identity",
-              "gdk/xuser-signin-best-practice",
-              "gdk/guest-users",
-              "gdk/async-programming",
-              "gdk/async-task-queues",
-              "gdk/packaging",
-              "gdk/packaging-pc",
-              "gdk/intelligent-delivery",
-              "gdk/game-saves",
-              "gdk/game-saves-overview",
-              "gdk/game-streaming",
-              "gdk/input",
-              "gdk/memory",
-              "gdk/localization",
-              "gdk/error-handling",
-              "gdk/text-to-speech",
-              "gdk/platform-integration"
+              {
+                "group": "Game Configuration",
+                "icon": "file-code",
+                "pages": [
+                  "gdk/game-config",
+                  "gdk/microsoftgameconfig-editor",
+                  "gdk/microsoftgameconfig-localization"
+                ]
+              },
+              {
+                "group": "Users & Identity",
+                "icon": "user",
+                "pages": [
+                  "gdk/user-model",
+                  "gdk/xuser-identity",
+                  "gdk/xuser-signin-best-practice",
+                  "gdk/guest-users"
+                ]
+              },
+              {
+                "group": "Async & Memory",
+                "icon": "shuffle",
+                "pages": [
+                  "gdk/async-programming",
+                  "gdk/async-task-queues",
+                  "gdk/memory",
+                  "gdk/error-handling"
+                ]
+              },
+              {
+                "group": "Packaging & Saves",
+                "icon": "box",
+                "pages": [
+                  "gdk/packaging",
+                  "gdk/packaging-pc",
+                  "gdk/intelligent-delivery",
+                  "gdk/game-saves",
+                  "gdk/game-saves-overview"
+                ]
+              },
+              {
+                "group": "Platform Features",
+                "icon": "plug",
+                "pages": [
+                  "gdk/input",
+                  "gdk/localization",
+                  "gdk/text-to-speech",
+                  "gdk/platform-integration",
+                  "gdk/game-streaming"
+                ]
+              }
             ]
           },
           {
@@ -284,23 +314,53 @@
           {
             "group": "Console Features",
             "pages": [
-              "gdk/console-overview",
-              "gdk/audio",
-              "gdk/storage",
-              "gdk/networking",
-              "gdk/game-dvr",
-              "gdk/cross-gen",
-              "gdk/directstorage",
-              "gdk/dynamic-lighting",
-              "gdk/quick-resume",
-              "gdk/game-streaming-overview",
-              "gdk/cloud-aware-api",
-              "gdk/graphics-overview",
-              "gdk/raytracing",
-              "gdk/mesh-shaders",
-              "gdk/vrs",
-              "gdk/sampler-feedback",
-              "gdk/xbox-texture-compressor"
+              {
+                "group": "Overview",
+                "icon": "compass",
+                "pages": [
+                  "gdk/console-overview"
+                ]
+              },
+              {
+                "group": "System & I/O",
+                "icon": "microchip",
+                "pages": [
+                  "gdk/audio",
+                  "gdk/storage",
+                  "gdk/networking",
+                  "gdk/directstorage",
+                  "gdk/quick-resume"
+                ]
+              },
+              {
+                "group": "Graphics",
+                "icon": "image",
+                "pages": [
+                  "gdk/graphics-overview",
+                  "gdk/raytracing",
+                  "gdk/mesh-shaders",
+                  "gdk/vrs",
+                  "gdk/sampler-feedback",
+                  "gdk/xbox-texture-compressor"
+                ]
+              },
+              {
+                "group": "Capture & Streaming",
+                "icon": "video",
+                "pages": [
+                  "gdk/game-dvr",
+                  "gdk/game-streaming-overview",
+                  "gdk/cloud-aware-api"
+                ]
+              },
+              {
+                "group": "Platform",
+                "icon": "right-left",
+                "pages": [
+                  "gdk/cross-gen",
+                  "gdk/dynamic-lighting"
+                ]
+              }
             ]
           }
         ]
@@ -311,17 +371,44 @@
           {
             "group": "Tools",
             "pages": [
-              "tools/overview",
-              "tools/pc-tools",
-              "tools/wdapp",
-              "tools/launching-on-pc",
+              {
+                "group": "Overview & Visual Studio",
+                "icon": "toolbox",
+                "pages": [
+                  "tools/overview",
+                  "tools/visual-studio"
+                ]
+              },
+              {
+                "group": "PC Tools",
+                "icon": "display",
+                "pages": [
+                  "tools/pc-tools",
+                  "tools/wdapp",
+                  "tools/launching-on-pc"
+                ]
+              },
+              {
+                "group": "Xbox Service Tools",
+                "icon": "screwdriver-wrench",
+                "pages": []
+              },
+              {
+                "group": "Console Tools",
+                "icon": "sitemap",
+                "pages": []
+              },
+              {
+                "group": "Profiling & Debug",
+                "icon": "magnifying-glass-chart",
+                "pages": []
+              },
               "tools/pix-for-windows",
               "tools/pc-sandbox-switcher",
               "tools/player-data-reset",
               "tools/test-account-tool",
               "tools/trace-analyzer",
               "tools/xbox-service-tools",
-              "tools/visual-studio",
               "tools/pix-for-xbox",
               "tools/xbwatson",
               "tools/xbox-manager",

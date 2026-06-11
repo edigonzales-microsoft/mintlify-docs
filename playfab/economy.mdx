@@ -69,7 +69,7 @@ await economyApi.AddInventoryItems({
 
 When the player buys a hard-currency pack on the Microsoft Store, your title fulfills the in-game soft currency by:
 
-1. Verifying the purchase via [XStore](/publishing/commerce) and Microsoft.StoreServices.
+1. Verifying the purchase via [XStore](/publishing/xstore-deep-dive) and Microsoft.StoreServices.
 2. Calling Economy from a trusted back end to grant the corresponding soft-currency bundle.
 3. Marking the consumable purchase as fulfilled with `XStoreReportConsumableFulfillment`.
 
@@ -89,4 +89,4 @@ Rewarded ads are usually a poor fit for premium console titles but can be the ri
 
 - [Store Integration](/playfab/microsoft-store)
 - [Player Sign-In](/playfab/player-sign-in)
-- [Commerce](/publishing/commerce) — the Microsoft Store side of the equation
+- [XStore Deep Dive](/publishing/xstore-deep-dive) — the Microsoft Store side of the equation

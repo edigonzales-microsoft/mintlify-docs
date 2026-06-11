@@ -25,9 +25,9 @@ XSAPI returns HRESULTs in the `FACILITY_XBOX` and `FACILITY_HTTP` ranges. Use [`
 
 ## Diagnosing failures
 
-1. Call `HCHttpCallResponseGetNetworkErrorCode` and `HCHttpCallResponseGetStatusCode` on the failed [HTTP call handle](/reference/xsapi-http-call).
+1. Call `HCHttpCallResponseGetNetworkErrorCode` and `HCHttpCallResponseGetStatusCode` on the failed [HTTP call handle](/reference/xsapi-rest).
 2. If you have an XSAPI HRESULT, run it through `XblGetErrorCondition` for the bucket.
-3. Use [`XblHttpCallSetTracing`](/reference/xsapi-http-call) on individual calls to log full request / response data.
+3. Use [`XblHttpCallSetTracing`](/reference/xsapi-rest) on individual calls to log full request / response data.
 
 ## See also
 

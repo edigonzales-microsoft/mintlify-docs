@@ -52,7 +52,7 @@ Most engines wrap `XMemAlloc` behind their own allocator and apply tags based on
 - **Pre-allocate at boot.** Reserve your largest contiguous heaps during title startup. This avoids fragmentation later in the session.
 - **Use streaming pools.** For open-world games, segment textures and meshes into chunks that map to gameplay zones, and stream them in and out of fixed-size pools.
 - **Keep a margin.** Leave at least a few hundred megabytes of headroom. Constrained mode, game streaming clients, and certification require a working buffer.
-- **Profile early.** Use PIX for Xbox memory captures and the [XBWatson](/tools/service-tools) crash signature service throughout production, not just at cert time.
+- **Profile early.** Use PIX for Xbox memory captures and the [XBWatson](/tools/xbwatson) crash signature service throughout production, not just at cert time.
 
 ## Constrained mode
 

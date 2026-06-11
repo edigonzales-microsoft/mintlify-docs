@@ -14,34 +14,43 @@ The GDK ships with a suite of command-line tools for working with Xbox services 
 ## Tool reference
 
 <CardGroup cols={2}>
-  <Card title="XblDevAccount.exe" icon="user-lock" href="/tools/xbox-service-tools">
+  <Card title="XblDevAccount.exe" icon="user-lock">
     **Developer Account tool** — Authenticate your Partner Center account and cache credentials for use across all other Xbox service executables. Required before using tools that call Xbox services on your behalf.
   </Card>
-  <Card title="XblPCSandbox.exe" icon="shield" href="/tools/xbox-service-tools">
+
+  <Card title="XblPCSandbox.exe" icon="shield" href="/tools/pc-sandbox-switcher">
     **PC Sandbox Switcher** — Show the active sandbox, switch to a development sandbox (e.g. `XDKS.1`), or return to `RETAIL`. Requires elevated (Administrator) privileges to set the sandbox.
   </Card>
-  <Card title="XblPlayerDataReset.exe" icon="rotate-left" href="/tools/xbox-service-tools">
+
+  <Card title="XblPlayerDataReset.exe" icon="rotate-left" href="/tools/player-data-reset">
     **Player Data Reset tool** — Reset a player's achievements, leaderboards, stats, and title history in test sandboxes. Accepts XUIDs, email addresses, or a delimited file as input.
   </Card>
-  <Card title="XblTraceAnalyzer.exe" icon="magnifying-glass-chart" href="/tools/xbox-service-tools">
+
+  <Card title="XblTraceAnalyzer.exe" icon="magnifying-glass-chart" href="/tools/trace-analyzer">
     **Trace Analyzer** — Offline analysis tool that reviews Xbox service calls made by a title and flags calling pattern violations. Works on Fiddler `.saz` trace files.
   </Card>
-  <Card title="XblConfig.exe" icon="gear" href="/tools/xbox-service-tools">
+
+  <Card title="XblConfig.exe" icon="gear">
     **Config as Source** — Enables advanced users to integrate their build pipelines with Xbox configuration services using a command-line interface.
   </Card>
-  <Card title="XblConnectedStorage.exe" icon="cloud-arrow-down" href="/tools/xbox-service-tools">
+
+  <Card title="XblConnectedStorage.exe" icon="cloud-arrow-down">
     **Connected Storage tool** — Download save data from your titles for inspection or backup during development.
   </Card>
-  <Card title="GlobalStorage.exe" icon="database" href="/tools/xbox-service-tools">
+
+  <Card title="GlobalStorage.exe" icon="database">
     **Global Storage tool** — Manage title global storage in test sandboxes before publishing content to `RETAIL`.
   </Card>
-  <Card title="MultiplayerSessionHistoryViewer.exe" icon="timeline" href="/tools/xbox-service-tools">
+
+  <Card title="MultiplayerSessionHistoryViewer.exe" icon="timeline">
     **Multiplayer Session History Viewer** — Show a historical timeline of all changes to a multiplayer session document, useful for debugging session state bugs.
   </Card>
-  <Card title="XblTestAccountGui.exe" icon="users" href="/tools/xbox-service-tools">
+
+  <Card title="XblTestAccountGui.exe" icon="users" href="/tools/test-account-tool">
     **Test Account tool** — GUI for setting up existing test accounts and configuring them for specific game scenarios.
   </Card>
-  <Card title="DevEntitlementTool.exe" icon="ticket" href="/tools/xbox-service-tools">
+
+  <Card title="DevEntitlementTool.exe" icon="ticket">
     **Store Development Entitlement tool** — Query, add, and remove Microsoft Store entitlements on Xbox test accounts within a sandbox.
   </Card>
 </CardGroup>
