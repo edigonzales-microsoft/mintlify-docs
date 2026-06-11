@@ -182,9 +182,10 @@
               {
                 "group": "Build Your First Title",
                 "icon": "play",
-                "pages": []
+                "pages": [
+                  "gdk/get-started"
+                ]
               },
-              "gdk/get-started",
               "gdk/developing-new-titles",
               "gdk/samples",
               "gdk/porting-guides"
