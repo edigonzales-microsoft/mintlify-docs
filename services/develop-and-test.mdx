@@ -54,12 +54,12 @@ The top three causes of "my title can't reach Xbox services":
 
 1. **Wrong sandbox** on the kit or PC — always check `xbconfig` / `XblPCSandbox` first.
 2. **Token expired** — reacquire on every resume from suspend.
-3. **Service config drift** — the title's `XblConfig` in Partner Center does not match what the title is compiled against. Re-run [Config as Source](#).
+3. **Service config drift** — the title's `XblConfig` in Partner Center does not match what the title is compiled against. Re-run Config as Source.
 
 Deeper diagnosis:
 
 - [Trace Analyzer](/tools/trace-analyzer) — offline call-pattern review.
-- [Fiddler integration](#) — inspect raw HTTPS traffic.
+- Fiddler integration — inspect raw HTTPS traffic.
 - The published service troubleshooting docs cover sign-in errors, sandbox errors, and per-API HTTP error reference.
 
 ## See also
