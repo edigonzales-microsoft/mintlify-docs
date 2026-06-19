@@ -171,8 +171,7 @@
                   "onboarding",
                   "gdk/access-resources",
                   "gdk/setup-organization",
-                  "gdk/security-requirements",
-                  "gdk/atg-engagement"
+                  "gdk/security-requirements"
                 ]
               },
               {
@@ -190,7 +189,8 @@
                 "pages": [
                   "gdk/developing-new-titles",
                   "gdk/samples",
-                  "gdk/porting-guides"
+                  "gdk/porting-guides",
+                  "gdk/atg-engagement"
                 ]
               }
             ]

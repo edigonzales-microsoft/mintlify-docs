@@ -5,7 +5,7 @@ description: "Reference for every Xbox service CLI tool: sandboxes, player data 
 icon: "screwdriver-wrench"
 ---
 
-The GDK ships with a suite of command-line tools for working with Xbox services during development. You can access these tools in two ways: run them directly from the GDK **bin** folder after installation, or download the standalone `XboxLiveTools.zip` package from [aka.ms/xbltools](https://aka.ms/xbltools). The full source for many of these tools is available on GitHub at [github.com/Microsoft/xbox-live-developer-tools](https://github.com/Microsoft/xbox-live-developer-tools).
+The GDK ships with a suite of command-line tools for working with XBOX services during development. You can access these tools in two ways: run them directly from the GDK **bin** folder after installation, or download the standalone `XboxLiveTools.zip` package from [aka.ms/xbltools](https://aka.ms/xbltools). The full source for many of these tools is available on GitHub at [github.com/Microsoft/xbox-live-developer-tools](https://github.com/Microsoft/xbox-live-developer-tools).
 
 <Note>
   To create your own custom tooling that integrates with the same backend services, use **Microsoft.Xbox.Service.DevTools.dll**, which is included in the GDK installation and available as open-source in the [Dev Tools library repository](https://github.com/microsoft/xbox-live-developer-tools/tree/main/Microsoft.Xbox.Service.DevTools).
@@ -15,7 +15,7 @@ The GDK ships with a suite of command-line tools for working with Xbox services 
 
 <CardGroup cols={2}>
   <Card title="XblDevAccount.exe" icon="user-lock">
-    **Developer Account tool** — Authenticate your Partner Center account and cache credentials for use across all other Xbox service executables. Required before using tools that call Xbox services on your behalf.
+    **Developer Account tool** — Authenticate your Partner Center account and cache credentials for use across all other XBOX service executables. Required before using tools that call XBOX services on your behalf.
   </Card>
 
   <Card title="XblPCSandbox.exe" icon="shield" href="/tools/pc-sandbox-switcher">
@@ -27,11 +27,11 @@ The GDK ships with a suite of command-line tools for working with Xbox services 
   </Card>
 
   <Card title="XblTraceAnalyzer.exe" icon="magnifying-glass-chart" href="/tools/trace-analyzer">
-    **Trace Analyzer** — Offline analysis tool that reviews Xbox service calls made by a title and flags calling pattern violations. Works on Fiddler `.saz` trace files.
+    **Trace Analyzer** — Offline analysis tool that reviews XBOX service calls made by a title and flags calling pattern violations. Works on Fiddler `.saz` trace files.
   </Card>
 
   <Card title="XblConfig.exe" icon="gear">
-    **Config as Source** — Enables advanced users to integrate their build pipelines with Xbox configuration services using a command-line interface.
+    **Config as Source** — Enables advanced users to integrate their build pipelines with XBOX configuration services using a command-line interface.
   </Card>
 
   <Card title="XblConnectedStorage.exe" icon="cloud-arrow-down">
@@ -51,7 +51,7 @@ The GDK ships with a suite of command-line tools for working with Xbox services 
   </Card>
 
   <Card title="DevEntitlementTool.exe" icon="ticket">
-    **Store Development Entitlement tool** — Query, add, and remove Microsoft Store entitlements on Xbox test accounts within a sandbox.
+    **Store Development Entitlement tool** — Query, add, and remove Microsoft Store entitlements on XBOX test accounts within a sandbox.
   </Card>
 </CardGroup>
 
@@ -73,14 +73,14 @@ XblDevAccount.exe signout
 ```
 
 <Note>
-  Your Partner Center account must have the **Tools Access** permission granted at the product level before you can reset player data or access other product-scoped APIs. This is set in Partner Center under **Account Settings → Users → Product-level permissions → Xbox Live → Tools access**.
+  Your Partner Center account must have the **Tools Access** permission granted at the product level before you can reset player data or access other product-scoped APIs. This is set in Partner Center under **Account Settings → Users → Product-level permissions → XBOX Live → Tools access**.
 </Note>
 
 ---
 
 ## XblPCSandbox.exe — PC Sandbox Switcher
 
-Use `XblPCSandbox.exe` to manage the Xbox Live sandbox on your development PC. Setting or changing the sandbox requires an **elevated (Administrator) command prompt**.
+Use `XblPCSandbox.exe` to manage the XBOX Live sandbox on your development PC. Setting or changing the sandbox requires an **elevated (Administrator) command prompt**.
 
 ```bash
 # Display the current sandbox
@@ -92,7 +92,7 @@ XblPCSandbox /set XDKS.1
 # Switch without relaunching system apps immediately
 XblPCSandbox /set XDKS.1 /noApps
 
-# Relaunch Microsoft Store and Xbox App in sandbox mode
+# Relaunch Microsoft Store and XBOX App in sandbox mode
 XblPCSandbox /launchApps
 
 # Return to the consumer RETAIL sandbox
@@ -100,7 +100,7 @@ XblPCSandbox /retail
 ```
 
 <Tip>
-  You must switch back to `RETAIL` before updating the Xbox App or Gaming Services from the Microsoft Store. These apps cannot receive updates while your PC is in a development sandbox.
+  You must switch back to `RETAIL` before updating the XBOX App or Gaming Services from the Microsoft Store. These apps cannot receive updates while your PC is in a development sandbox.
 </Tip>
 
 The tool automatically corrects sandbox name casing (e.g. `xdks.1` becomes `XDKS.1`).
@@ -129,7 +129,7 @@ XblPlayerDataReset.exe --scid <SCID> --sandbox <SANDBOX.0> --xuid <X1*X2*X3> --d
 
 ## XblTraceAnalyzer.exe — Trace Analyzer
 
-The Trace Analyzer is an offline tool that reviews the Xbox service calls your title made and highlights any calling pattern violations.
+The Trace Analyzer is an offline tool that reviews the XBOX service calls your title made and highlights any calling pattern violations.
 
 <Steps>
   <Step title="Capture a Fiddler trace">
@@ -153,7 +153,7 @@ The Trace Analyzer is an offline tool that reviews the Xbox service calls your t
 
 ## Fiddler — Web service call inspection
 
-Fiddler can be configured to act as an HTTPS proxy for your GDK title, allowing you to inspect raw Xbox Live REST requests and responses. This is especially useful for diagnosing authentication failures, unexpected error codes, or latency spikes.
+Fiddler can be configured to act as an HTTPS proxy for your GDK title, allowing you to inspect raw XBOX Live REST requests and responses. This is especially useful for diagnosing authentication failures, unexpected error codes, or latency spikes.
 
 See the full GDK documentation on [Using Fiddler to inspect web service calls](https://learn.microsoft.com/en-us/gaming/gdk/docs/tools/tools-services/live-fiddler-inspect-web-calls) for setup instructions specific to GDK titles.
 
@@ -166,4 +166,4 @@ If the built-in tools do not cover your workflow, you can build your own using *
 - NuGet package: included in the GDK installation
 - Source: [github.com/microsoft/xbox-live-developer-tools](https://github.com/microsoft/xbox-live-developer-tools/tree/main/Microsoft.Xbox.Service.DevTools)
 
-The library provides the same authenticated HTTP client and service abstractions used by the built-in tools, so you can integrate Xbox service operations directly into your CI/CD pipelines.
+The library provides the same authenticated HTTP client and service abstractions used by the built-in tools, so you can integrate XBOX service operations directly into your CI/CD pipelines.
