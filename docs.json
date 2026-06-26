@@ -189,8 +189,8 @@
                 "group": "Setup & Install",
                 "icon": "download",
                 "pages": [
-                  "gdk/get-started",
                   "gdk/what-is-gdk",
+                  "gdk/get-started",
                   "gdk/download-install",
                   "gdk/sdk-and-tools",
                   "gdk/dev-pc-setup",
