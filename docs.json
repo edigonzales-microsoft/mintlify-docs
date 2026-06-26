@@ -22,8 +22,8 @@
       "dark": "#09090b"
     },
     "image": {
-      "light": "/images/Gradient2_1920x1080.png",
-      "dark": "/images/Gradient2_1920x1080.png"
+      "light": "/images/gradient_opacity.png",
+      "dark": "/images/gradient_opacity.png"
     }
   },
   "navbar": {
