@@ -1,80 +1,23 @@
 ---
-title: "Engaging with the Xbox Advanced Technology Group (ATG)"
+title: "ATG engagement"
 sidebarTitle: "ATG engagement"
-icon: "handshake"
-description: "How to work with Microsoft's Xbox Advanced Technology Group on performance, graphics, and architecture problems specific to your title."
+description: "How to engage Microsoft's Advanced Technology Group for deep platform support."
+icon: "handshake-angle"
 ---
 
-The **XBOX Advanced Technology Group (ATG)** is Microsoft's dedicated engineering team for partner game studios. ATG embeds with developers on the hardest problems — graphics performance, memory budgets, ray-tracing optimization, audio latency, multi-threaded scaling — and provides direct guidance and code from the platform team.
+The **Advanced Technology Group (ATG)** at Microsoft works directly with studios on performance, graphics, and platform-feature deep dives.
 
-## Who ATG is for
+## What ATG provides
 
-ATG support is available to:
+- 1:1 reviews of your title's GPU / CPU traces.
+- Early access to platform-feature samples and best-practice guidance.
+- Help unlocking Game DVR, capture, and broadcasting integration.
 
-- ID@XBOX and managed partner studios.
-- Studios shipping or working on XBOX titles.
-- Teams with specific, reproducible technical problems that platform documentation hasn't solved.
+## Engage ATG
 
-ATG is most effective on **technical** issues, not process or business problems. For those, talk to your Microsoft Account Manager or [Developer Account Manager](/onboarding).
+Reach out through your Microsoft account manager or via the developer support channel in [Partner Center](/publishing/properties). ATG engagements are typically prioritized for titles approaching ship.
 
-## When to engage ATG
+## Related
 
-Good scenarios:
-
-- **Performance budget overruns** — your title misses frame-time targets on XBOX Series S or XBOX One.
-- **GPU optimization** — specific bottlenecks PIX captures don't make obvious.
-- **Ray-tracing tuning** — BVH builder choices, traversal performance, custom hybrid algorithms.
-- **Memory pressure** — fitting on XBOX Series S, ESRAM management for XBOX One.
-- **Custom audio pipelines** — XAPU / XDSP usage, low-latency audio.
-- **Cross-gen architecture decisions** — single codebase across XBOX One / Series X|S.
-- **DirectStorage / SFS integration** — designing the streaming pipeline correctly the first time.
-- **Multi-threaded scaling** — work-stealing schedulers, lock-free patterns, cache behavior.
-
-Less effective scenarios:
-
-- General "how do I use X" questions — the documentation covers those.
-- Account or Partner Center issues — those go through your Account Manager.
-- Microsoft Store / commerce policy questions — the [XBOX Requirements](/publishing/xbox-requirements) and [XStore](/publishing/xstore-deep-dive) docs cover those.
-
-## How to engage
-
-1. **Reach out through your Microsoft Account Manager** or Developer Account Manager. ATG engagements are scoped through them.
-2. **Provide a reproduction** — a PIX capture, perf trace, sample project, or test scenario the ATG engineer can examine.
-3. **Describe the constraint** — "we need to hit 60 FPS at 4K on Series X with ray tracing enabled" is more actionable than "GPU is slow."
-4. **Allocate engineering time on your side** — ATG engagements are collaborative; the ATG engineer needs your team available to test fixes.
-
-## What ATG produces
-
-Typical deliverables from an engagement:
-
-- **Code changes** — sometimes direct patches to your codebase, often inline with your engineers.
-- **PIX traces with annotations** — showing where time is going and what changes to try.
-- **Sample code** — reusable patterns for your team to adopt.
-- **Whitepapers / Dev Day talks** — lessons learned, often anonymized, that feed back into platform docs.
-- **Bug reports against the platform** — when the problem is in the GDK / driver / OS, ATG files and tracks the fix.
-
-## ATG presentations
-
-ATG runs the technical track at XBOX Dev Day and Xfest each year. Past talks worth searching for:
-
-- "XBOX raytracing: performance and optimization"
-- "Mesh shaders: tales from the trenches"
-- "GPU performance tips and tricks"
-- "Getting the most from the XBOX shader compiler"
-- "GPU debugging tips and tricks for XBOX"
-- "What's new in PIX"
-- "Optimizing shader performance with PIX Shader Explorer"
-- "GPU-driven rendering with mesh shaders in Alan Wake 2"
-- "Fine-Tuned loadout: optimizing Call of Duty rendering for XBOX"
-
-Access these through your Microsoft contact or XBOX Game Development Home.
-
-## Confidentiality
-
-ATG engagements are covered by your NDA with Microsoft. Internal discussions, performance numbers, and unreleased platform features stay confidential. ATG case studies that go public are anonymized unless you explicitly approve naming your title.
-
-## See also
-
-- [Access GDK resources](/gdk/access-resources)
-- [Graphics overview](/gdk/graphics-overview)
-- [PIX for Windows](/tools/pix-for-windows)
+- [Game DVR](/gdk/game-dvr)
+- [Game streaming overview](/gdk/game-streaming-overview)

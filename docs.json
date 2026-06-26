@@ -189,8 +189,12 @@
                 "group": "Setup & Install",
                 "icon": "download",
                 "pages": [
+                  "gdk/get-started",
+                  "gdk/what-is-gdk",
+                  "gdk/download-install",
+                  "gdk/sdk-and-tools",
                   "gdk/dev-pc-setup",
-                  "gdk/sdk-and-tools"
+                  "gdk/samples"
                 ]
               },
               {
@@ -236,7 +240,9 @@
                 "icon": "shuffle",
                 "pages": [
                   "gdk/async-programming",
-                  "gdk/async-task-queues"
+                  "gdk/async-task-queues",
+                  "gdk/memory",
+                  "gdk/error-handling"
                 ]
               },
               {
@@ -266,12 +272,15 @@
             "group": "GDK and Game Engines Integration",
             "icon": "rocket",
             "pages": [
+              "pc-e2e/overview",
               "pc-e2e/gdk-and-engines",
               "pc-e2e/engines/unreal",
               "pc-e2e/engines/gamemaker",
               "pc-e2e/engines/custom-engine",
               "pc-e2e/engines/godot",
-              "pc-e2e/handheld"
+              "pc-e2e/handheld",
+              "pc-e2e/optional-services",
+              "pc-e2e/engines/unity"
             ]
           }
         ]
@@ -286,7 +295,14 @@
               "services/multiplayer",
               "services/game-chat",
               "services/multiplayer-activity",
-              "services/develop-and-test"
+              "services/develop-and-test",
+              "services/achievements",
+              "services/cloud-storage",
+              "services/player-data",
+              "services/social",
+              "services/people-system",
+              "services/rich-presence",
+              "services/gamertags-and-privacy"
             ]
           },
           {
@@ -301,7 +317,11 @@
               "playfab/analytics",
               "playfab/identity",
               "playfab/live-service-management",
-              "playfab/player-progression"
+              "playfab/player-progression",
+              "playfab/party",
+              "playfab/sign-in-concepts",
+              "playfab/player-sign-in",
+              "playfab/insights-analytics"
             ]
           }
         ]
@@ -326,7 +346,8 @@
                   "gdk/audio",
                   "gdk/storage",
                   "gdk/networking",
-                  "gdk/directstorage"
+                  "gdk/directstorage",
+                  "gdk/input"
                 ]
               },
               {
@@ -334,21 +355,30 @@
                 "icon": "image",
                 "pages": [
                   "gdk/sampler-feedback",
-                  "gdk/xbox-texture-compressor"
+                  "gdk/xbox-texture-compressor",
+                  "gdk/graphics-overview",
+                  "gdk/raytracing",
+                  "gdk/vrs",
+                  "gdk/mesh-shaders"
                 ]
               },
               {
                 "group": "Capture & Streaming",
                 "icon": "video",
                 "pages": [
-                  "gdk/cloud-aware-api"
+                  "gdk/cloud-aware-api",
+                  "gdk/game-dvr",
+                  "gdk/game-streaming-overview",
+                  "gdk/atg-engagement"
                 ]
               },
               {
                 "group": "Platform",
                 "icon": "right-left",
                 "pages": [
-                  "gdk/cross-gen"
+                  "gdk/cross-gen",
+                  "gdk/quick-resume",
+                  "gdk/dynamic-lighting"
                 ]
               }
             ]
@@ -426,7 +456,8 @@
               "principles/accessibility-resources",
               "principles/mgats",
               "principles/energy-efficiency-essentials",
-              "principles/sustainability-case-studies"
+              "principles/sustainability-case-studies",
+              "principles/sustainability-overview"
             ]
           }
         ]
@@ -449,7 +480,18 @@
               "publishing/xstore-server-to-service",
               "publishing/xstore-pc",
               "publishing/xbox-insider-program",
-              "publishing/developer-account"
+              "publishing/developer-account",
+              "publishing/certification",
+              "publishing/cert-bypass-program",
+              "publishing/discs",
+              "publishing/franchise-hubs",
+              "publishing/pre-release",
+              "publishing/pricing",
+              "publishing/properties",
+              "publishing/ratings",
+              "publishing/sandboxes",
+              "publishing/store-listing",
+              "publishing/xr-fma"
             ]
           }
         ]
@@ -511,13 +553,20 @@
               "reference/wdp-extended",
               "reference/xasyncprovider",
               "reference/xgameruntimetypes",
-              "reference/xgamesave-wrapper"
+              "reference/xgamesave-wrapper",
+              "reference/xmem",
+              "reference/xfrontpaneldisplay",
+              "reference/networking",
+              "reference/wdp-rest",
+              "reference/remote-iteration",
+              "reference/xuser-api"
             ]
           },
           {
             "group": "XBOX Services API",
             "icon": "xbox",
             "pages": [
+              "reference/xsapi-overview",
               "reference/social-manager",
               "reference/microsoftgameconfig-schema",
               "reference/microsoftgameconfig-elements",
@@ -539,7 +588,11 @@
               "reference/xsapi-string-verify",
               "reference/xsapi-context",
               "reference/xsapi-rest-overview",
-              "reference/xsapi-json"
+              "reference/xsapi-json",
+              "reference/xsapi-rest",
+              "reference/xsapi-user-statistics",
+              "reference/xsapi-context-and-globals",
+              "reference/xsapi-social-manager"
             ]
           },
           {
@@ -560,7 +613,8 @@
               "reference/playfab-groups",
               "reference/playfab-friends",
               "reference/playfab-playstream-events",
-              "reference/playfab-access-policy"
+              "reference/playfab-access-policy",
+              "reference/playfab-party"
             ]
           }
         ]
@@ -586,8 +640,8 @@
   "banner": {
     "content": "XBOX Game Development Documentation",
     "color": {
-      "light": "#7CC400",
-      "dark": "#7CC400"
+      "light": "#FFFFFF",
+      "dark": "#09090b"
     }
   },
   "seo": {

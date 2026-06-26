@@ -1,33 +1,27 @@
 ---
-title: "XSAPI User Statistics (user_statistics_c) reference"
+title: "XSAPI User Statistics API reference"
 sidebarTitle: "User Statistics"
-icon: "chart-line"
-description: "Query single or multiple user stats across one or more service configurations, and subscribe to stat changes."
+description: "Read and subscribe to legacy event-based user statistics on XSAPI."
+icon: "chart-column"
 ---
 
-## Queries
+Legacy event-based **user statistics** APIs on XSAPI. Stats represent gameplay quantities (kills, races finished, items collected) used for achievements and leaderboards.
 
-| Function | Description |
-| --- | --- |
-| `XblUserStatisticsGetSingleUserStatisticAsync` / `Result` / `ResultSize` | One stat for one user |
-| `XblUserStatisticsGetSingleUserStatisticsAsync` / `Result` / `ResultSize` | Multiple stats for one user |
-| `XblUserStatisticsGetMultipleUserStatisticsAsync` / `Result` / `ResultSize` | Stats for many users in one SCID |
-| `XblUserStatisticsGetMultipleUserStatisticsForMultipleServiceConfigurationsAsync` / `Result` / `ResultSize` | Cross-SCID query |
+## Functions
 
-## Subscriptions
+- `XblUserStatisticsGetSingleUserStatisticAsync`
+- `XblUserStatisticsGetMultipleUserStatisticsAsync`
+- `XblUserStatisticsGetMultipleUserStatisticsForMultipleServiceConfigurationsAsync`
+- `XblUserStatisticsSubscribeToStatisticChange` / `XblUserStatisticsUnsubscribeFromStatisticChange`
 
-| Function | Description |
-| --- | --- |
-| `XblUserStatisticsTrackStatistics` / `XblUserStatisticsStopTrackingStatistics` | Track or untrack stats |
-| `XblUserStatisticsStopTrackingUsers` | Stop tracking a user |
-| `XblUserStatisticsAddStatisticChangedHandler` / `Remove` | Receive change events |
-| `XblStatisticChangedHandler` | Callback signature |
+## Compared to other stat APIs
 
-## Types
+- For writes, use [event-based stats](/reference/xsapi-events) and the Stats service.
+- For title-managed stats, use [XSAPI Stats](/reference/xsapi-stats).
+- For PlayFab statistics, see [PlayFab Statistics](/reference/playfab-statistics).
 
-Structs: `XblRequestedStatistics`, `XblServiceConfigurationStatistic`, `XblStatistic`, `XblStatisticChangeEventArgs`, `XblUserStatisticsResult`.
+## Related
 
-## See also
-
-- [Player data](/services/player-data)
-- [Title Managed Stats](/reference/xsapi-title-managed-stats)
+- [Stats](/reference/xsapi-stats)
+- [Events](/reference/xsapi-events)
+- [Leaderboard](/reference/xsapi-leaderboard)

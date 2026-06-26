@@ -1,57 +1,15 @@
 ---
-title: "XSAPI Context, Settings, and Globals reference"
-sidebarTitle: "Context & Globals"
+title: "XSAPI Context and Globals"
+sidebarTitle: "Context & Globals (legacy)"
+description: "Legacy index page — see the Context & Globals reference for the canonical surface."
 icon: "gear"
-description: "XblContext lifecycle, per-context HTTP / WebSocket settings, and XSAPI global initialization, memory hooks, and routed call handlers."
 ---
 
-## XBOX Live Context (`xbox_live_context_c`)
+Index page that points to the canonical reference for XSAPI context, settings, and global initialization.
 
-| Function | Description |
-| --- | --- |
-| `XblContextCreateHandle` | Create from a user |
-| `XblContextDuplicateHandle` | Duplicate |
-| `XblContextCloseHandle` | Release |
-| `XblContextGetUser` | Owning user |
-| `XblContextGetXboxUserId` | Xuid |
+See [XSAPI Context, Settings, and Globals](/reference/xsapi-context) for the full surface — `XblContext` lifecycle, per-context HTTP / WebSocket settings, XSAPI global initialization, memory hooks, routed call handlers, and platform storage hooks.
 
-Handle: `XblContextHandle`. Helper struct: `XblGuid`.
-
-## Context Settings (`xbox_live_context_settings_c`)
-
-Get/Set the per-context HTTP retry, timeout, and WebSocket behavior.
-
-`XblContextSettingsGetHttpRetryDelay` / `Set`, `GetHttpTimeoutWindow` / `Set`, `GetLongHttpTimeout` / `Set`, `GetWebsocketTimeoutWindow` / `Set`, `GetUseCrossPlatformQosServers` / `Set`.
-
-## Globals (`xbox_live_global_c`)
-
-| Function | Description |
-| --- | --- |
-| `XblInitialize` / `XblCleanupAsync` | Library lifecycle (`XblInitArgs`) |
-| `XblGetAsyncQueue` | Default queue |
-| `XblGetScid` | SCID |
-| `XblSetApiType` | Pick API mode (`XblApiType`) |
-| `XblSetOverrideConfiguration` / `XblSetOverrideLocale` | Test/dev overrides |
-| `XblMemSetFunctions` / `XblMemGetFunctions` | Memory hooks |
-| `XblAddServiceCallRoutedHandler` / `Remove` | Inspect every service call |
-| `XblDisableAssertsForXboxLiveThrottlingInDevSandboxes` | Quieter dev experience |
-
-Structs: `XblInitArgs`, `XblServiceCallRoutedArgs`. Enums: `XblApiType`, `XblConfigSetting`.
-
-## Platform layer (`platform_c`)
-
-Allows the host to handle local storage on platforms without a default implementation.
-
-`XblLocalStorageSetHandlers` plus the `XblLocalStorage*` callbacks (`ReadHandler`, `WriteHandler`, `ClearHandler`, `ReadComplete`, `WriteComplete`, `ClearComplete`).
-
-Enums: `XblClientOperationResult`, `XblLocalStorageWriteMode`. Handle: `XblClientOperationHandle`.
-
-## Errors (`errors_c`)
-
-`XblGetErrorCondition` and enum `XblErrorCondition` map HRESULT codes to broad conditions (auth, rate-limited, transient, etc.).
-
-## See also
+## Related
 
 - [XSAPI overview](/reference/xsapi-overview)
-- [libHttpClient](/reference/httpclient)
-- [XSAPI HTTP / REST](/reference/xsapi-rest)
+- [Context & Globals](/reference/xsapi-context)

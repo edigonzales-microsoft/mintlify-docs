@@ -1,36 +1,26 @@
 ---
-title: "Submit and manage physical disc releases"
-sidebarTitle: "Physical Discs"
-description: "Configure disc image, layout, royalty, and multi-disc / cross-gen disc releases for XBOX Series X|S and XBOX One titles through Partner Center."
+title: "Discs"
+sidebarTitle: "Discs"
+description: "Physical XBOX disc fulfillment alongside your digital Microsoft Store release."
 icon: "compact-disc"
 ---
 
-If you ship your title on **physical disc** (XBOX Series X and XBOX One disc-equipped consoles), you manage the disc relationship through Partner Center alongside the digital release.
+Physical XBOX retail discs are produced through a separate **disc fulfillment** process in Partner Center, in addition to the digital Microsoft Store release.
 
-## Disc request management
+## Disc package
 
-Disc orders flow through the **Discs** section of your title in Partner Center:
+- Built from your standard Game Core for XBOX package.
+- Includes mandatory day-one update planning if package size exceeds the disc.
+- Must pass the same [certification](/publishing/certification) as the digital build.
 
-- Configure the **disc image** by uploading the master package the disc factory will replicate.
-- Submit a **disc layout file** (`.xml`) that tells the replicator how to lay out the data, multi-disc spans, and stamping metadata.
-- Track the order status from approval through replication to fulfillment.
+## Workflow
 
-Disc submissions go through certification just like digital packages. Plan for an extra month of lead time over the digital lane.
+1. Plan disc package SKUs in [Game setup](/publishing/game-setup).
+2. Upload the disc image alongside the digital package.
+3. Coordinate with your publisher for replication and distribution.
+4. Ship a day-one update via [Packages](/publishing/packages).
 
-## Multi-disc and cross-gen discs
-
-Large titles that span multiple discs, or that ship a cross-gen disc with both XBOX One and XBOX Series X|S binaries, declare the layout in the disc layout file. Keep the digital and disc package versions in lock-step so day-one updates are minimal.
-
-## Royalty configuration
-
-Disc royalties are configured separately from digital pricing because they include physical-media costs (replication, packaging, distribution). Set the royalty configuration before submitting the first disc order; you can revise it for future re-pressings.
-
-## Day-one updates
-
-Most disc titles ship a day-one update over the network because cert \+ replication takes weeks. Plan the on-disc build to be the **safe minimum** (boots, navigates menus, displays the update prompt) and rely on the update for shipping features that landed late.
-
-## See also
+## Related
 
 - [Packages](/publishing/packages)
-- [Cross-Gen](/gdk/cross-gen)
-- [Certification](/publishing/certification)
+- [Pre-release](/publishing/pre-release)

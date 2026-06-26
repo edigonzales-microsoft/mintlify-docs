@@ -1,53 +1,27 @@
 ---
-title: "XBOX PC Remote Iteration API reference"
-sidebarTitle: "Remote Iteration"
-icon: "share-from-square"
-description: "Programmatic deployment, launch, and file transfer to a remote test PC for iterative development."
+title: "Remote iteration reference"
+sidebarTitle: "Remote iteration"
+description: "Iterate on dev-kit assets and code without redeploying full packages."
+icon: "arrows-rotate"
 ---
 
-The Remote Iteration API lets your build / test tooling deploy, launch, and copy files to a remote Windows test PC without going through the editor or command line.
+Remote iteration lets you push file or asset changes to an XBOX dev kit without rebuilding and redeploying the full package — critical for iteration speed on art, audio, and script content.
 
-## Deployment and game lifecycle
+## Tools
 
-| Function | Description |
-| --- | --- |
-| `WdRegisterRemoteXboxGame` | Register a game package on the remote PC |
-| `WdLaunchRemoteGame` | Launch the registered game (`WdLaunchOptions`, `WdLaunchMode`) |
-| `WdResumeRemoteGame` | Resume a suspended game |
-| `WdTerminateRemoteGame` | Terminate the game |
+- **`xbcopy`** — copy files between PC and dev kit.
+- **`xbapp`** — launch, suspend, terminate, and manage installed apps.
+- **`wdapp`** — PC-side equivalent.
+- **Remote Run** in the [XTF](/reference/xtf) — programmatic remote launch from build scripts.
 
-## File copy
+## Recommended workflow
 
-| Function | Description |
-| --- | --- |
-| `WdRemoteCopy` | Copy files / directories between dev PC and target |
-| `WdCancelRemoteCopy` | Cancel an in-progress copy |
+1. Loose-file your asset directories during development.
+2. Mount them on the dev kit so engine reloads pick up changes instantly.
+3. Use [WDP REST](/reference/wdp-rest) endpoints to automate the loop in your editor.
 
-Callbacks: `WdCopyFilesStatusCallback`, `WdCopyErrorCallback`.
+## Related
 
-## Cancellation handles
-
-| Function | Description |
-| --- | --- |
-| `WdCreateCancellationHandle` | Create a token |
-| `WdDuplicateCancellationHandle` | Duplicate it |
-| `WdCloseCancellationHandle` | Release it |
-
-## Types
-
-| Type | Purpose |
-| --- | --- |
-| `WdCancellationHandle` | Cancellation token |
-| `WdCopyFileProgressInfo` | Per-file progress |
-| `WdCopyOperationSummary` | Final summary |
-| `WdCopyOptions` / `WdCopySearchOptions` | Copy semantics |
-| `WdCopyStatusCallbacks` | Bundle of callbacks for a single operation |
-| `WdLaunchOptions` | Launch options |
-| `WdCopyDirection` | PC → target or target → PC |
-| `WdCopyErrorSeverity` | Warning / error / fatal |
-| `WdLaunchMode` | Foreground / background / debug |
-
-## See also
-
-- [Launching on PC](/tools/launching-on-pc)
-- [WDApp](/tools/wdapp)
+- [WDP REST](/reference/wdp-rest)
+- [WDP extended](/reference/wdp-extended)
+- [XTF](/reference/xtf)

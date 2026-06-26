@@ -1,105 +1,15 @@
 ---
-title: "Get Started with the XBOX Game Development Kit"
-sidebarTitle: "GDK Quick Start Guide"
-description: "Learn the two GDK development paths — XBOX console and Windows PC — and set up your environment with Visual Studio to build your first GDK title."
-icon: "play"
+title: "GDK Get Started"
+sidebarTitle: "GDK Get Started"
+description: "Start here for XBOX GDK development — overview, dev PC setup, SDK install, and samples."
+icon: "rocket"
 ---
 
-The XBOX Game Development Kit (GDK) supports two primary development paths: building games for **XBOX consoles** (XBOX Series X|S and XBOX One) and building games for **Windows PC and handheld devices**. Both paths share the same Game Core programming model, GDK Gaming Runtime APIs, and XBOX services integration — meaning a large portion of your game code can be shared between platforms. Before writing a single line of game code, make sure you meet the prerequisites below and understand which path fits your project.
+Get started with the XBOX Game Development Kit (GDK) — install the toolchain, set up your dev PC, and build your first title for XBOX and Windows PC.
 
-## Prerequisites
+## Next steps
 
-Before you begin GDK development, verify that your setup meets the following requirements:
-
-- **Windows PC** — A 64-bit installation of Windows 10 (May 2019 Update / version 1903 or later) or Windows 11. The GDK does not support 32-bit Windows or ARM-based devices for Visual Studio extensions.
-- **Visual Studio 2019 or 2022** — Either edition (Community, Professional, or Enterprise) with the **Game development with C\+\+** workload installed.
-- **XBOX developer program membership** — Required for console development and to access XBOX services. Register at [xbox.com/Developers](https://www.xbox.com/Developers/). PC-only titles may use the [public GDK on GitHub](https://aka.ms/gdk) without program membership.
-- **30 GB of free disk space** — Required for a full GDK installation including extensions.
-
-<Note>
-  XBOX console development requires NDA program membership with Microsoft. Without it, you cannot access console-specific GDK extensions (GDKx), development kit hardware, or NDA documentation. Visit [xbox.com/Developers](https://www.xbox.com/Developers/) to learn about available programs and how to apply.
-</Note>
-
-## Development paths
-
-The GDK gives you two distinct — but complementary — development paths. Choose the one that matches your shipping target, or follow both to build a cross-platform title.
-
-<Tabs>
-  <Tab title="XBOX Console Development">
-    XBOX console development targets **XBOX Series X|S** and **XBOX One**. It requires the full **GDK with XBOX Extensions (GDKx)**, which includes console-specific toolchains, platform toolsets, and NDA-protected APIs.
-
-    **What's different on console:**
-
-    - Your project uses the `Gaming.XBOX.Scarlett.x64` (Series X|S) or `Gaming.XBOX.XboxOne.x64` (XBOX One) MSBuild platform toolset instead of the standard x64 toolset.
-    - The Windows API family is set to `WINAPI_FAMILY_GAMES`, which restricts you to the subset of OS APIs guaranteed to be present on the XBOX Game OS. This is enforced at compile time.
-    - You deploy and debug your game to a physical **XBOX Development Kit** over the network. A fast NVMe SSD and a 10 GbE network setup is recommended for efficient deployment.
-    - Console-exclusive features — spatial audio, DirectStorage, cross-generation development, hardware-level memory management, and Game DVR — are only available when targeting XBOX.
-    - All console submissions must pass XBOX Requirements (XRs) certification before appearing on XBOX.
-
-    **Getting started on console:**
-
-    1. Install the GDK with XBOX Extensions. See [Download and install the GDK](/gdk/download-install).
-    2. Set up your XBOX Development Kit hardware (NDA — requires program access).
-    3. Create a new project from the **Direct3D 12 XBOX Game** Visual Studio template.
-    4. Configure `MicrosoftGame.config` with your Partner Center identity details.
-    5. Deploy to your dev kit and iterate.
-
-    <Tip>
-      If you're shipping on both XBOX One and XBOX Series X|S, explore the [cross-generation development](/gdk/game-config) guidance to manage feature differences between hardware generations in a single codebase.
-    </Tip>
-  </Tab>
-  <Tab title="PC & Windows Development">
-    PC development targets **Windows 10/11 desktops, laptops, and handheld gaming devices** (such as Steam Deck-class PC handhelds running Windows). You use the standard **GDK** (no XBOX Extensions required) with the `Gaming.Desktop.x64` MSBuild platform.
-
-    **What's different on PC:**
-
-    - Your project uses the `Gaming.Desktop.x64` MSBuild platform, which targets x64 Windows with the full `WINAPI_FAMILY_DESKTOP_APP` API surface — all standard Win32 and DirectX 12 APIs are available.
-    - You build and run directly on your development PC using the local Visual Studio debugger — no separate hardware required.
-    - Games are packaged in the **MSIXVC** format and distributed through the **Microsoft Store** or **XBOX Game Pass for PC**.
-    - The **Gaming Services Runtime** must be present on any PC running your packaged game (it is installed automatically when a player installs from the Microsoft Store).
-    - PC titles can optionally integrate XBOX services — achievements, leaderboards, multiplayer, cloud saves — without needing NDA console program membership.
-
-    **Getting started on PC:**
-
-    1. Install the GDK. See [Download and install the GDK](/gdk/download-install).
-    2. Create a new project from the **Direct3D 12 Desktop Game** Visual Studio template.
-    3. Configure `MicrosoftGame.config` with your Partner Center identity.
-    4. Build and run on your local PC.
-    5. Package with `makepkg` and test your MSIXVC package before submitting to the Store.
-
-    <Tip>
-      If you're adding the GDK to an **existing** desktop project rather than starting fresh, follow the [Adding the GDK to an existing desktop project](https://learn.microsoft.com/en-us/gaming/gdk/docs/gdk-dev/pc-dev/overviews/gr-add-to-existing-project) guide to integrate the Gaming Runtime without disrupting your current build system.
-    </Tip>
-  </Tab>
-</Tabs>
-
-## Key concepts to learn next
-
-Once your environment is set up and you've created your first project, these are the most important concepts to understand before going further:
-
-<CardGroup cols={2}>
-  <Card title="MicrosoftGame.config" icon="file-code" href="/gdk/game-config">
-    The identity manifest for your game. Controls title ID, store visuals, executable declarations, and XBOX services configuration.
-  </Card>
-
-  <Card title="Packaging" icon="box-archive" href="/gdk/packaging">
-    Create MSIXVC packages for PC and console. Required for Microsoft Store submission and sandbox testing.
-  </Card>
-
-  <Card title="XBOX Services" icon="trophy" href="/services/overview">
-    Add achievements, cloud saves, multiplayer, and leaderboards. Requires a Partner Center product and sandbox setup.
-  </Card>
-
-  <Card title="API Reference" icon="code" href="/reference/system-overview">
-    Full reference for Gaming Runtime (XGameRuntime), XBOX services (XSAPI), and platform extension APIs.
-  </Card>
-</CardGroup>
-
-## Engine and middleware guides
-
-If you're using a game engine rather than a custom C\+\+ codebase, end-to-end integration guides are available for the most common engines:
-
-- **Unity** — [Get started with Unity for PC](https://learn.microsoft.com/en-us/gaming/gdk/docs/gdk-dev/pc-dev/tutorials/get-started-with-unity-pc/gdk-unity-end-to-end-guide)
-- **Unreal Engine** — [Get started with Unreal for PC](https://learn.microsoft.com/en-us/gaming/gdk/docs/gdk-dev/pc-dev/tutorials/get-started-with-unreal-pc/gc-get-started-with-unreal-pc)
-- **GameMaker** — [Get started with GameMaker](https://learn.microsoft.com/en-us/gaming/gdk/docs/gdk-dev/pc-dev/tutorials/get-started-with-gamemaker/gc-get-started-with-gamemaker)
-- **Custom engine** — [Get started with a custom engine on PC](https://learn.microsoft.com/en-us/gaming/gdk/docs/gdk-dev/pc-dev/tutorials/get-started-with-custom-engine/gc-get-started-with-custom-engine-pc)
+- [Dev PC setup](/gdk/dev-pc-setup)
+- [Install the Windows SDK, Visual Studio, and the GDK](/gdk/sdk-and-tools)
+- [What is the GDK](/gdk/what-is-gdk)
+- [Download and install](/gdk/download-install)

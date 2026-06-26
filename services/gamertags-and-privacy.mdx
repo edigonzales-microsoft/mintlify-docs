@@ -1,6 +1,30 @@
 ---
-title: "Handle gamertags, privileges, privacy, and rate limits for XBOX services"
-sidebarTitle: "Gamertags & Privacy"
-description: "Display modern gamertags correctly, check privileges before offering features, respect player-to-player privacy, and handle XBOX services rate limits."
-icon: "id-badge"
+title: "Gamertags and privacy"
+sidebarTitle: "Gamertags & privacy"
+description: "Modern gamertags, privacy permission checks, and string verification on XBOX."
+icon: "shield-halved"
 ---
+
+Display user-generated content (gamertags, chat, club names) safely and respect each player's privacy settings.
+
+## Modern gamertags
+
+- Gamertags can include Unicode characters and a numeric suffix (`Player#1234`).
+- Use [XSAPI Profile](/reference/xsapi-profile) to fetch the canonical display string.
+- Always render the modern gamertag exactly as returned — do not strip the suffix.
+
+## Privacy checks
+
+Before sending invites, voice, text, or sharing UGC, check permissions with [XSAPI Privacy](/reference/xsapi-privacy):
+
+- `XblPrivacyCheckPermissionAsync` — single-permission check.
+- `XblPrivacyBatchCheckPermissionAsync` — batch check for many users.
+
+## String verification
+
+Validate user-entered strings (gamertags, clan names, custom presence) against the Microsoft policy and profanity filter with [XSAPI String Verify](/reference/xsapi-string-verify) before display or storage.
+
+## Related
+
+- [Social](/services/social)
+- [People system](/services/people-system)
