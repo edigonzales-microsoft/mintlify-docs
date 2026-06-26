@@ -71,3 +71,8 @@ html.light #sidebar {
   );
   border-right: 1px solid rgba(124, 196, 0, 0.12);
 }
+
+/* Slightly larger banner text */
+#banner {
+  font-size: 1rem;
+}
