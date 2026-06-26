@@ -176,3 +176,51 @@ When a player signs in or your game initializes a provider, Connected Storage ma
 <Accordion title="Reserve quota appropriately">
   Each user has a finite Connected Storage quota. Use `XGameSaveGetRemainingQuota` (or its async variant) to check available space before large writes. Inform players gracefully if their quota is exhausted.
 </Accordion>
+
+## Built-in dialogues
+
+XGameSave can drive system UI for common save scenarios — no need to roll your own. Available dialogues include:
+
+- **Container picker** — let the user select an existing save slot
+- **Conflict resolution** — the player chooses between the local and cloud copy when a sync conflict is detected
+- **Out-of-quota** — system prompt asking the user to free Connected Storage space
+- **No connection** — surfaces sync failure to the player without blocking gameplay
+
+Always prefer the system dialogue over a custom UI; it stays consistent with the shell, is fully localized, and is required for some certification scenarios.
+
+## Storage systems and where saves live
+
+Connected Storage save data lives in several places at once:
+
+- **Local cache** — on the console or PC for fast read/write and offline play
+- **Cloud (XBOX Live Title Storage)** — the source of truth that roams between devices
+- **System reserve** — a small per-user budget separate from the device's free space
+
+Writes are first persisted locally, then uploaded asynchronously. Reads come from the local cache when available; the runtime invalidates and re-syncs entries when the cloud copy changes.
+
+## Debugging game saves
+
+Useful tools when something goes wrong:
+
+- **Game Saves Manager** (in XBOX Manager / Dev Home) — list, export, import, and delete containers per signed-in user and SCID
+- **`xbgamesave` command-line tool** — script container inspection and bulk save export from CI
+- **PIX timing capture** — `XGameSave*` calls emit events that show up on the timing track
+- **Headless tests** — run save flows under `xbapp` headless launches to validate first-boot, mid-game, and resume scenarios
+- **Sync logging** — enable verbose Connected Storage logging via Dev Home to capture the sync state machine
+
+Common issues:
+
+| Symptom | Likely cause |
+| --- | --- |
+| `E_GS_PROVIDER_NOT_INITIALIZED` | Provider closed or user signed out before the async call resolved |
+| Stale data after roaming | `XGameSaveContainerSyncResult` was ignored — re-run sync and check the result |
+| Quota exhausted | Old containers not pruned; use `XGameSaveDeleteContainer` to clean up |
+| Saves not roaming | Wrong SCID, or title not yet published to a sandbox the signed-in account can access |
+
+## Walkthroughs and samples
+
+The GDK samples ship several reference implementations you can crib from:
+
+- **GameSaveSimpleCombo** — minimal end-to-end provider, container, blob write/read
+- **GameSaveFiles** — file-style API on top of `XGameSaveFiles` for porting code that already speaks `fopen`/`fwrite`
+- **GameSaveCombo** — full provider \+ conflict resolution UI \+ roaming validation

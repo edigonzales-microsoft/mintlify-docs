@@ -1,0 +1,85 @@
+---
+title: "Threading and CPU utilization"
+sidebarTitle: "Threading & CPU"
+description: "Threading patterns for GDK titles: CPU affinity, thread pool integration, finding contention, and hybrid-CPU PC behavior."
+icon: "microchip"
+---
+
+GDK titles run on heterogeneous CPUs (Series S/X have 8 SMT cores; PC ranges from 4-core ultraportables to 16-core desktops with hybrid P/E topologies). Threading decisions you make at the start of the project drive perf characteristics for the life of the title.
+
+## Core model on console
+
+- **Xbox Series X|S** — 8 physical cores, SMT enabled. The OS reserves a slice for system services; titles see the equivalent of ~7 cores under typical load
+- **Xbox One** — 8 cores split into two clusters of 4; cross-cluster traffic costs more than within-cluster
+- **Quick Resume** — the title can resume with a different core topology than it suspended on; never cache `GetLogicalProcessorInformation` across suspend
+
+## Core utilization patterns
+
+Use the dev kit's CPU profiler to classify per-core behaviour:
+
+- **Idle** — cores you are not using at all; opportunity to parallelise more work
+- **Spinning** — cores stuck in a busy-wait. Symptom of lock contention or polling loops; replace with event-driven wait
+- **Floating** — threads that bounce across cores frame to frame; pin to a core (or core pair) to keep cache warm
+- **Time-sensitive** — render submission, audio mix. Keep on a known core away from background work
+- **Serialization** — long sequences of dependent tasks; restructure into parallel stages
+
+## Common steps for finding threading issues
+
+1. Capture a PIX timing capture with CPU sampling enabled
+2. Identify hot waits — locks, condition variables, queue drains
+3. Trace the contended resource across threads; document the contention point
+4. Replace the synchronisation primitive or restructure the data flow
+5. Re-capture and verify; record the win in your perf log
+
+### Locking
+
+- Prefer **`SRWLOCK`** over `CRITICAL_SECTION` for read-heavy data
+- Avoid `WaitForMultipleObjects` on more than a handful of handles
+- Never hold a lock across an `XAsync` submission — submit, then release, then wait
+
+### High context switches
+
+Frequent context switches manifest as wasted CPU and unstable frame time:
+
+- Audit thread count; each title-owned thread should justify itself
+- Use the `XTaskQueue` thread pool for short-lived work rather than spinning your own threads
+- Avoid `Sleep(0)` and `Sleep(1)` polling — use proper wait primitives
+
+### Time-sensitive threads
+
+- Render thread: pin to a known core; do not let it migrate
+- Audio thread: pin and prioritise; respect the audio frame deadline (usually 5–10 ms)
+- Network thread: lower priority than render and audio; tolerate jitter
+
+## Hybrid CPUs on PC
+
+Windows PCs increasingly ship Intel hybrid CPUs (P-cores \+ E-cores) and AMD chiplet designs:
+
+- **Do not pin threads by index** on PC — the OS scheduler is better than your guess at which core is a P-core
+- Use **Thread Director** hints (priority, QoS) so Windows places threads on the right core class
+- Honour the `THREAD_POWER_THROTTLING_EXECUTION_SPEED` flag for low-importance background threads
+- Profile on at least one hybrid-CPU machine in QA; older machines without P/E split will hide bugs
+
+## Integration with XTaskQueue
+
+The GDK async runtime is built on `XTaskQueue`. Reuse it for general gameplay work:
+
+- Submit lightweight callbacks via `XTaskQueueSubmitCallback`
+- Pair manual queues with your message loop for completion delivery on the main thread
+- Avoid creating ad-hoc thread pools when the queue is already pumping
+
+See [Async task queues](/gdk/async-task-queues) for the API surface and dispatch modes.
+
+## CPU diagnostics tools
+
+- **PIX timing capture** — per-thread, per-core utilization with sampling
+- **`XThread` API** — query and set core affinity, name threads, query priority
+- **Trace Analyzer** — offline review of service calls and thread interactions
+- **Visual Studio Diagnostic Tools** — CPU sampling on PC
+
+## Related
+
+- [Async model](/gdk/async-programming)
+- [Async task queues](/gdk/async-task-queues)
+- [Memory](/gdk/memory) — cross-core memory costs
+- [XThread reference](/reference/xthread)

@@ -242,7 +242,8 @@
                   "gdk/async-programming",
                   "gdk/async-task-queues",
                   "gdk/memory",
-                  "gdk/error-handling"
+                  "gdk/error-handling",
+                  "gdk/threading.mdx"
                 ]
               },
               {
@@ -318,6 +319,7 @@
               "playfab/identity",
               "playfab/live-service-management",
               "playfab/player-progression",
+              "playfab/multiplayer-servers.mdx",
               "playfab/party",
               "playfab/sign-in-concepts",
               "playfab/player-sign-in",
@@ -559,7 +561,9 @@
               "reference/networking",
               "reference/wdp-rest",
               "reference/remote-iteration",
-              "reference/xuser-api"
+              "reference/xuser-api",
+              "reference/xgameinvite.mdx",
+              "reference/xgameprotocol.mdx"
             ]
           },
           {

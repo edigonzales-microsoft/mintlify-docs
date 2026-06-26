@@ -93,8 +93,30 @@ Game Chat 2 fits naturally above either MPSD-based multiplayer or PlayFab Party:
 - **MPSD / matchmaking.** Add a remote chat user when a remote MPSD member joins; remove when they leave.
 - **PlayFab Party.** Party already handles the network transport. Use Party's data channel APIs to send and receive Game Chat 2 packets.
 
+## Real-time audio manipulation
+
+Game Chat 2 exposes a per-stream pre- and post-decode hook so titles can manipulate voice audio in real time:
+
+- **Pre-encode hook** (local mic) — apply your own noise gate, echo cancellation, or compression before encoding
+- **Pre-decode hook** (remote peer) — inspect or replace encoded packets (transcription pipelines, archival)
+- **Post-decode hook** (remote peer) — apply attenuation curves (proximity chat), distortion (radio effect), or spatialization on top of the standard chat mix
+- All hooks run on the chat thread; keep them lock-free and budget-bounded
+
+Use this to implement proximity chat, in-world radio chatter, or per-character voice filters without leaving the Game Chat 2 mix.
+
+## Alternative chat transports
+
+You can swap the network transport without giving up Game Chat 2's mixing, TTS/STT, and policy enforcement:
+
+- **PlayFab Party chat** — Party ships its own integrated chat API that uses Party's network. Use it when you want a single library for both networking and chat
+- **Custom transport** — Game Chat 2 packets are opaque byte buffers; carry them on any reliable channel you control
+- **MsQuic streams** — pair Game Chat 2 with MsQuic for sub-relay-latency voice on a custom server
+
+Pick the transport based on the latency budget your title needs, not on which library is "easier".
+
 ## See also
 
 - [Multiplayer](/services/multiplayer) — sessions, matchmaking, and Party transport
 - [Text-to-Speech](/gdk/text-to-speech) — accessibility certification
 - [Audio](/gdk/audio) — mixing voice with game audio
+- [Chat API reference](/reference/chat)

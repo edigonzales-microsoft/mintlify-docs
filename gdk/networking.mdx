@@ -142,8 +142,96 @@ A range of XBOX-system ports is reserved for platform services (Live, Party, sys
 
 Titles porting from XBOX One ERA (XDK) replace XDK-era socket and HTTP APIs with WinSock \+ xCurl/WinHTTP. The migration guide maps every XDK web-request and game-mesh API to its GDK equivalent.
 
+## MsQuic (QUIC / HTTP/3) for low-latency game mesh
+
+**MsQuic** is the Microsoft implementation of the QUIC transport protocol. The GDK supports MsQuic for game traffic that needs the latency of UDP with the reliability and security of TLS:
+
+- 0-RTT reconnection for fast resume after network blips
+- Stream multiplexing without head-of-line blocking (key for mixed gameplay \+ chat traffic)
+- Built-in TLS 1.3 — works with the XBOX secure sockets layer for peer authentication
+- Suitable for dedicated-server titles that want HTTP/3-style transport without writing their own UDP reliability
+
+Use MsQuic when PlayFab Party's relay model adds too much latency for your title and you control your own backend.
+
+## WinSock and connectivity initialization
+
+GDK networking has a defined startup contract:
+
+1. Call `XNetworkingGetConnectivityHint` to read the platform's view of network availability before initializing your stack
+2. Call `WSAStartup(MAKEWORD(2, 2), ...)` and check the returned data
+3. Register for connectivity-changed notifications so you can fail multiplayer gracefully when the link drops
+4. On shutdown, terminate per-socket activity, then `WSACleanup`
+
+Skipping the connectivity hint causes mysterious failures on first launch after a sign-in change; the platform may not yet have a fully resolved network when your title starts.
+
+## Preferred local UDP multiplayer port
+
+For LAN play and direct-connect scenarios:
+
+- Reserve a single UDP port via your `MicrosoftGame.config` `<NetworkManifest>` so the platform firewall opens it automatically
+- Use it as your title's well-known port for LAN discovery
+- Fall back to a random ephemeral port if the well-known port is in use — never crash on bind failure
+
+## Game mesh integration recipes
+
+| Stack | When to use |
+| --- | --- |
+| **PlayFab Party** | Default for cross-platform peer-to-peer and chat — handles relay, NAT traversal, and voice in one library |
+| **MsQuic** | Custom client-server with low latency and built-in encryption |
+| **WinSock UDP \+ secure sockets** | Bespoke peer-to-peer where you control the reliability layer |
+| **WinHTTP / xCurl** | REST/JSON service calls; matchmaking glue; analytics ingestion |
+
+### Party Unity plug-in
+
+PlayFab Party ships a **Unity plug-in** that wires Party into Unity titles with C# bindings:
+
+- Drop-in component for local player onboarding
+- Networking and chat callbacks exposed as Unity events
+- Built-in voice activity / transcription hooks for accessibility
+- Works on XBOX, PC, mobile, and other Party-supported platforms
+
+### Party Unreal Online Subsystem
+
+For Unreal titles, an **OnlineSubsystem** implementation backs the standard `IOnlineSubsystem` interface with Party:
+
+- Sessions, voice, friends, and presence flow through Unreal's existing OSS API
+- Lets engine and gameplay code stay platform-agnostic while Party handles connection state
+- Use alongside the GDK OnlineSubsystem for XBOX services identity and entitlement plumbing
+
+### PC port behavior
+
+PlayFab Party and the GDK secure sockets layer behave slightly differently on PC vs console:
+
+- On PC, the security layer still requires a signed-in MSA, but uses the local Windows firewall rather than the platform firewall
+- Some XBOX-only features (e.g. group chat with off-network players, party-wide invites from the shell) require a signed-in Live account on PC
+- Test the PC build with the Windows firewall in default state; never disable it as part of your QA matrix
+
+## Networking tools
+
+The GDK ships several diagnostic tools you should integrate into your QA pipeline:
+
+| Tool | Purpose |
+| --- | --- |
+| **NetCap** | On-device packet capture for game traffic — replaces Wireshark on the console; capture and replay sessions for repro |
+| **NetStress** | Synthetic network impairment — inject latency, jitter, loss, and bandwidth caps without specialised hardware |
+| **Fiddler (PC)** | HTTPS proxy for inspecting xCurl / WinHTTP REST traffic in real time |
+| **Fiddler setup** | Documented profile for trusting the dev kit / PC certificate root so HTTPS decryption works |
+| **GDK connectivity simulator** | Force connectivity-hint changes to validate offline / online transitions |
+
+Bake NetStress profiles into your regression suite — the most common multiplayer bugs only repro under specific latency or loss curves.
+
+## QoS networking deep dive
+
+Beyond DSCP packet tagging, the GDK exposes:
+
+- **QoS probes** — measure round-trip and bandwidth to candidate peers before committing to a session host
+- **Bandwidth budgets** — declare per-session bandwidth ceilings so the platform can deprioritise non-game traffic
+- **Path MTU discovery** — automatic for WinSock and MsQuic; avoid hard-coding MTU below 1200 bytes
+- **Per-stream priorities** (MsQuic) — keep voice and gameplay updates ahead of bulk asset transfers
+
 ## See also
 
 - [Multiplayer features](/services/multiplayer) — session directories, matchmaking, Game Chat 2
 - [PlayFab Party overview](https://learn.microsoft.com/en-us/gaming/playfab/features/multiplayer/networking/)
 - [GDK networking documentation (NDA)](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/networking/gc-networking-toc)
+- [XCurl reference](/reference/xcurl) · [XNetworking reference](/reference/xnetworking)

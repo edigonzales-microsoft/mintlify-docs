@@ -146,8 +146,78 @@ pXAudio2->CreateSourceVoice(
   The exact mechanism for setting the audio category on a voice is documented in the NDA-gated audio overview. Ensure you have authorized access to view the complete implementation guide.
 </Note>
 
+## SHAPE — the XBOX audio flowgraph platform
+
+**SHAPE** (Scalable Hardware Audio Processing Engine) is the offload audio platform on XBOX consoles. You author a flowgraph of audio nodes (sources, mixers, effects, sinks) that runs entirely on the audio silicon, freeing CPU and avoiding the latency of bouncing data between the audio block and the main cores.
+
+- **Nodes** — sources (PCM, ADPCM, XMA2, Opus via XAPU), mixers, custom effects (via ACP authoring), and sinks
+- **Best practice flowgraph construction** — keep node depth shallow, batch effects on shared submixes, and avoid CPU-side fan-out for sounds that only fan out to fixed buses
+- **ACP** — the Audio Compute Processor exposes user-authored DSP that runs on the SHAPE pipeline. Write effects once in ACP and reuse across flowgraphs
+
+SHAPE is XBOX-console-only. On PC, use XAPO effects with XAudio2.
+
+## XAPU deep dive
+
+XAPU is the dedicated codec block on XBOX consoles. The most common pattern is **single-stream Opus decode**:
+
+- Open an XAPU session and configure the Opus decoder with sample rate, channel count, and frame size
+- Submit packets from your streaming source; the decoder writes PCM into a SHAPE source node
+- Pair with an XAudio2 source voice if you need to bring decoded audio back to the CPU side
+
+XAPU also accelerates other codec paths used by the platform (game chat, voice). Keep one XAPU session per stream type; do not multiplex unrelated streams through a single session.
+
+## XDSP recipes
+
+XDSP exposes primitives that the platform uses for low-latency DSP at scale:
+
+| Primitive | Typical use |
+| --- | --- |
+| **Convolution** | Reverb, speaker virtualization, custom HRTF |
+| **FFT / IFFT** | Frequency-domain filters, spectrum analysis for music games |
+| **IR reduction** | Compress impulse responses for cheap convolution reverb |
+| **Enveloping** | Time-domain envelope shaping, side-chain ducking |
+| **Convolution with envelope** | Time-varying reverb tails for moving sources |
+
+Author DSP graphs offline so the platform can lay them out efficiently; do not rebuild a convolution kernel every frame.
+
+## Codecs and encoder tools
+
+The GDK ships command-line encoders so your asset pipeline can produce platform-optimal audio:
+
+| Tool | Format | Notes |
+| --- | --- | --- |
+| `xma2encode` | XMA2 | High-quality compressed audio for XBOX consoles; supports `xmaencoder.lib` linking for in-engine encode |
+| `xwmaencode` | xWMA | Legacy compressed format; still useful for very-low-bitrate ambient streams; `xwmaencoder.lib` available for tools |
+| `adpcmencode` | ADPCM | Lightweight compressed format for short SFX; minimal CPU cost on playback |
+| (XAPU Opus) | Opus | Encode with any standard libopus encoder; decode is hardware-accelerated through XAPU |
+
+Pick **XMA2** as the default for compressed sound effects and short music cues, ADPCM for tiny SFX where loop quality matters, and Opus for music streams where you want hardware decode.
+
+## XBOX Series X|S audio hardware
+
+- Dedicated audio block separate from the main APU — no CPU contention for offloaded streams
+- Supports hardware Dolby Atmos decode and HRTF
+- SHAPE pipeline runs at very low latency; ideal for object-based spatial audio with hundreds of objects
+
+## Xbox One audio architecture
+
+- SHAPE and XAPU are also present on Xbox One, with smaller per-frame budgets
+- Cross-gen titles should target the Xbox One budget for shared graphs and use XBOX Series X|S extra capacity for additional richness (more reverb taps, more objects)
+
+## XDK → GDK API migration
+
+The legacy XDK audio surface mapped to a different set of headers and lib names than the GDK exposes:
+
+- XDK `XAudio2` mostly maps 1:1 to GDK `XAudio2`, but link against the GDK redistributable
+- XDK `XMA2` decode flows become GDK XMA2 source voices on XAudio2
+- XDK custom SHAPE / ACP graphs need to be rebuilt against the GDK SHAPE toolchain
+- HRTF and spatial audio APIs converge on `ISpatialAudioClient` — port XDK custom spatial code to the spatial audio platform
+
+When porting, validate audio latency first (especially game chat round-trip) before chasing fidelity differences.
+
 ## See also
 
 - [Game DVR and broadcasting](/gdk/game-dvr) — how voice chat interacts with clip capture
 - [XAudio2 reference](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)
 - [X3DAudio reference](https://learn.microsoft.com/en-us/windows/win32/xaudio2/x3daudio)
+- [Audio APIs reference](/reference/audio-apis)

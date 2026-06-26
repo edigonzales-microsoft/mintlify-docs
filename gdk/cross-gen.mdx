@@ -62,6 +62,42 @@ Game saves must roam between SKUs. A player who buys on XBOX One and upgrades to
 
 Expose the performance / quality choice as a player-facing setting where possible.
 
+## Smart Delivery deep dive
+
+Smart Delivery is the store-side mechanism that ensures a player gets the right binary and asset set on every console they sign in on:
+
+- Tied to the **Store identity** (a single `StoreId`) that fronts one or more packages
+- The store evaluates the target console at install time and delivers the best matching package
+- Save data, achievements, friends progress, and licenses follow the player to the new SKU automatically
+- Smart Delivery works across console generations only — PC entitlements are managed separately through XBOX Play Anywhere
+
+Enable Smart Delivery in Partner Center on the product's properties page. Two packaging models exist on top:
+
+- **Single package, branching at runtime** — simplest, but loses cert-friendly per-SKU optimization
+- **Dual-package (recommended)** — one package per console family, both linked to the same Store identity
+
+## Dual-SKU pattern
+
+The dual-SKU pattern keeps Gen8 and Gen9 builds independent in the toolchain while shipping under a single Store identity:
+
+- Maintain two `MicrosoftGame.config` files with the same `Identity` `Name` and matching `StoreId`
+- Tag each package with its target device family (`XboxOne`, `Scarlett`) in the layout
+- Use shared assets where bandwidth matters and per-SKU assets for high-fidelity content (4K textures, hi-res audio)
+- Ship the **same SCID** for both packages so XBOX services, Connected Storage, and achievements roam transparently
+
+Test the dual-SKU flow by switching between an XBOX One dev kit and a Series X dev kit signed in to the same test account; verify that saves, achievements, and entitlements roam without intervention.
+
+## Backcompat-only titles
+
+If your title is XBOX One only and you never ship a native Gen9 build:
+
+- The console runs your XBOX One binary in backcompat mode on Series X|S
+- Platform features like **FPS Boost** and **Auto HDR** can be enabled by the platform team on a per-title basis — request review through your account manager
+- Performance and feature differences over the original Gen8 run are platform-applied; your title does not need any code changes
+- You still benefit from the faster I/O and CPU of Gen9 hardware automatically; you do not benefit from DirectStorage, mesh shaders, ray tracing, or sampler feedback
+
+Backcompat-only is the lowest-effort path. Most active titles graduate to a Gen9 native build to take advantage of the hardware.
+
 ## See also
 
 - [Console Overview](/gdk/console-overview)

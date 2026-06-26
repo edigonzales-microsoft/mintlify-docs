@@ -247,6 +247,77 @@ Most titles use **Multiplayer Manager (MPM)** as a high-level wrapper over MPSD.
 | Cross-platform (console \+ PC \+ mobile) | MPSD/MPA \+ PlayFab Party (all networking \+ chat) |
 | Session browse / LFG | MPSD \+ SmartMatch (session browse or LFG hopper) |
 
+## Invite flows
+
+XBOX supports several distinct invite paths; pick the right one per scenario:
+
+- **Send an invite from your title** — `XblMultiplayerWriteSessionAsync` updates the session and triggers a notification on the recipient
+- **Send an invite from the shell** — the player picks a friend from the system invite UI; your title only handles the protocol activation when they accept
+- **Receive an invite** — register a protocol activation callback (`XGameInvite`) and resolve the session before showing your join UI
+- **Multi-platform invites via PlayFab Party** — Party invites overlay onto XBOX invites; players on PC, mobile, and console see a unified invite
+- Always join through the session reference in the invite payload — never re-create from cached state
+
+Common pitfalls: not handling protocol activation while suspended (Quick Resume), not deduplicating join attempts when the player accepts the invite twice, ignoring invite TTLs.
+
+## MPM flowcharts
+
+Multiplayer Manager wraps complex state machines behind a small API. The published flowcharts document:
+
+- **Play with friends** — invite \+ join sequence end-to-end
+- **Play with SmartMatch** — matchmaking \+ QoS \+ arbiter setup
+- **Send invites** — title-driven invite path
+- **Protocol activation** — handle an incoming invite while the title is foreground, background, or not yet running
+- **Fill open slots** — backfill after a player leaves
+- **Host migration** — promote a new arbiter when the host disconnects
+- **Use matchmaking and QoS together** — sequence QoS probes after matchmaking returns candidates
+- **Shut down** — cleanly leave sessions on title exit so other members are not blocked
+
+Implement these flows by referencing the corresponding MPM API sequence; do not invent new orderings.
+
+## Large sessions and session templates
+
+For very-large multiplayer (battle royale, MMO):
+
+- **Large sessions** in MPSD support hundreds of members in a single session reference; tune `MaxMembersCount` and `Capabilities` in the session template
+- **Session templates** are authored in Partner Center; the template name is part of the session reference and cannot change at runtime
+- **Session template constants** (timeouts, member counts, broadcast caps) are baked into the template; change them via a new template version, not a runtime override
+- **MPSD status codes** — handle 412 (precondition), 409 (conflict), and 404 (session deleted) explicitly during writes
+
+## Game session visibility and joinability
+
+Each session declares its **visibility** and **joinability**:
+
+- **Visibility** — Open, Visible (in shell), Private (invite-only), Closed
+- **Joinability** — Joinable, JoinableByFriends, InviteOnly, Closed
+- The combination drives shell behaviour (whether the join-game button is enabled, whether friends list shows "join")
+- Update both at session state changes (lobby → in-match → results) so the shell reflects reality
+
+## MPSD-to-MLP migration
+
+Older titles use **MLP (Multiplayer Local Play)** primitives. Migration to MPSD:
+
+- Map MLP local sessions to MPSD private sessions with a single member
+- Replace MLP discovery with MPSD presence \+ activity
+- Honour XBOX network security requirements that MPSD enforces and MLP did not
+
+## Multiplayer Activity — recent players
+
+MPA also drives the **recent players** list:
+
+- Submit a recent-players record whenever a match completes
+- Records persist for a system-defined window; do not over-submit
+- The shell's "play with" affordance reads recent-players to suggest friends and re-matches
+- Tie into reputation submission — submit feedback alongside the recent-players record when relevant
+
+## PlayFab Party \+ MPA integration
+
+For PlayFab-driven networking, MPA and Party work together:
+
+- MPA represents the discoverable activity in the XBOX shell
+- Party handles the actual networking and chat
+- Bind a Party network to an MPA activity ID so shell joins land in the right Party network
+- Tear down both in lockstep on session exit
+
 ## See also
 
 - [Multiplayer overview (NDA)](https://learn.microsoft.com/en-us/gaming/gdk/docs/services/multiplayer/overviews/multiplayer-intro)

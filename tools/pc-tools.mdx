@@ -102,6 +102,69 @@ The GDK provides a focused set of PC-side tools that handle the three most commo
 
 ---
 
+## Additional command-line tools
+
+The PC GDK ships several more command-line utilities under the `bin` folder for capture, remoting, and save management:
+
+### wdCapture / wdEndpoint / wdRemote / wdCaptureSession
+
+These tools form the **PC capture and remoting suite** — the equivalent of `xbcapture` and remote run on console:
+
+- **`wdCapture.exe`** — capture an MSIXVC layout from a registered loose-file build so QA can run it without your source tree. Useful when handing off a repro to certification or partner teams.
+- **`wdEndpoint.exe`** — register a PC as a _capture endpoint_ and configure which capture targets it accepts. Run on the machine that will receive captures.
+- **`wdRemote.exe`** — drive another PC's GDK runtime over the network (install, launch, terminate, list). Pair with `wdEndpoint` to build remote run-and-test pipelines on PC.
+- **`wdCaptureSession.exe`** — start/stop a named capture session and stream the resulting layout to a network share. Wraps `wdCapture` for batch/CI usage.
+
+### xgamesaveutil.exe
+
+`xgamesaveutil.exe` inspects and edits **PC connected storage** containers for a given user/title without launching the game:
+
+- Dump container contents to disk (`extract`)
+- Replace blob payloads (`update`) to test edge-case save data
+- Delete containers, list blobs, and reset the entire save area for a sandbox
+
+Equivalent to the Connected Storage Tool, but PC-local and scriptable from CI.
+
+### title-registration-pc
+
+The **title-registration-pc** flow describes the exact registry/PRI/manifest writes that happen when you run `wdapp register`, so you can:
+
+- Diagnose "Game does not appear in Start menu" issues by inspecting the resulting `AppxManifest.xml` and AUMID entries
+- Pre-stage registrations on lab machines without copying the full loose-file tree
+- Re-register after a Windows feature update wipes Gaming Services state
+
+---
+
+## Visual Studio integration
+
+The GDK ships VS extensions, MSBuild targets, and project templates for both VS 2019 and VS 2022:
+
+- **VS 2019 / VS 2022 support notes** — current support matrix, known issues per VS version, and how to switch the active GDK between toolsets.
+- **Project templates** — Gaming.Desktop.x64, Gaming.Xbox.XboxOne.x64, Gaming.Xbox.Scarlett.x64 templates for native C\+\+ and DirectX 12.
+- **Property pages** — the **Gaming Desktop**, **GDK Deployment**, and **GDK Packaging** property pages drive MSIX/MSIXVC packaging from inside the IDE.
+- **Debugging** — `F5` Debugging works against:
+  - The local PC (Gaming.Desktop.x64)
+  - A Remote Windows PC via VS's Remote Debugger (covered in **dev-pc-setup**)
+  - An XBOX devkit via the GDK Remote Debugger
+- **vs-clang** — switch the active toolset from MSVC to **clang-cl** on Gaming.Desktop.x64 targets. Useful for catching warnings/UB that MSVC silently accepts and for matching the clang-based console toolchain. Set in project properties → General → Platform Toolset.
+
+See also **dev-pc-setup** for the BWOI (Build Without Install) and Remote Windows debugging configurations.
+
+---
+
+## XBOX PC Toolbox
+
+The **XBOX PC Toolbox** is a unified UI launcher for the most-used PC GDK tools (wdapp install/launch/list, registration, sandbox switching, capture, log collection). It surfaces operations that would otherwise require several PowerShell commands:
+
+- Drag-and-drop install for `.msixvc` packages
+- One-click launch with `/WaitToExit` and exit-code surfacing
+- Inline access to **PC Sandbox Switcher** and log capture
+- Quick links to PIX, Feedback Hub, and the GDK documentation
+
+Find it under `<GRDK>\bin\xboxpctoolbox\` in the GDK installation. It is the recommended GUI entry point for most day-to-day PC dev tasks; CLI tools remain available for automation.
+
+---
+
 ## PIX for Windows
 
 PIX for Windows is a standalone GPU performance analysis and debugging tool for DirectX 12 titles running on Windows 10 and later. It is separate from the version of PIX that ships inside the GDK (which targets XBOX One Development Kits).

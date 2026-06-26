@@ -121,6 +121,46 @@ int WINAPI wWinMain(
 
 ---
 
+## XGameRuntimeInitializeWithOptions
+
+Use `XGameRuntimeInitializeWithOptions` instead of the basic `XGameRuntimeInitialize` when you need to control **how the runtime locates `MicrosoftGame.config`** or to opt into other initialization tweaks.
+
+### XGameRuntimeOptions
+
+```cpp
+struct XGameRuntimeOptions
+{
+    XGameRuntimeGameConfigSource gameConfigSource;
+    const char* gameConfigPath;   // optional, only used by some sources
+};
+```
+
+### XGameRuntimeGameConfigSource
+
+| Value | Meaning |
+| --- | --- |
+| `XGameRuntimeGameConfigSource::Default` | Use the runtime's normal lookup: the manifest of the registered/installed package. This matches `XGameRuntimeInitialize`. |
+| `XGameRuntimeGameConfigSource::Title` | Read `MicrosoftGame.config` from the title's working directory. Useful for tools and dev iteration where the package isn't registered. |
+| `XGameRuntimeGameConfigSource::File` | Read from the explicit path supplied in `gameConfigPath`. Used by build tools and unit tests that need to point at a config that lives outside the install layout. |
+
+### Example
+
+```cpp
+XGameRuntimeOptions opts = {};
+opts.gameConfigSource = XGameRuntimeGameConfigSource::File;
+opts.gameConfigPath   = "D:\\\\MyGame\\\\MicrosoftGame.config";
+
+HRESULT hr = XGameRuntimeInitializeWithOptions(&opts);
+```
+
+`XGameRuntimeUninitialize` is the matching shutdown call regardless of which initializer you used.
+
+<Note>
+  `XGameRuntimeInitializeWithOptions` is intended for **tooling and developer scenarios**. Shipping titles should use `XGameRuntimeInitialize` so the runtime resolves the config the same way the platform installer does.
+</Note>
+
+---
+
 ## See also
 
 - [XGameRuntimeUninitialize](https://learn.microsoft.com/en-us/gaming/gdk/docs/reference/system/xgameruntimeinit/functions/xgameruntimeuninitialize)

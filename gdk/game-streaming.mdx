@@ -136,3 +136,51 @@ XBOX Game Streaming supports players connecting from:
 - Web browsers via XBOX Cloud Gaming
 
 Your game runs identically on the server regardless of which client platform the player is using. Client-specific adaptations — touch layouts, display scaling — are handled through the Cloud Aware APIs.
+
+## Latency compensation
+
+Cloud streaming adds an irreducible round-trip between the player's controller and your game logic. The GDK exposes hooks to mitigate it:
+
+- **Predictive input** — sample input on the server frame the client _will_ see, not the frame the server is rendering. Pair with `XGameStreamingGetClientPropertiesAsync` to read the measured round-trip and adjust.
+- **Visual cues** — slightly enlarge hit windows or extend reticle assist on streamed sessions so player intent maps better through the latency.
+- **Tunable HUD response** — reduce HUD animation durations so the UI feels reactive even when total latency is higher than local play.
+- **Frame pacing** — keep frame times tight and stable. A jittery 60 fps streams worse than a steady 50 fps.
+
+Use the [Latency measurement tools](/tools/trace-analyzer) and the simulate-latency dev kit setting (see below) to validate behavior across the latency curve.
+
+## Custom resolution
+
+The streaming pipeline can run your title at a non-native resolution to fit different client targets. To take advantage:
+
+- Render at a resolution that matches the negotiated stream resolution (often 1080p, sometimes 720p for low-bitrate clients).
+- Query the negotiated stream resolution via client properties; do not assume 1080p.
+- Re-allocate render targets and UI scale when the resolution changes mid-session.
+- Avoid hard-coded resolutions in shaders, post-process kernels, or texture mip selection.
+
+Custom resolution support is required for the smallest-bandwidth streaming tiers and is recommended for handheld clients.
+
+## DirectCapture
+
+DirectCapture is the path the streaming pipeline uses to grab the encoded video frame directly from your swap chain on the server, with no intermediate copy. Most titles get DirectCapture automatically. Things to be aware of:
+
+- HDR and SDR backbuffers each require their own DirectCapture configuration.
+- DirectCapture is disabled if your title uses unsupported swap chain configurations (e.g. exclusive fullscreen on PC GDK builds).
+- Capture format and color space are negotiated; clamp values inside the standard SDR/HDR ranges to avoid clipped or blown-out output.
+
+## "Am I streaming?" detection patterns
+
+`XGameStreamingIsStreaming` returns a snapshot. For correct behavior you also want:
+
+- A registered connection-state-changed callback so you react to start/stop within the same session (Remote Play and XBOX Game Streaming both support join-in-progress).
+- A re-check whenever you show new UI; players can start a Remote Play stream while the title is already running.
+- Per-controller awareness — `XGameStreamingIsStreaming` is process-wide, but client properties are per `XGameStreamingClientId`. Match input devices to clients.
+
+## Testing tools
+
+- **Content Test Applications (CTAs)** — Windows PC, Android, and Web clients for in-house streaming tests. Configure custom resolution, bitrate, and codec to stress test your title.
+- **Stream config in the CTA** — override bitrate and round-trip target to validate behavior on poor connections without a real degraded link.
+- **Simulate latency on the dev kit** — the dev kit can inject artificial input lag and frame jitter to mirror real-world streaming conditions during local development.
+- **TAK Editor preview** — preview your touch layouts against recorded gameplay before packing a bundle.
+- **Latency measurement test** — captures end-to-end glass-to-glass latency for regression tracking.
+
+See [Touch Adaptation Kit](/reference/touch-adaptation-kit) for the layout authoring details.

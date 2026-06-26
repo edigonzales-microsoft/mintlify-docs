@@ -66,8 +66,25 @@ if (!enabled) {
 
 When your title is suspended or constrained, stop pushing lighting updates. The OS does not zero the device on suspend by default; if you leave a bright cue running, the player will see it on the dashboard. Push a final "idle" color buffer in your suspend handler.
 
+## Windows.Devices.Lights.LampArray (PC)
+
+On PC, the **`Windows.Devices.Lights.LampArray`** WinRT API is the underlying mechanism the GDK lighting surface targets. If you need finer control than the GDK shim provides, you can use `LampArray` directly:
+
+| Type | Purpose |
+| --- | --- |
+| `LampArray` | A single addressable lighting device. Enumerated via `Windows.Devices.Enumeration`. |
+| `LampArray.LampCount` / `LampInfo` | Number and physical layout of lamps, including XY position and key/lamp purpose hints. |
+| `LampArray.SetColor` / `SetColors` / `SetColorsForIndices` / `SetColorsForKey` | Push colors per-lamp, per-index, per-purpose (gamepad button, keyboard key), or whole-array. |
+| `LampArray.RequestMessageAsync` | Vendor extension channel for device-specific effects. |
+| `LampArrayEffectPlaylist`, `LampArrayColorRampEffect`, `LampArrayBlinkEffect`, etc. | Built-in effect primitives that run on the device without per-frame CPU cost. |
+| `LampArray.IsAvailable` / `IsConnected` / `AvailabilityChanged` | Player-preference and hot-plug awareness; mirrors `XGameLightingIsEnabledForTitle`. |
+| `LampArrayKind` | Hint for the device class (`Keyboard`, `Mouse`, `Headset`, `Chassis`, `GameController`, `Peripheral`, `Furniture`, `Art`, `Speaker`, `Notification`). |
+
+The GDK surface is preferred for cross-platform titles because it works identically on PC and console. Drop down to `LampArray` only when you need vendor effects or purpose-aware addressing not yet exposed by the GDK shim.
+
 ## See also
 
 - [Dynamic Lighting](/gdk/dynamic-lighting) — conceptual guide
 - [Lighting API reference (Microsoft Learn)](https://learn.microsoft.com/en-us/gaming/gdk/_content/gc/reference/lighting/gc-reference-lighting-toc) — full per-function documentation
+- [Windows.Devices.Lights namespace (Microsoft Learn)](https://learn.microsoft.com/en-us/uwp/api/windows.devices.lights) — `LampArray` WinRT API
 - [GameInput](/reference/gameinput) — the input-side companion API

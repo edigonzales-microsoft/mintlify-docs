@@ -159,11 +159,48 @@ See the full GDK documentation on [Using Fiddler to inspect web service calls](h
 
 ---
 
-## Building custom tooling
+## XBOX Live Account Tool
 
-If the built-in tools do not cover your workflow, you can build your own using **Microsoft.Xbox.Service.DevTools.dll**, which ships in the GDK `bin` folder and is also available as open-source:
+The **XBOX Live Account tool** lets you create and manage XBOX Live test accounts in your dev sandboxes without going through the shell:
 
-- NuGet package: included in the GDK installation
-- Source: [github.com/microsoft/xbox-live-developer-tools](https://github.com/microsoft/xbox-live-developer-tools/tree/main/Microsoft.Xbox.Service.DevTools)
+- Create new test accounts bound to your title's sandbox pool
+- Reset passwords, refresh entitlements, and toggle account settings programmatically
+- Useful for CI flows that need a fresh account per test run
 
-The library provides the same authenticated HTTP client and service abstractions used by the built-in tools, so you can integrate XBOX service operations directly into your CI/CD pipelines.
+Differs from the GUI Test Account tool: this one is automation-first and runs without UI.
+
+## XBOX Common Events Tool
+
+The **XBOX Common Events tool** sends platform-standard events (sign-in, sign-out, session create/leave, achievement unlock) to your sandbox so you can validate event-based pipelines (stats, achievements, presence) without a full game build:
+
+- Replay canned event sequences against a target user / sandbox
+- Stamp custom event payloads to test your stat rules
+- Pair with **Trace Analyzer** to verify the round-trip from event ingest to stat update
+
+## Multiplayer Session History Viewer
+
+When a session document misbehaves (host migration loop, stuck pending state, lost member), the **MP Session History Viewer** rebuilds the document timeline so you can see every write:
+
+- Filter by user, by property, or by time window
+- Diff between adjacent versions to find the write that caused a regression
+- Export the timeline for bug reports
+
+## Connected Storage Tool
+
+Beyond inspection, the **Connected Storage tool** can:
+
+- Export and import containers between test accounts
+- Stamp known-bad save data for reproducing edge cases
+- Clear specific containers without resetting the entire account (use `XblPlayerDataReset` for full resets)
+
+## Dev Entitlements Tool
+
+Use **DevEntitlementTool** to grant or revoke Microsoft Store entitlements on test accounts in your sandbox:
+
+- Grant DLC, season-pass, or in-game-currency SKUs without going through the Store UI
+- Test entitlement-gated content paths (cert checks for graceful handling when entitlements expire)
+- Revoke entitlements to validate cleanup flows
+
+## See also
+
+- [Config as Source](#config-as-source) workflow for service-config GitOps
