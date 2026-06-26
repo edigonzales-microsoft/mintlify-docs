@@ -78,9 +78,13 @@ Read accelerometer and gyroscope deltas through GameInput on controllers that ex
 - **Windows.Gaming.Input (WGI) port** — direct mapping of WGI concepts (Gamepad, RawGameController) onto `IGameInputDevice` and `IGameInputReading`
 - **What to port first** — replace XInput device enumeration and hot-plug, then state polling, then haptics; defer keyboard/mouse and racing wheel work until the gamepad path is solid
 
-## Related
+## Related API documentation
+
+- [GameInput API reference](/reference/gameinput) — `GameInputCreate`, `GameInputDeviceInfo`, `GameInputKeyState`, `GameInputMouseState`, `GameInputHapticInfo`, `GameInputSensorsInfo`, `GameInputSensorsState`, `GameInputForceFeedbackConditionParams`, `GameInputForceFeedbackMotorInfo`, `GameInputForceFeedbackParams`
+- [GameInput extended API reference](/reference/gameinput-extended) — `XInputOnGameInput` shim and deprecated GameInput surface
+
+## See also
 
 - [Console overview](/gdk/console-overview)
 - [User model](/gdk/user-model)
 - [Touch Adaptation Kit](/reference/touch-adaptation-kit)
-- [GameInput](/reference/gameinput) · [GameInput extended](/reference/gameinput-extended)

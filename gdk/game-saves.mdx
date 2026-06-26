@@ -224,3 +224,9 @@ The GDK samples ship several reference implementations you can crib from:
 - **GameSaveSimpleCombo** — minimal end-to-end provider, container, blob write/read
 - **GameSaveFiles** — file-style API on top of `XGameSaveFiles` for porting code that already speaks `fopen`/`fwrite`
 - **GameSaveCombo** — full provider \+ conflict resolution UI \+ roaming validation
+
+## Related API documentation
+
+- [XGameSave API reference](/reference/xgamesave) — `XGameSaveInitializeProvider`, `XGameSaveInitializeProviderAsync`, `XGameSaveCloseProvider`, `XGameSaveGetRemainingQuota`, `XGameSaveSubmitUpdate`
+- [XGameSaveFiles API reference](/reference/xgamesavefiles) — `XGameSaveFilesGetFolderWithUiAsync`, `XGameSaveFilesGetRemainingQuota`
+- [XAsync API reference](/reference/xasync) — `XAsyncGetResultSize`

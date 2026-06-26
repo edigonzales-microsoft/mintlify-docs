@@ -229,9 +229,14 @@ Beyond DSCP packet tagging, the GDK exposes:
 - **Path MTU discovery** — automatic for WinSock and MsQuic; avoid hard-coding MTU below 1200 bytes
 - **Per-stream priorities** (MsQuic) — keep voice and gameplay updates ahead of bulk asset transfers
 
+## Related API documentation
+
+- [XNetworking API reference](/reference/xnetworking) — `XNetworkingQueryPreferredLocalUdpMultiplayerPort`, `XNetworkingQueryPreferredLocalUdpMultiplayerPortAsync`, `XNetworkingRegisterPreferredLocalUdpMultiplayerPortChanged`, `XNetworkingQuerySecurityInformationForUrlUtf16Async`, `XNetworkingVerifyServerCertificate`, `XNetworkingSecurityInformation`
+- [XCurl API reference](/reference/xcurl) — HTTP client
+- [XUser API reference](/reference/xuser) — `XUserGetTokenAndSignatureUtf16Async`, `XUserGetTokenAndSignatureUtf16Data` (authenticated web requests)
+
 ## See also
 
 - [Multiplayer features](/services/multiplayer) — session directories, matchmaking, Game Chat 2
 - [PlayFab Party overview](https://learn.microsoft.com/en-us/gaming/playfab/features/multiplayer/networking/)
 - [GDK networking documentation (NDA)](https://learn.microsoft.com/en-us/gaming/gdk/docs/features/console/networking/gc-networking-toc)
-- [XCurl reference](/reference/xcurl) · [XNetworking reference](/reference/xnetworking)

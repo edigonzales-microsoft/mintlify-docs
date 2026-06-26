@@ -79,3 +79,8 @@ Every process gets a default task queue available via `XTaskQueueGetCurrentProce
 - Always pair `XTaskQueueDuplicateHandle` with `XTaskQueueCloseHandle`
 - Closing the last handle terminates the queue; in-flight callbacks still run
 - Use `XTaskQueueTerminate` to drain a queue deterministically before shutdown
+
+## Related API documentation
+
+- [XTaskQueue API reference](/reference/xtaskqueue) — `XTaskQueueCreate`, `XTaskQueueDispatch`, `XTaskQueueTerminate`, `XTaskQueueRegisterMonitor`, `XTaskQueueRegisterWaiter`, `XTaskQueueSetCurrentProcessTaskQueue`
+- [XAsync API reference](/reference/xasync) — `XAsyncBlock`

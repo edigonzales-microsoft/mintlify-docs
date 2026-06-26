@@ -253,3 +253,15 @@ void QueryAndPurchase(XStoreContextHandle store, XUserHandle user)
 <Note>
   Always verify game licenses and entitlements server-side for any security-sensitive decisions. Client-side license checks are suitable for UX gating (showing locked content) but should not be the sole authority for granting access to protected content or services.
 </Note>
+
+## Related conceptual documentation
+
+- [XStore Commerce — product types, trials, DLC, and bundles](/publishing/xstore-deep-dive) — choosing product types, configuring Partner Center, granting DLC, trials, consumables, bundles, season passes, and product sharing.
+- [XStore on PC — DRM, license tokens, and sandboxes](/publishing/xstore-pc) — PC-specific considerations including basic DRM, license tokens for service validation, mismatched store accounts, and sandbox switching.
+- [Manage products with the XStore S2S APIs](/publishing/xstore-server-to-service) — server-side Microsoft Store APIs for querying entitlements, fulfilling consumables, granting products, Game Pass detection, and clawback processing.
+- [Integrate PlayFab Economy with Microsoft Store purchases](/playfab/microsoft-store) — connecting Microsoft Store purchases to PlayFab Economy v2 for inventory and currency grants.
+
+## See also
+
+- [XPackage API reference](/reference/xpackage)
+- [XUser API reference](/reference/xuser)

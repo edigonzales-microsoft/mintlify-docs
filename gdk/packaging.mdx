@@ -226,3 +226,9 @@ When a package will not install or will not boot:
 - Compare the `MicrosoftGame.config` from the failing package against a known-good build
 - Use **Dev Home → Installed games → Logs** to capture the install/boot trace
 - For streaming install failures, log `XPackageInstallChunks` results and check `XPackageGetInstallProgress` at every state change
+
+## Related API documentation
+
+- [XPackage API reference](/reference/xpackage) — `XPackageEnumeratePackages`, `XPackageEnumerateFeatures`, `XPackageMount`, `XPackageMountWithUiAsync`, `XPackageCreateInstallationMonitor`, `XPackageRegisterInstallationProgressChanged`, `XPackageRegisterPackageInstalled`, `XPackageFeature`
+- [XGame API reference](/reference/xgame) — `XLaunchNewGame`
+- [XStore API reference](/reference/xstore) — `XStoreQueryGameLicenseAsync` (mods)

@@ -43,7 +43,12 @@ Use these when you implement an async API of your own (e.g., wrapping a long-run
 | `XAsyncProviderData` | Passed into the provider function |
 | `XAsyncOp` | The current op (`Begin`, `DoWork`, `GetResult`, `Cancel`, `Cleanup`) |
 
+## Related conceptual documentation
+
+- [Asynchronous programming model](/gdk/async-programming) — the GDK async pattern built on `XTaskQueue` and `XAsyncBlock`.
+- [Task queues](/gdk/async-task-queues) — dispatch modes, process task queue, and handle lifetime patterns.
+
 ## See also
 
-- [Async programming model](/gdk/async-programming)
+- [XAsyncProvider](/reference/xasyncprovider) for implementing your own async APIs
 - [XTaskQueue](/reference/xtaskqueue) for dispatch

@@ -152,9 +152,13 @@ Most common XStore integration issues:
 - **`XStoreReportConsumableFulfillmentAsync` returns success but balance doesn't update** — you reported with a duplicate trackingId; the Store ignored it as a retry.
 - **DLC license drops mid-session** — family-sharing context changed; handle gracefully and re-fetch licenses.
 
+## Related API documentation
+
+- [XStore API reference](/reference/xstore) — `XStoreCreateContext`, `XStoreQueryAssociatedProductsAsync`, `XStoreQueryEntitledProductsAsync`, `XStoreQueryAddOnLicensesAsync`, `XStoreAcquireLicenseForPackageAsync`, `XStoreAcquireLicenseForDurablesAsync`, `XStoreQueryGameLicenseAsync`, `XStoreShowPurchaseUIAsync`, `XStoreQueryConsumableBalanceRemainingAsync`, `XStoreReportConsumableFulfillmentAsync`, `XStoreQueryPackageUpdatesAsync`, `XStoreDownloadAndInstallPackageUpdatesAsync`, `XStoreRegisterPackageLicenseLost`
+- [XPackage API reference](/reference/xpackage) — `XPackageEnumeratePackages`, `XPackageMount`, `XPackageMountWithUiAsync`, `XPackageInstallChunksAsync`, `XPackageRegisterInstallationProgressChanged`
+
 ## See also
 
-- [XStore API](/reference/xstore)
 - [Manage products from services (server-side)](/publishing/xstore-server-to-service)
 - [PC-specific XStore considerations](/publishing/xstore-pc)
 - [Add-ons (Partner Center)](/publishing/add-ons)

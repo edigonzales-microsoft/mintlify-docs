@@ -215,9 +215,20 @@ The legacy XDK audio surface mapped to a different set of headers and lib names 
 
 When porting, validate audio latency first (especially game chat round-trip) before chasing fidelity differences.
 
+## Related API documentation
+
+- [Audio APIs reference](/reference/audio-apis) — covers all of the following modules:
+  - **XAudio2** — `XAudio2CreateWithSharedContexts`, `FXLoudnessParameters`
+  - **XMA2** — `XMA2WaveFormatEx` and helpers
+  - **XAPU** — `XAPUConnect`, `XAPUDisconnect`, `XAPUDecodeConvertCommand`
+  - **APU** — `APUCreateHeap`, `APUAlloc`, `APUFree`
+  - **XDSP** — `XDSPActivate`, `XDSPDeactivate`, `XDSPConnect`, `XDSPDisconnect`, `XDSPConnectWithMaximumStreamLimit`, `XDSPSubmitCommand`, `XDSPSubmitCommandWithEnvelope`, `XDSPCommand`, `XDSPStatus`, `XDSPActivationParameters`
+  - **ACP HAL** — `ACP_COMMAND_LOAD_SHAPE_FLOWGRAPH`, `ACP_COMMAND_UPDATE_*_CONTEXT` structures
+  - **SHAPE contexts** — `SHAPE_DMA_CONTEXT`, `SHAPE_EQCOMP_CONTEXT`, `SHAPE_FILTVOL_CONTEXT`, `SHAPE_PCM_CONTEXT`, `SHAPE_SRC_CONTEXT`, `SHAPE_XMA_CONTEXT`
+  - **AudioStateMonitor** — `CreateCaptureAudioStateMonitor`
+
 ## See also
 
 - [Game DVR and broadcasting](/gdk/game-dvr) — how voice chat interacts with clip capture
 - [XAudio2 reference](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)
 - [X3DAudio reference](https://learn.microsoft.com/en-us/windows/win32/xaudio2/x3daudio)
-- [Audio APIs reference](/reference/audio-apis)
