@@ -407,7 +407,8 @@
                 "pages": [
                   "tools/pc-tools",
                   "tools/wdapp",
-                  "tools/launching-on-pc"
+                  "tools/launching-on-pc",
+                  "tools/pc-remote-tools"
                 ]
               },
               {
