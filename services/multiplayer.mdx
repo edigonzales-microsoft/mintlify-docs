@@ -1,5 +1,5 @@
 ---
-title: "XBOX multiplayer: MPSD, SmartMatch, and PlayFab Party"
+title: "XBOX multiplayer — MPSD, SmartMatch, and PlayFab Party"
 sidebarTitle: "Multiplayer"
 description: "Explore XBOX multiplayer: MPSD session management, Multiplayer Manager, SmartMatch matchmaking, PlayFab Party, Game Chat 2, and Multiplayer Activity (MPA)."
 icon: "users"
@@ -90,7 +90,7 @@ The XBOX multiplayer stack is composed of several complementary subsystems. You 
 
     **Use PlayFab Party when you:**
 
-    - Need cross-platform multiplayer (Xbox, PC, PlayStation, Switch, mobile)
+    - Need cross-platform multiplayer (XBOX, PC, PlayStation, Switch, mobile)
     - Want relay-based P2P without exposing player IP addresses
     - Need integrated voice and text chat with accessibility features (speech-to-text, text-to-speech)
     - Are building a client-host (peer-to-peer with relay) title
@@ -186,7 +186,7 @@ HRESULT hr = XblMultiplayerActivitySetActivityAsync(
 
 ## Game Chat 2
 
-**Game Chat 2** provides secure, low-latency voice and text chat for XBOX services gamers. It uses Xbox's media services and the XBOX social graph to enforce mute preferences, reputation-based filtering, and communication restrictions.
+**Game Chat 2** provides secure, low-latency voice and text chat for XBOX services gamers. It uses XBOX's media services and the XBOX social graph to enforce mute preferences, reputation-based filtering, and communication restrictions.
 
 Key features:
 
@@ -213,23 +213,35 @@ chat_user& localChatUser =
 
 ## Multiplayer roles and the arbiter
 
-Inside an MPSD session, members can be assigned **roles** \\u2014 host, spectator, party leader, AFK \\u2014 that gate what they're allowed to do. Roles are server-enforced; clients can request them but only the service decides.
+Inside an MPSD session, members can be assigned **roles** — host, spectator, party leader, AFK — that gate what they're allowed to do. Roles are server-enforced; clients can request them but only the service decides.
 
-One special role is the **arbiter**: the single session member responsible for authoritative decisions (kick votes, match-end results, server allocation). The arbiter is typically the host. If the arbiter disconnects, your title must **migrate the arbiter** to another member before the session can make any more authoritative decisions \\u2014 otherwise you orphan the session.
+One special role is the **arbiter**: the single session member responsible for authoritative decisions (kick votes, match-end results, server allocation). The arbiter is typically the host. If the arbiter disconnects, your title must **migrate the arbiter** to another member before the session can make any more authoritative decisions — otherwise you orphan the session.
 
 Plan for arbiter migration on every disconnect path: graceful host quit, network drop, suspend that exceeds the disconnect timeout.
 
 ## Session browse and LFG
 
-For titles where players pick their own match (community servers, custom games, looking-for-group), use **session browse** \\u2014 MPSD exposes a queryable list of joinable sessions filtered by tag, mode, region, or custom property. LFG (Looking For Group) is a session-browse hopper variant tuned for short-lived groupings.
+For titles where players pick their own match (community servers, custom games, looking-for-group), use **session browse** — MPSD exposes a queryable list of joinable sessions filtered by tag, mode, region, or custom property. LFG (Looking For Group) is a session-browse hopper variant tuned for short-lived groupings.
 
 ## Cross-network play (XR-007)
 
-If your title supports **cross-network play** (XBOX players matched with PC, mobile, or other-platform players), it falls under cert requirement **XR-007**. Implement:\\n\\n- A clear in-UI disclosure that the player is about to encounter non-XBOX users.\\n- A per-player toggle to opt out of cross-network matches (some accounts opt out by default).\\n- Parental control respect \\u2014 child accounts may be blocked from cross-network entirely.\\n\\nThe published cross-network examples (MMO and multiplayer match) show how to structure session config and matchmaking hoppers to honor XR-007.\\n\\n## Calling MPSD directly\\n\\nMost titles use **Multiplayer Manager (MPM)** as a high-level wrapper over MPSD. For unusual session shapes \\u2014 persistent guilds, asymmetric large-team modes, server-allocated sessions \\u2014 you can call **MPSD REST** directly with `XblMultiplayer*` APIs. The direct path is more code but unlocks every MPSD feature.\\n\\n## Choosing the right multiplayer components
+If your title supports **cross-network play** (XBOX players matched with PC, mobile, or other-platform players), it falls under cert requirement **XR-007**. Implement:
+
+- A clear in-UI disclosure that the player is about to encounter non-XBOX users.
+- A per-player toggle to opt out of cross-network matches (some accounts opt out by default).
+- Parental control respect — child accounts may be blocked from cross-network entirely.
+
+The published cross-network examples (MMO and multiplayer match) show how to structure session config and matchmaking hoppers to honor XR-007.
+
+## Calling MPSD directly
+
+Most titles use **Multiplayer Manager (MPM)** as a high-level wrapper over MPSD. For unusual session shapes — persistent guilds, asymmetric large-team modes, server-allocated sessions — you can call **MPSD REST** directly with `XblMultiplayer*` APIs. The direct path is more code but unlocks every MPSD feature.
+
+## Choosing the right multiplayer components
 
 | Scenario | Recommended components |
 | --- | --- |
-| Simple P2P, ≤8 players, Xbox/PC | MPM \+ PlayFab Party (networking) \+ Game Chat 2 |
+| Simple P2P, ≤8 players, XBOX/PC | MPM \+ PlayFab Party (networking) \+ Game Chat 2 |
 | Custom matchmaking, any player count | MPSD \+ SmartMatch \+ MPA \+ PlayFab Party or Game Chat 2 |
 | Dedicated server, large player count | MPSD \+ MPA \+ PlayFab Multiplayer Servers \+ Game Chat 2 |
 | Cross-platform (console \+ PC \+ mobile) | MPSD/MPA \+ PlayFab Party (all networking \+ chat) |

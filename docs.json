@@ -20,7 +20,12 @@
     "color": {
       "light": "#FFFFFF",
       "dark": "#09090b"
-    }
+    },
+    "image": {
+      "light": "/images/Gradient2_with_XBOX_1920x1080.png",
+      "dark": "/images/Gradient2_with_XBOX_1920x1080.png"
+    },
+    "decoration": "gradient"
   },
   "navbar": {
     "links": [
@@ -139,6 +144,16 @@
       "source": "/introduction",
       "destination": "/gdk/welcome",
       "permanent": true
+    },
+    {
+      "source": "/reference/xsapi-context-and-globals",
+      "destination": "/reference/xsapi-context",
+      "permanent": true
+    },
+    {
+      "source": "/reference/xsapi-social-manager",
+      "destination": "/reference/social-manager",
+      "permanent": true
     }
   ],
   "metadata": {
@@ -157,11 +172,8 @@
                 "icon": "hand-wave",
                 "pages": [
                   "index",
-                  "gdk/what-is-gdk",
                   "gdk/welcome",
-                  "gdk/get-started",
-                  "gdk/glossary",
-                  "gdk/feature-quality"
+                  "gdk/glossary"
                 ]
               },
               {
@@ -179,8 +191,7 @@
                 "icon": "download",
                 "pages": [
                   "gdk/dev-pc-setup",
-                  "gdk/sdk-and-tools",
-                  "gdk/download-install"
+                  "gdk/sdk-and-tools"
                 ]
               },
               {
@@ -188,9 +199,8 @@
                 "icon": "play",
                 "pages": [
                   "gdk/developing-new-titles",
-                  "gdk/samples",
-                  "gdk/porting-guides",
-                  "gdk/atg-engagement"
+                  "gdk/add-backend-services",
+                  "gdk/porting-guides"
                 ]
               }
             ]
@@ -227,9 +237,7 @@
                 "icon": "shuffle",
                 "pages": [
                   "gdk/async-programming",
-                  "gdk/async-task-queues",
-                  "gdk/memory",
-                  "gdk/error-handling"
+                  "gdk/async-task-queues"
                 ]
               },
               {
@@ -247,7 +255,6 @@
                 "group": "Platform Features",
                 "icon": "plug",
                 "pages": [
-                  "gdk/input",
                   "gdk/localization",
                   "gdk/text-to-speech",
                   "gdk/platform-integration",
@@ -260,14 +267,11 @@
             "group": "GDK and Game Engines Integration",
             "icon": "rocket",
             "pages": [
-              "pc-e2e/overview",
               "pc-e2e/gdk-and-engines",
-              "pc-e2e/engines/unity",
               "pc-e2e/engines/unreal",
               "pc-e2e/engines/gamemaker",
               "pc-e2e/engines/custom-engine",
               "pc-e2e/engines/godot",
-              "pc-e2e/optional-services",
               "pc-e2e/handheld"
             ]
           }
@@ -277,19 +281,12 @@
         "tab": "Services",
         "groups": [
           {
-            "group": "Xbox Services",
+            "group": "XBOX Services",
             "pages": [
               "services/overview",
-              "services/player-data",
-              "services/achievements",
               "services/multiplayer",
-              "services/social",
-              "services/cloud-storage",
               "services/game-chat",
-              "services/rich-presence",
               "services/multiplayer-activity",
-              "services/people-system",
-              "services/gamertags-and-privacy",
               "services/develop-and-test"
             ]
           },
@@ -297,8 +294,6 @@
             "group": "PlayFab",
             "pages": [
               "playfab/overview",
-              "playfab/sign-in-concepts",
-              "playfab/player-sign-in",
               "playfab/microsoft-store",
               "playfab/economy",
               "playfab/multiplayer-lobby",
@@ -332,18 +327,13 @@
                   "gdk/audio",
                   "gdk/storage",
                   "gdk/networking",
-                  "gdk/directstorage",
-                  "gdk/quick-resume"
+                  "gdk/directstorage"
                 ]
               },
               {
                 "group": "Graphics",
                 "icon": "image",
                 "pages": [
-                  "gdk/graphics-overview",
-                  "gdk/raytracing",
-                  "gdk/mesh-shaders",
-                  "gdk/vrs",
                   "gdk/sampler-feedback",
                   "gdk/xbox-texture-compressor"
                 ]
@@ -352,8 +342,6 @@
                 "group": "Capture & Streaming",
                 "icon": "video",
                 "pages": [
-                  "gdk/game-dvr",
-                  "gdk/game-streaming-overview",
                   "gdk/cloud-aware-api"
                 ]
               },
@@ -361,8 +349,7 @@
                 "group": "Platform",
                 "icon": "right-left",
                 "pages": [
-                  "gdk/cross-gen",
-                  "gdk/dynamic-lighting"
+                  "gdk/cross-gen"
                 ]
               }
             ]
@@ -393,7 +380,7 @@
                 ]
               },
               {
-                "group": "Xbox Service Tools",
+                "group": "XBOX Service Tools",
                 "icon": "screwdriver-wrench",
                 "pages": []
               },
@@ -439,7 +426,6 @@
               "principles/xbox-accessibility-guidelines",
               "principles/accessibility-resources",
               "principles/mgats",
-              "principles/sustainability-overview",
               "principles/energy-efficiency-essentials",
               "principles/sustainability-case-studies"
             ]
@@ -454,21 +440,16 @@
             "icon": "shield-check",
             "pages": [
               "publishing/overview",
-              "publishing/certification",
-              "publishing/sandboxes",
               "publishing/branches",
               "publishing/add-ons",
-              "publishing/properties",
               "publishing/packages",
               "publishing/game-setup",
               "publishing/xbox-requirements",
-              "publishing/xr-fma",
               "publishing/xr-top-failing",
               "publishing/xstore-deep-dive",
               "publishing/xstore-server-to-service",
               "publishing/xstore-pc",
               "publishing/xbox-insider-program",
-              "publishing/discs",
               "publishing/developer-account"
             ]
           }
@@ -501,15 +482,12 @@
               "reference/xstore",
               "reference/xuser",
               "reference/gameinput",
-              "reference/networking",
               "reference/chat",
               "reference/lighting",
               "reference/tools-api",
               "reference/xaccessibility",
               "reference/xspeechsynthesizer",
               "reference/xappcapture",
-              "reference/wdp-rest",
-              "reference/xmem",
               "reference/xdisplay",
               "reference/xthread",
               "reference/xerror",
@@ -526,10 +504,8 @@
               "reference/gameinput-extended",
               "reference/touch-adaptation-kit",
               "reference/dstorage",
-              "reference/xfrontpaneldisplay",
               "reference/xnetworking",
               "reference/xcurl",
-              "reference/remote-iteration",
               "reference/pix3",
               "reference/xtf",
               "reference/httpclient",
@@ -540,10 +516,9 @@
             ]
           },
           {
-            "group": "Xbox Services API",
+            "group": "XBOX Services API",
             "icon": "xbox",
             "pages": [
-              "reference/xsapi-overview",
               "reference/social-manager",
               "reference/microsoftgameconfig-schema",
               "reference/microsoftgameconfig-elements",
@@ -555,7 +530,6 @@
               "reference/xsapi-presence",
               "reference/xsapi-privacy",
               "reference/xsapi-social",
-              "reference/xsapi-social-manager",
               "reference/xsapi-profile",
               "reference/xsapi-leaderboard",
               "reference/xsapi-matchmaking",
@@ -565,8 +539,6 @@
               "reference/xsapi-stats",
               "reference/xsapi-string-verify",
               "reference/xsapi-context",
-              "reference/xsapi-context-and-globals",
-              "reference/xsapi-rest",
               "reference/xsapi-rest-overview",
               "reference/xsapi-json"
             ]
@@ -582,7 +554,6 @@
               "reference/playfab-economy",
               "reference/playfab-title-data",
               "reference/playfab-lobby-matchmaking",
-              "reference/playfab-party",
               "reference/playfab-multiplayer-servers",
               "reference/playfab-cloudscript",
               "reference/playfab-insights",
@@ -594,7 +565,44 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Resources",
+        "pages": [
+          "resources/overview",
+          {
+            "group": "External Links",
+            "pages": [
+              "resources/gdk",
+              "resources/publishing",
+              "resources/community",
+              "resources/platforms-tools",
+              "resources/middleware"
+            ]
+          }
+        ]
       }
     ]
+  },
+  "banner": {
+    "content": "XBOX Game Development Documentation",
+    "color": {
+      "light": "#7CC400",
+      "dark": "#7CC400"
+    }
+  },
+  "seo": {
+    "metatags": {
+      "author": "XBOX",
+      "category": "Game Development",
+      "og:site_name": "XBOX Game Development Documentation",
+      "og:image": "/images/We_Are_Xbox_Email-Signature_200x200.png",
+      "twitter:card": "summary_large_image",
+      "twitter:image": "/images/We_Are_Xbox_Email-Signature_200x200.png"
+    },
+    "indexing": "navigable"
+  },
+  "thumbnails": {
+    "background": "/images/Gradient2_with_XBOX_1920x1080.png"
   }
 }
