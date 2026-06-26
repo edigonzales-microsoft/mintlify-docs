@@ -24,8 +24,7 @@
     "image": {
       "light": "/images/xbox_logo_transparent_6_25.png",
       "dark": "/images/xbox_logo_transparent_6_25.png"
-    },
-    "decoration": "gradient"
+    }
   },
   "navbar": {
     "links": [
