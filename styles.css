@@ -12,8 +12,8 @@
   background: linear-gradient(
     to top left,
     rgba(124, 196, 0, 0.18) 0%,
-    rgba(124, 196, 0, 0.08) 30%,
-    rgba(124, 196, 0, 0.02) 60%,
+    rgba(124, 196, 0, 0.08) 15%,
+    rgba(124, 196, 0, 0.02) 50%,
     rgba(124, 196, 0, 0) 100%
   );
 }
@@ -23,8 +23,8 @@ html.light #background-color::after {
   background: linear-gradient(
     to top left,
     rgba(124, 196, 0, 0.10) 0%,
-    rgba(124, 196, 0, 0.05) 30%,
-    rgba(124, 196, 0, 0.02) 60%,
+    rgba(124, 196, 0, 0.05) 15%,
+    rgba(124, 196, 0, 0.02) 50%,
     rgba(124, 196, 0, 0) 100%
   );
 }
