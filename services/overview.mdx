@@ -1,8 +1,10 @@
 ---
-title: "XBOX services overview: features and XSAPI for GDK"
+title: "XBOX services overview — features and XSAPI"
 sidebarTitle: "Overview"
 description: "Discover XBOX services: cloud micro-services for achievements, multiplayer, social, and cloud storage on XBOX and Windows PC using XSAPI or REST endpoints."
 icon: "compass"
+keywords: ["XBOX services", "XSAPI", "XBOX Live", "achievements", "multiplayer", "social", "cloud storage", "XBOX One PC services"]
+related: ["/services/multiplayer", "/services/game-chat", "/services/multiplayer-activity", "/services/develop-and-test"]
 ---
 
 XBOX services is Microsoft's cloud gaming network — a collection of micro-services that expose features such as player profiles, friends and presence, stats, leaderboards, achievements, multiplayer session management, matchmaking, and cloud storage. When you integrate XBOX services into your title, you instantly connect your players to a network of over **55 million active users** across XBOX One family consoles, XBOX Series X|S, and Windows 10/11 PC.
@@ -31,20 +33,20 @@ XSAPI handles the complexity of OAuth token management, endpoint discovery, and 
 ## Feature areas
 
 <CardGroup cols={2}>
-  <Card title="Player Data" icon="chart-bar" href="/services/player-data">
-    Stats, leaderboards, and achievements. Event-based server-side aggregation or title-managed direct-call models.
-  </Card>
-
   <Card title="Multiplayer" icon="users" href="/services/multiplayer">
     MPSD session management, SmartMatch matchmaking, Multiplayer Manager, Game Chat 2, and PlayFab Party.
   </Card>
 
-  <Card title="Social" icon="heart" href="/services/social">
-    Friends list, followers, Rich Presence strings, Social Manager caching, and Game Hubs.
+  <Card title="Game Chat 2" icon="microphone" href="/services/game-chat">
+    In-game voice chat with channel routing, TTS, STT, and platform mute enforcement.
   </Card>
 
-  <Card title="Cloud Storage" icon="cloud" href="/services/cloud-storage">
-    Connected Storage for roaming game saves and Title Storage for shared global or per-user assets.
+  <Card title="Multiplayer Activity" icon="person-running" href="/services/multiplayer-activity">
+    Publish joinable sessions for the XBOX guide, party invites, and cross-platform join flows.
+  </Card>
+
+  <Card title="Develop & Test" icon="flask" href="/services/develop-and-test">
+    Sandboxes, test accounts, fine-grained rate limiting, offline play, and troubleshooting.
   </Card>
 </CardGroup>
 
@@ -79,7 +81,7 @@ The XSAPI C-based API is the recommended client library for all GDK titles. It o
 - **Memory control** — titles can supply custom allocators for all XSAPI heap operations.
 - **Thread control** — titles control which threads XSAPI uses for callbacks and work items.
 - **libHttpClient** — a game-developer-focused HTTP library with configurable retry, timeout, and mock support.
-- **PC and Xbox** — the same API surface works on both Windows PC and XBOX console GDK targets.
+- **PC and XBOX** — the same API surface works on both Windows PC and XBOX console GDK targets.
 
 To get started, include the XSAPI headers and link against the XSAPI library provided in the GDK:
 
@@ -116,9 +118,9 @@ Key configuration areas:
   Configure the storage types (global blob, per-user blob, JSON, binary config) and access permissions for Title Storage containers.
 </Accordion>
 
-## XBOX Creators Program vs. ID@Xbox
+## XBOX Creators Program vs. ID@XBOX
 
-Some XBOX services features are available only to titles in a **managed developer program** such as ID@Xbox:
+Some XBOX services features are available only to titles in a **managed developer program** such as ID@XBOX:
 
 | Feature | Creators Program | ID@XBOX |
 | --- | --- | --- |
@@ -130,7 +132,7 @@ Some XBOX services features are available only to titles in a **managed develope
 | Title Storage | ✅ | ✅ |
 | Multiplayer / MPSD | Limited | ✅ |
 
-If you need achievements or event-based stats, apply to [ID@Xbox](https://www.xbox.com/Developers/id).
+If you need achievements or event-based stats, apply to [ID@XBOX](https://www.xbox.com/Developers/id).
 
 ## Best practices for calling XBOX services
 

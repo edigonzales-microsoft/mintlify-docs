@@ -1,7 +1,7 @@
 ---
-title: "Social Manager C API reference"
+title: "XSAPI Social Manager API reference"
 sidebarTitle: "Social Manager"
-description: "Reference for the Social Manager C API: add local users, call DoWork each frame, create social user groups, and process social events efficiently."
+description: "Reference for the Social Manager C API: add local users, call DoWork each frame, create filtered social user groups, and process social events efficiently."
 icon: "users"
 ---
 
@@ -229,3 +229,93 @@ XblSocialManagerRemoveLocalUser(userHandle);
 <Warning>
   The `socialEvents` pointer returned by `XblSocialManagerDoWork` is only valid until the next call to `XblSocialManagerDoWork`. Never cache this pointer across frames or pass it to code that runs asynchronously after the current frame ends.
 </Warning>
+
+---
+
+## Full API surface
+
+### Lifecycle
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerAddLocalUser` | Begin tracking a user |
+| `XblSocialManagerRemoveLocalUser` | Stop tracking |
+| `XblSocialManagerDoWork` | Drain events each frame |
+| `XblSocialManagerGetLocalUsers` / `GetLocalUserCount` | Enumerate local users |
+
+### User groups
+
+Filter or fix the cached graph into reusable groups.
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerCreateSocialUserGroupFromFilters` | Filter group |
+| `XblSocialManagerCreateSocialUserGroupFromList` | Static list group |
+| `XblSocialManagerUpdateSocialUserGroup` | Update a list group |
+| `XblSocialManagerDestroySocialUserGroup` | Release |
+| `XblSocialManagerUserGroupGetType` / `GetFilters` / `GetLocalUser` / `GetUsers` / `GetUsersTrackedByGroup` | Inspect a group |
+
+### Presence and rich presence
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerSetRichPresencePollingStatus` | Toggle background polling |
+| `XblSocialManagerPresenceRecordIsUserPlayingTitle` | Quick check |
+
+### Types
+
+**Structs:** `XblPreferredColor`, `XblSocialManagerEvent`, `XblSocialManagerPresenceRecord`, `XblSocialManagerPresenceTitleRecord`, `XblSocialManagerUser`, `XblTitleHistory`.
+
+**Handle:** `XblSocialManagerUserGroupHandle`.
+
+**Enums:** `XblPresenceFilter`, `XblRelationshipFilter`, `XblSocialManagerEventType`, `XblSocialManagerExtraDetailLevel`, `XblSocialUserGroupType`.
+
+## See also
+
+- [XSAPI Social API reference](/reference/xsapi-social)
+- [XSAPI Presence API reference](/reference/xsapi-presence)
+
+---
+
+## Full API surface
+
+### Lifecycle
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerAddLocalUser` | Begin tracking a user |
+| `XblSocialManagerRemoveLocalUser` | Stop tracking |
+| `XblSocialManagerDoWork` | Drain events each frame |
+| `XblSocialManagerGetLocalUsers` / `GetLocalUserCount` | Enumerate local users |
+
+### User groups
+
+Filter or fix the cached graph into reusable groups.
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerCreateSocialUserGroupFromFilters` | Filter group |
+| `XblSocialManagerCreateSocialUserGroupFromList` | Static list group |
+| `XblSocialManagerUpdateSocialUserGroup` | Update a list group |
+| `XblSocialManagerDestroySocialUserGroup` | Release |
+| `XblSocialManagerUserGroupGetType` / `GetFilters` / `GetLocalUser` / `GetUsers` / `GetUsersTrackedByGroup` | Inspect a group |
+
+### Presence and rich presence
+
+| Function | Description |
+| --- | --- |
+| `XblSocialManagerSetRichPresencePollingStatus` | Toggle background polling |
+| `XblSocialManagerPresenceRecordIsUserPlayingTitle` | Quick check |
+
+### Types
+
+**Structs:** `XblPreferredColor`, `XblSocialManagerEvent`, `XblSocialManagerPresenceRecord`, `XblSocialManagerPresenceTitleRecord`, `XblSocialManagerUser`, `XblTitleHistory`.
+
+**Handle:** `XblSocialManagerUserGroupHandle`.
+
+**Enums:** `XblPresenceFilter`, `XblRelationshipFilter`, `XblSocialManagerEventType`, `XblSocialManagerExtraDetailLevel`, `XblSocialUserGroupType`.
+
+## See also
+
+- [XSAPI Social API reference](/reference/xsapi-social)
+- [XSAPI Presence API reference](/reference/xsapi-presence)

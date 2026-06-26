@@ -1,11 +1,11 @@
 ---
-title: "Compile HLSL for XBOX with the DirectX Shader Compiler (DXC)"
-sidebarTitle: "Shader Compiler"
+title: "Compile XBOX HLSL with the DirectX Shader Compiler"
+sidebarTitle: "Shader compiler"
 description: "DXC — the DirectX Shader Compiler used for XBOX HLSL, including Shader Model 6.x, XBOX intrinsics and defines, HLSL extensions, and FXC porting."
 icon: "wand-magic-sparkles"
 ---
 
-XBOX titles compile HLSL with the **DirectX Shader Compiler (DXC)**. DXC is the long-term successor to FXC and is the only compiler that supports Shader Model 6.x, mesh shaders, ray tracing, and Xbox-specific intrinsics.
+XBOX titles compile HLSL with the **DirectX Shader Compiler (DXC)**. DXC is the long-term successor to FXC and is the only compiler that supports Shader Model 6.x, mesh shaders, ray tracing, and XBOX-specific intrinsics.
 
 ## Why DXC, not FXC
 
@@ -15,9 +15,7 @@ FXC tops out at Shader Model 5.1 and is no longer receiving feature work. DXC is
 - Mesh and amplification shaders.
 - Ray tracing (DXR / XDXR).
 - Sampler Feedback.
-- XBOX HLSL extensions and intrinsics.
-
-## Using DXC
+- XBOX HLSL extensions and intrinsics.## Using DXC
 
 Invoke `dxc.exe` directly or through the Visual Studio HLSL build rules. Common flags:
 
@@ -39,15 +37,15 @@ The FXC → DXC port guide covers:
 
 Most code compiles unchanged. Plan for a clean-up pass on warnings.
 
-## Xbox-specific HLSL
+## XBOX-specific HLSL
 
-Three Xbox-only surfaces you should know:
+Three XBOX-only surfaces you should know:
 
 - **XBOX defines** — preprocessor macros set by the XBOX toolchain so you can `#ifdef _GAMING_XBOX_SCARLETT` for Series X|S-only code paths.
 - **XBOX intrinsics** — hand-tuned HLSL builtins that map to XBOX GPU instructions you cannot express in stock HLSL.
 - **XBOX HLSL extensions** — language extensions (e.g., extended type qualifiers, hardware-specific resource bindings).
 
-Keep the Xbox-only code paths behind clear `#ifdef`s so the same HLSL still compiles for PC.
+Keep the XBOX-only code paths behind clear `#ifdef`s so the same HLSL still compiles for PC.
 
 ## See also
 

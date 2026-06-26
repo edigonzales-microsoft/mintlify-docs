@@ -9,7 +9,7 @@ PlayFab identity has three layers — master player accounts, title player accou
 
 ## Account model
 
-- **Master Player Account** — the publisher-wide identity. Persists across all titles in a publisher's portfolio. Linked to external auth providers (Xbox, Steam, Google, etc.).
+- **Master Player Account** — the publisher-wide identity. Persists across all titles in a publisher's portfolio. Linked to external auth providers (XBOX, Steam, Google, etc.).
 - **Title Player Account** — the per-title slice. Has its own PlayerData, statistics, friends, and inventory. A master account has one title player account per title it has logged into.
 - **Entity** — the modern model. Each entity has a key (`{ type, id }`) and supports profiles, objects, files, and policies. Entity types include `master_player_account`, `title_player_account`, `group`, `character`, and `title`.
 
@@ -39,11 +39,11 @@ For pre-account experiences (player tries the game before signing in):
 - `LoginWithCustomID` — your title provides a stable device ID; PlayFab creates an account bound to it.
 - `LoginWithIOSDeviceID`, `LoginWithAndroidDeviceID` — platform-supplied device IDs.
 
-Later, when the player signs in with Xbox, call `LinkXboxAccount` to merge the device-bound account with the XBOX identity. From then on, either sign-in path resolves to the same master account.
+Later, when the player signs in with XBOX, call `LinkXboxAccount` to merge the device-bound account with the XBOX identity. From then on, either sign-in path resolves to the same master account.
 
 ## Account merging
 
-If the player has two PlayFab accounts (one from anonymous play, one created later via Xbox), use the link APIs with `ForceLink = true` to merge them. The currently-signed-in account is kept; the other is deleted. There's no automatic conflict resolution — if both accounts have progression in the same title, you need to design a merge policy.
+If the player has two PlayFab accounts (one from anonymous play, one created later via XBOX), use the link APIs with `ForceLink = true` to merge them. The currently-signed-in account is kept; the other is deleted. There's no automatic conflict resolution — if both accounts have progression in the same title, you need to design a merge policy.
 
 ## Entity tokens
 
