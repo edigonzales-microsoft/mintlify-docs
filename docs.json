@@ -643,10 +643,10 @@
     ]
   },
   "banner": {
-    "content": "**XBOX Game Development Documentation**",
+    "content": "XBOX Game Development Documentation",
     "color": {
-      "light": "#7CC400",
-      "dark": "#7CC400"
+      "light": "#09090b",
+      "dark": "#09090b"
     }
   },
   "seo": {
