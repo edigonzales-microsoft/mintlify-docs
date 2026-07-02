@@ -90,8 +90,16 @@ Implementation guidance:
 
 See the modern gamertags unicode reference for the exact allowed UTF-8 ranges and backwards-compatibility rules.
 
+## Related conceptual documentation
+
+- [PlayFab player sign-in steps](/playfab/player-sign-in) — authenticate players with Microsoft accounts before granting PlayFab access.
+- [Game Chat](/services/game-chat) — user identity, privilege checks, and issue resolution for voice chat.
+- [Multiplayer](/services/multiplayer) — user tokens for MPSD, invites, and matchmaking.
+- [Networking](/gdk/networking) — `XUserGetTokenAndSignatureUtf16Async` for authenticated web requests.
+- [Asynchronous programming model](/gdk/async-programming) — canonical async examples (`XUserAddAsync`, `XUserGetGamerPictureAsync`).
+- [XStore on PC](/publishing/xstore-pc) — detecting the store user and mismatched account handling.
+
 ## See also
 
 - [User Model](/gdk/user-model) — conceptual overview and best practices
-- [Async programming model](/gdk/async-programming)
 - [Error handling](/gdk/error-handling) — XUser HRESULT codes

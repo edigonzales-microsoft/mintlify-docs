@@ -18,3 +18,7 @@ description: "Mark threads as time-sensitive and assert that long-running work d
 ## When to use
 
 Tag your render and audio threads as time-sensitive, then use `XThreadAssertNotTimeSensitive` in functions known to block (file I/O, mutex acquisition, etc.) to catch accidental blocking during development.
+
+## Related conceptual documentation
+
+- [Asynchronous programming model](/gdk/async-programming) — how time-sensitive threads interact with the GDK async pattern (`XThreadSetTimeSensitive`).
