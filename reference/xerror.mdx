@@ -25,7 +25,11 @@ void CALLBACK MyErrorCallback(HRESULT hr, const char* message, void* context) {
 XErrorSetCallback(MyErrorCallback, nullptr);
 ```
 
+## Related conceptual documentation
+
+- [Error handling](/gdk/error-handling) — HRESULT patterns, XError, and service error surfacing across the GDK.
+- [Threading](/gdk/threading) — installing `XErrorSetCallback` alongside the time-sensitive thread pattern.
+
 ## See also
 
-- [Error handling](/gdk/error-handling)
 - [Error codes](/reference/error-codes)

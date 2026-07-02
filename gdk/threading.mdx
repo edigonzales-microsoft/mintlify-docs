@@ -1,85 +1,139 @@
 ---
-title: "Threading and CPU utilization"
-sidebarTitle: "Threading & CPU"
-description: "Threading patterns for GDK titles: CPU affinity, thread pool integration, finding contention, and hybrid-CPU PC behavior."
+title: "Threading model, time-sensitive threads, and diagnosing threading issues"
+sidebarTitle: "Threading"
+description: "Understand the GDK threading model: time-sensitive threads, core utilization, serialization, and how to find threading issues that affect frame time."
 icon: "microchip"
 ---
 
-GDK titles run on heterogeneous CPUs (Series S/X have 8 SMT cores; PC ranges from 4-core ultraportables to 16-core desktops with hybrid P/E topologies). Threading decisions you make at the start of the project drive perf characteristics for the life of the title.
+The GDK exposes a threading model that gives your title fine control over which threads run frame-critical work and which threads absorb latency for background operations. This page covers the practical rules for structuring threads on XBOX hardware and Windows PC — how to mark threads as time-sensitive, how to distinguish rendering / audio threads from work threads, and how to diagnose the common threading issues that show up in performance captures.
 
-## Core model on console
+## Time-sensitive threads
 
-- **Xbox Series X|S** — 8 physical cores, SMT enabled. The OS reserves a slice for system services; titles see the equivalent of ~7 cores under typical load
-- **Xbox One** — 8 cores split into two clusters of 4; cross-cluster traffic costs more than within-cluster
-- **Quick Resume** — the title can resume with a different core topology than it suspended on; never cache `GetLogicalProcessorInformation` across suspend
+A **time-sensitive thread** is one your title has explicitly marked so the OS scheduler prioritizes it and system tooling asserts against accidental blocking calls. Frame-critical threads — render, audio mixdown, physics substep, low-latency input — should always be marked time-sensitive.
+
+Use [`XThreadSetTimeSensitive`](/reference/xthread) on the thread you want to promote, then use `XThreadAssertNotTimeSensitive` inside any function known to block (file I/O, mutex acquisition, network I/O, long-running allocations). During development, those asserts fire the moment a blocking call sneaks into a frame-critical thread — much cheaper to catch than tracking down a stutter in a PIX capture months later.
+
+```cpp
+// On the render thread, at startup:
+XThreadSetTimeSensitive(true);
+
+// Inside a helper that must never block:
+void ReadTexture(const char* path, /* ... */)
+{
+    XThreadAssertNotTimeSensitive();
+    // Do the I/O — will fire the assert if called from a time-sensitive thread.
+}
+```
+
+Mark render / audio threads time-sensitive **and** design their callers to schedule blocking work onto an [`XTaskQueue`](/reference/xtaskqueue) instead of running it inline.
+
+## Threads and task queues
+
+Most of your background work should not run on its own thread — it should run on the process task queue or a task queue you own. The GDK async pattern is built on `XTaskQueue`, and the port dispatch mode you configure determines whether callbacks fire on the thread pool or on a specific game-loop thread.
+
+See the [async programming model](/gdk/async-programming) and [task queues](/gdk/async-task-queues) for the full pattern. Key rules:
+
+- Do not spin your own `std::thread` for GDK async work — use task queues.
+- For time-sensitive threads that also need to drain completions, configure a **manual** completion port and drain it in your game loop.
+- Keep the number of raw OS threads small — one per critical work class, not one per system.
 
 ## Core utilization patterns
 
-Use the dev kit's CPU profiler to classify per-core behaviour:
+On XBOX consoles the CPU cores are heterogeneous. Some cores are reserved for the system, and the remaining cores are what your title can run on. Two patterns to watch for in profiling captures:
 
-- **Idle** — cores you are not using at all; opportunity to parallelise more work
-- **Spinning** — cores stuck in a busy-wait. Symptom of lock contention or polling loops; replace with event-driven wait
-- **Floating** — threads that bounce across cores frame to frame; pin to a core (or core pair) to keep cache warm
-- **Time-sensitive** — render submission, audio mix. Keep on a known core away from background work
-- **Serialization** — long sequences of dependent tasks; restructure into parallel stages
+### Idle cores
 
-## Common steps for finding threading issues
+If a core is idle for large parts of a frame, work is either serialized behind a bottleneck (see [Serialization](#serialization) below) or your job system is not scheduling enough parallel work to fill it. Look for missing parallelism, over-eager locking, or under-utilized job dependencies.
 
-1. Capture a PIX timing capture with CPU sampling enabled
-2. Identify hot waits — locks, condition variables, queue drains
-3. Trace the contended resource across threads; document the contention point
-4. Replace the synchronisation primitive or restructure the data flow
-5. Re-capture and verify; record the win in your perf log
+### Spinning cores
 
-### Locking
+A core running hot without producing useful frame progress is usually spinning on a lock or in a busy-wait. Check for:
 
-- Prefer **`SRWLOCK`** over `CRITICAL_SECTION` for read-heavy data
-- Avoid `WaitForMultipleObjects` on more than a handful of handles
-- Never hold a lock across an `XAsync` submission — submit, then release, then wait
+- Custom spin locks that never yield.
+- Third-party middleware that spins waiting for I/O.
+- Debug asserts firing inside a tight loop.
+
+Both patterns are easy to spot in a PIX timing capture — see [PIX for XBOX](/tools/pix-for-xbox).
+
+## Floating threads
+
+"Floating threads" are threads that the scheduler moves between cores. On XBOX, uncontrolled float degrades cache locality and can cost frame time. Pin frame-critical threads to specific cores with the standard Win32 affinity APIs, and prefer to run all work for a system on the same core when possible.
+
+## Common threading issues
+
+A short catalog of the issues that most often show up in shipping titles:
 
 ### High context switches
 
-Frequent context switches manifest as wasted CPU and unstable frame time:
+When many threads run at similar priority, the scheduler switches between them frequently — each switch costs a few microseconds. If a PIX capture shows thousands of context switches per frame:
 
-- Audit thread count; each title-owned thread should justify itself
-- Use the `XTaskQueue` thread pool for short-lived work rather than spinning your own threads
-- Avoid `Sleep(0)` and `Sleep(1)` polling — use proper wait primitives
+- Reduce the number of active threads.
+- Prefer task queues over dedicated threads.
+- Use `XThreadSetTimeSensitive` on the render / audio threads so they preempt background work cleanly.
 
-### Time-sensitive threads
+### Serialization
 
-- Render thread: pin to a known core; do not let it migrate
-- Audio thread: pin and prioritise; respect the audio frame deadline (usually 5–10 ms)
-- Network thread: lower priority than render and audio; tolerate jitter
+Serialization is the pattern where multiple threads that should run in parallel end up waiting on the same lock, queue, or resource. Common causes:
 
-## Hybrid CPUs on PC
+- Global allocator lock (mitigate with per-thread arenas or a lock-free allocator).
+- Single log queue writer (batch or shard the log).
+- Job system with a single work-stealing queue.
 
-Windows PCs increasingly ship Intel hybrid CPUs (P-cores \+ E-cores) and AMD chiplet designs:
+### Threads locking
 
-- **Do not pin threads by index** on PC — the OS scheduler is better than your guess at which core is a P-core
-- Use **Thread Director** hints (priority, QoS) so Windows places threads on the right core class
-- Honour the `THREAD_POWER_THROTTLING_EXECUTION_SPEED` flag for low-importance background threads
-- Profile on at least one hybrid-CPU machine in QA; older machines without P/E split will hide bugs
+Deadlocks and priority inversions are catastrophic. Design guidance:
 
-## Integration with XTaskQueue
+- Never acquire two locks in different orders — use a strict lock hierarchy.
+- Never block a time-sensitive thread on a lock owned by a background thread.
+- Use lock-free structures for producer/consumer queues between the game loop and worker threads.
 
-The GDK async runtime is built on `XTaskQueue`. Reuse it for general gameplay work:
+## Finding threading issues in captures
 
-- Submit lightweight callbacks via `XTaskQueueSubmitCallback`
-- Pair manual queues with your message loop for completion delivery on the main thread
-- Avoid creating ad-hoc thread pools when the queue is already pumping
+PIX for XBOX is the primary tool for diagnosing threading issues. Standard flow:
 
-See [Async task queues](/gdk/async-task-queues) for the API surface and dispatch modes.
+1. Capture a timing trace covering several frames of the problem scenario.
+2. Filter the timeline to your CPU cores — look for gaps (idle) and hot spans (busy).
+3. Cross-reference PIX event markers (`PIXBeginEvent` / `PIXEndEvent`) to find the systems responsible for gaps and spikes.
+4. If a thread stalls, expand the stack sample at the stall point to see whether it was waiting on a lock or a kernel object.
 
-## CPU diagnostics tools
+See [PIX for XBOX](/tools/pix-for-xbox) and the [PIX3 API reference](/reference/pix3) for capture and event-markup details.
 
-- **PIX timing capture** — per-thread, per-core utilization with sampling
-- **`XThread` API** — query and set core affinity, name threads, query priority
-- **Trace Analyzer** — offline review of service calls and thread interactions
-- **Visual Studio Diagnostic Tools** — CPU sampling on PC
+## Threading across the GDK
 
-## Related
+Many GDK APIs have documented threading requirements — the runtime documents whether each call is safe from any thread, must be called from the process main thread, or dispatches its completion on the task queue passed in. When integrating a new module, check its API reference for the threading contract before adding it to your frame loop.
 
-- [Async model](/gdk/async-programming)
-- [Async task queues](/gdk/async-task-queues)
-- [Memory](/gdk/memory) — cross-core memory costs
-- [XThread reference](/reference/xthread)
+Relevant runtime surfaces to review:
+
+- [`XTaskQueue`](/reference/xtaskqueue) — the primary dispatch primitive.
+- [`XAsync`](/reference/xasync) and [`XAsyncProvider`](/reference/xasyncprovider) — how async operations announce completion on the queue.
+- [`XThread`](/reference/xthread) — time-sensitive thread management.
+
+## Related API documentation
+
+- [XThread](/reference/xthread) — `XThreadSetTimeSensitive`, `XThreadAssertNotTimeSensitive`
+- [XTaskQueue](/reference/xtaskqueue) — `XTaskQueueCreate`, `XTaskQueueCreateComposite`, `XTaskQueueGetCurrentProcessTaskQueue`, `XTaskQueueDispatch`, `XTaskQueueRegisterMonitor`, `XTaskQueueRegisterWaiter`, `XTaskQueueSetCurrentProcessTaskQueue`, `XTaskQueueTerminate`
+- [XAsyncProvider](/reference/xasyncprovider) — `XAsyncComplete`
+- [XNetworking](/reference/xnetworking) — `XNetworkingQueryPreferredLocalUdpMultiplayerPort`, `XNetworkingVerifyServerCertificate`, connectivity-hint notifications
+- [XSystem](/reference/xsystem) — `XSystemAllowFullDownloadBandwidth`, `XSystemGetAnalyticsInfo`, `XSystemGetConsoleId`, `XSystemGetXboxLiveSandboxId`
+- [XDisplay](/reference/xdisplay) — `XDisplayAcquireTimeoutDeferral`, `XDisplayCloseTimeoutDeferralHandle`, `XDisplayTryEnableHdrMode`
+- [XAppCapture](/reference/xappcapture) — broadcast and screenshot APIs
+- [XAccessibility](/reference/xaccessibility) — closed caption, high contrast, and STT APIs
+- [XError](/reference/xerror) — `XErrorSetCallback`, `XErrorSetOptions`
+- [XGame](/reference/xgame) — `XGameGetXboxTitleId`, `XLaunchNewGame`
+- [XGameEvent](/reference/xgameevent) — `XGameEventWrite`
+- [XGameSave](/reference/xgamesave) — provider, container, blob, and update lifecycle
+- [XGameStreaming](/reference/xgamestreaming) — connection state and client properties change notifications
+- [XGameUI](/reference/xgameui) — `XGameUISetNotificationPositionHint`
+- [XLauncher](/reference/xlauncher) — `XLaunchUri`
+- [XPackage](/reference/xpackage) — chunk availability, install monitors, mount lifecycle
+- [XPersistentLocalStorage](/reference/xpersistentlocalstorage) — path and package-mount lifecycle
+- [XSpeechSynthesizer](/reference/xspeechsynthesizer) — voice enumeration and stream lifecycle
+- [XStore](/reference/xstore) — context, license, and product-query lifecycle
+- [XUser](/reference/xuser) — user handle, sign-in deferral, and change-event lifecycle
+
+## See also
+
+- [Asynchronous programming model](/gdk/async-programming)
+- [Task queues](/gdk/async-task-queues)
+- [Memory](/gdk/memory)
+- [PIX for XBOX](/tools/pix-for-xbox)
